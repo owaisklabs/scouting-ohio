@@ -209,8 +209,8 @@
                     <div class="dGrid">
                         @foreach ($chunk as $video)
                         <div class="dGItem">
-                            <img src="{{asset('img/videos/'.$video->thumbnil)}}" height="100%" width="100%" alt="">
-                            <input type="hidden" value="{{$video->video_link}}" name="video_url"
+                            <img src="{{asset('img/videos/'.$video->hudl_thumbnail)}}" height="100%" width="100%" alt="">
+                            <input type="hidden" value="{{$video->hudl_link}}" name="video_url"
                                 id="url_link{{$video->id}}">
                             <img src="{{asset('img/1x/plahhov.png')}}" height="100%" width="100%" class="forHover"
                                 onclick="geturl('url_link'+{{$video->id}})" alt="">

@@ -298,20 +298,25 @@ class PlayerController extends Controller
     {
         // dd($request->all());
         if (Session::get('type') === "update") {
-            dd($request->al());
             $playerVideo = PlayerVideo::find($request->hidden_id);
             $playerVideo->hudl_link = $request->hudl_link;
+            if ($request->file('hudl_thumbnail')) {
+                Storage::disk('public_videos')->delete($playerVideo->hudl_thumbnail);
+                $hudlThumbnail = $request->hudl_thumbnail;
+                $hudlThumbnailName = Str::random(10) . '.' . $hudlThumbnail->getClientOriginalExtension();
+                Storage::disk('public_videos')->put($hudlThumbnailName, \File::get($hudlThumbnail));
+                $playerVideo->hudl_thumbnail = $hudlThumbnailName;
+            }
             $playerVideo->save();
             $request->session()->forget('type');
             $items = $playerVideo->getChanges();
-            $request->session()->put('user_video_updating', $items);
             Session::flash('message', 'This is a message!');
             return redirect()->back();
         }
         else{
         $playerVideo = new PlayerVideo();
         if ($request->file('hudl_thumbnail')) {
-            Storage::disk('public_videos')->delete($playerVideo->hudl_thumbnail);
+            // Storage::disk('public_videos')->delete($playerVideo->hudl_thumbnail);
             $hudlThumbnail = $request->hudl_thumbnail;
             $hudlThumbnailName = Str::random(10) . '.' . $hudlThumbnail->getClientOriginalExtension();
             Storage::disk('public_videos')->put($hudlThumbnailName, \File::get($hudlThumbnail));

@@ -9,7 +9,7 @@
 
                 <div class="profileM">
                     <div class="back"
-                        style="background: url(assets/img/1x/cover-8.png) no-repeat center center / contain;">
+                        style="background: url({{asset('user_image').'/'.$user->user_cover}}) no-repeat center center / contain;">
                         <img src="{{asset('img/1x/greenbg-8.png')}}" alt="">
                     </div>
                     <div class="proDetails">
@@ -57,23 +57,33 @@
                                         <div class="imgs d-flex">
                                             <div class="forDesktop">
                                                 <div class="tfour d-flex justify-content-end ">
-                                                    <img src="{{asset('img/1x/rivals-8.png')}}" height="" width=""
+                                                   <a href="{{$user->userLink->database_rivals}}" target="_blank"> <img src="{{asset('img/1x/rivals-8.png')}}" height="" width=""
+                                                    alt="">
+                                                </a>
+                                                    <a href="{{$user->userLink->database_24_7}}"target="_blank">
+                                                        <img src="{{asset('img/1x/24sports-8.png')}}" height="" width=""
                                                         alt="">
-                                                    <img src="{{asset('img/1x/24sports-8.png')}}" height="" width="29%"
-                                                        alt="">
+                                                    </a>
                                                     <div class="line"></div>
-                                                    <img src="{{asset('img/1x/youtube-8.png')}}" height="" width=""
+                                                    <a href="{{$user->userLink->youtube}}" target="_blank">
+                                                        <img src="{{asset('img/1x/youtube-8.png')}}" height="" width=""
                                                         alt="">
+                                                    </a>
+                                                    <a href="{{$user->userLink->hudle}}" target="_blank">
                                                     <img src="{{asset('img/1x/hudl-8.png')}}" height="" width="" alt="">
+                                                </a>
                                                 </div>
                                             </div>
                                             <div class="forMobile mt1">
                                                 <div class="tfour d-flex flex-column justify-content-end ">
                                                     <div class="text-center">
-                                                        <img src="{{asset('img/1x/youtube-8.png')}}" height="" width=""
+                                                        <a href="" target="_blank"> <img src="{{asset('img/1x/rivals-8.png')}}" height="" width=""
                                                             alt="">
-                                                        <img src="{{asset('img/1x/hudl-8.png')}}" height="" width=""
-                                                            alt="">
+                                                        </a>
+                                                            <a href=" "target="_blank">
+                                                                <img src="{{asset('img/1x/24sports-8.png')}}" height="" width=""
+                                                                alt="">
+                                                            </a>
                                                     </div>
                                                     <!-- <div class="line"></div> -->
                                                     <div class="text-center">
@@ -96,9 +106,9 @@
                         </div>
                         <div class="basicInfo mt2 ">
                             <div class="col-lg-12 d-flex socialead">
-                                <a href="https://www.instagram.com/" target="_blank"><i class="fa fa-instagram"></i></a>
-                                <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook-f"></i></a>
-                                <a href="https://www.twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a>
+                                <a href="{{$user->userLink->instagram}}" target="_blank"><i class="fa fa-instagram"></i></a>
+                                <a href="{{$user->userLink->facebook}}" target="_blank"><i class="fa fa-facebook-f"></i></a>
+                                <a href="{{$user->userLink->twitter}}" target="_blank"><i class="fa fa-twitter"></i></a>
                             </div>
 
                             <!-- basic info -->

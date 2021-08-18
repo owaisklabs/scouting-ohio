@@ -6,6 +6,9 @@
   <title>{{env('APP_NAME')}}</title>
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="shortcut icon" href="{{get_favicon_logo()}}" type="image/x-icon">
+  <link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+  <script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
 
   <!-- jquery ui css-->
   <link rel="stylesheet" type="text/css" href="{{asset('plugins/jquery-ui/jquery-ui.css')}}">
@@ -232,4 +235,9 @@
 
 
       </body>
+      <script>
+          $(document).ready( function () {
+            $('#example1').DataTable();
+} );
+      </script>
       </html>

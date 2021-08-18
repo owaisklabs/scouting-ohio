@@ -14,10 +14,12 @@ use App\Models\Package;
 use App\Models\User;
 use App\Models\Contact;
 use App\Models\PlayerLink;
+use App\Models\PlayerVideo;
 use App\Models\Region;
 use App\Models\Video;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 use function GuzzleHttp\json_decode;
 
@@ -26,7 +28,7 @@ class HomeController extends Controller
     public function index()
     {
         $articles = Article::all();
-        $videos = Video::all();
+        $videos = PlayerVideo::latest()->get();
         $users = User::where('type', 'Player')
         ->latest()
         ->limit(6)
@@ -364,9 +366,10 @@ class HomeController extends Controller
                 }
             }
             else{
-                return [
-                    'email' => 'Your reqiest is not approved please try leter',
-                ];
+
+                    Session::flash('notVerified', 'This is a message!');
+                    return redirect()->back();
+                    // 'email' => 'Your reqiest is not approved please try leter';
             }
 
         } elseif (Auth::attempt($credentials) && $user->type !== 'college coach') {
@@ -374,6 +377,7 @@ class HomeController extends Controller
             return redirect('/');
         } else {
             return [
+
                 'email' => 'Your reqiest is not approved please try leter',
             ];
         }

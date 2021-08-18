@@ -253,7 +253,7 @@
             </div>
         </div>
         <div class="col-lg-12 text-center allright mt2">
-            All copyrights reserved 2021 by <a href="http://designprosca.com/" target="_blank">design pros usa</a>
+            All copyrights reserved 2021 by <a href="https://scoutingohio.com" target="_blank">{{config('app.name');}}</a>  Develop By <a href="http://designprosca.com/" target="_blank">design pros usa</a>
         </div>
     </footer>
 </div>
@@ -268,7 +268,7 @@
         <div class="modal-content">
             <div class="modal-body">
                 <i class="fa fa-times" data-bs-dismiss="modal" aria-label="Close"></i>
-                <iframe width="100%" height="315" src="https://www.youtube.com/embed/fey4tGWYFHU"
+                <iframe width="100%" height="430" src="https://www.youtube.com/embed/fey4tGWYFHU"
                     title="YouTube video player" frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
@@ -511,6 +511,14 @@
 </style>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
+     @if(Session::has('notVerified'))
+    // console.log('kdkdkdk')
+    swal({
+        icon: "error",
+        text: "Your Profile is not approve yet, Please try later"
+    });
+    @endif
+
     var imgBtn = document.getElementById('updateImages')
     $("#coverPic").change(function () {
         imgBtn.click();
@@ -535,7 +543,7 @@
             e.preventDefault();
             var email = $("input[name=email]").val();
             // console.log(email)
-            var url = '{{ url('subscription - store') }}';
+            var url = '{{ url('subscription-store') }}';
             console.log(url)
             $.ajax({
                 url: url,

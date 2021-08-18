@@ -64,8 +64,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     // Route::resource('/contact_detail', 'Admin\ContactController');
     Route::resource('/subscription', 'Admin\SubscriptionController');
     Route::resource('/video', 'Admin\VideoController');
-    Route::get('/player-dashboard', 'Admin\DashboardController@playerDashboard')->name('player-dashboard');
-    Route::get('/coach-dashboard', 'Admin\DashboardController@coachDashboard')->name('coach-dashboard');
 
 
 
@@ -100,6 +98,11 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Route::post('addtional-coach-update', 'Web\PlayerController@addtionalCoachUpdate')->name('addtional-coach-update');
 
     // coach Dashboard Funcationalty
+
+});
+Route::group(['middleware' => 'auth', 'prefix' => 'user'], function () {
+    Route::get('/player-dashboard', 'Admin\DashboardController@playerDashboard')->name('player-dashboard');
+    Route::get('/coach-dashboard', 'Admin\DashboardController@coachDashboard')->name('coach-dashboard');
 
 });
 Auth::routes();

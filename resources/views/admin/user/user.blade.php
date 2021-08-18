@@ -43,9 +43,10 @@
                     <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">
                         <thead>
                             <tr role="row">
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Full Name: activate to sort column ascending">First Name</th>>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Full Name: activate to sort column ascending">First Name</th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Email Address: activate to sort column ascending">Email Address</th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Baskets: activate to sort column ascending">Type</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Baskets: activate to sort column ascending">Status</th>
                                 <!-- <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Baskets: activate to sort column ascending">Player Types</th> -->
                                 <th class="sorting" tabindex="1" aria-controls="example1" rowspan="1" colspan="1" aria-label="Registration Date: activate to sort column ascending" width="200">Registration Date</th>
                                 <th class="sorting" tabindex="1" aria-controls="example1" rowspan="1" colspan="1" aria-label="Actions: activate to sort column ascending" width="100">Actions</th>
@@ -72,6 +73,12 @@
 
                                 <!-- player types -->
                                 <td class="">{{$user->type}}</td>
+
+                                @if ($user->user_status ==1)
+                                <td class="">Active</td>
+                                @else
+                                <td class="">Un Active</td>
+                                @endif
 
                                 <!-- registration date -->
                                 @if($user->created_at == null)
@@ -110,7 +117,7 @@
             <!-- /.card-body -->
             <div class="card-footer">
                 @if(count($users) > 0)
-                {{$users->appends(request()->except('page'))->links()}}
+                {{-- {{$users->appends(request()->except('page'))->links()}} --}}
                 @endif
             </div>
         </div>

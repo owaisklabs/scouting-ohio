@@ -15,7 +15,7 @@
                 @endif
 
             </div>
-            <div class="link d-flex flex-column justify-content-center">
+            <div class="link d-flex flex-column justify-content-center p-3">
                 <label>Link</label>
                 <span>{{$playerVideo->hudl_link}}</span>
             </div>
@@ -67,6 +67,7 @@
             $('#exampleModaVideos .modal-body .imga .fa.fa-plus').attr("hidden",true);
             $('#exampleModaVideos .modal-body [name=hudl_link]').val(data.hudl_link)
             $('#exampleModaVideos .modal-body .imga .uploadAble img').removeAttr('hidden');
+            $('#exampleModaVideos .modal-body [name=hidden_id]').val(data.id)
             if(data.hudl_thumbnail != null){
                 $('#exampleModaVideos .modal-body .imga .uploadAble img').attr('src',`{{asset('img/videos')}}/${data.hudl_thumbnail}`);
             }
@@ -74,7 +75,6 @@
                 $('#exampleModaVideos .modal-body .imga .uploadAble img').attr('src',`{{asset('img/noimg.jpg')}}`);
             }
 
-            $('#exampleModaVideos .modal-body [name=hidden_id]').val(data.id)
         }else{
             $('#exampleModaVideos .modal-body .imga .uploadAble img').attr("hidden",true);
             $('#exampleModaVideos .modal-body .imga .fa.fa-plus').removeAttr('hidden');

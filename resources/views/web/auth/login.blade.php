@@ -38,5 +38,14 @@
                 </div>
             </div>
 @endsection
+<script>
+     @if(Session::has('try-leter'))
+    // console.log('kdkdkdk')
+    swal({
+        icon: "success",
+        text: "Information Saved"
+    });
+    @endif
+</script>
 
 
