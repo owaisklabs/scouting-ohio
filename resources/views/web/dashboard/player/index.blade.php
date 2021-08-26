@@ -7,6 +7,12 @@
             <div class="sider">
                 <ul class="nav nav-pills flex-column justify-content-center gap-1" id="pills-tab" role="tablist">
                     <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-notification-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-notification" type="button" role="tab" aria-controls="pills-notification"
+                            aria-selected="false">Notifications</button>
+                    </li>
+
+                    <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="pills-BasicInfo-tab" data-bs-toggle="pill"
                             data-bs-target="#pills-BasicInfo" type="button" role="tab" aria-controls="pills-BasicInfo"
                             aria-selected="true">Basic Info</button>
@@ -35,6 +41,11 @@
                             aria-controls="pills-PersonalInfo" aria-selected="false">Personal Info</button>
                     </li>
                     <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-ScholarshipOffers-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-ScholarshipOffers" type="button" role="tab"
+                            aria-controls="pills-ScholarshipOffers" aria-selected="false">Scholarship Offers</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
                         <button class="nav-link " id="pills-PEvaluation-tab" data-bs-toggle="pill" data-bs-target="#pills-PEvaluation" type="button" role="tab" aria-controls="pills-PEvaluation" aria-selected="true">Player Evaluation</button>
                     </li>
                     <li class="nav-item" role="presentation">
@@ -57,6 +68,7 @@
                             data-bs-target="#pills-friendeq" type="button" role="tab" aria-controls="pills-friendeq"
                             aria-selected="false">Friends Request</button>
                     </li> --}}
+
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="pills-Friends-tab" data-bs-toggle="pill"
                             data-bs-target="#pills-Friends" type="button" role="tab" aria-controls="pills-Friends"
@@ -137,6 +149,9 @@
 
         <!-- tab9 -->
         @include("web.dashboard.player.tab9")
+        {{-- notifaction tab --}}
+        @include("web.dashboard.player.tab15")
+
 
         <!-- tab 12 -->
         @include("web.dashboard.player.tab12")
@@ -150,6 +165,9 @@
         <!-- tab13 -->
         @include("web.dashboard.player.tab13")
 
+        {{-- ScholarshipOffers --}}
+        @include("web.dashboard.player.tab14")
+
 
         <!-- tab12-->
         <div class="tab-pane fade" id="pills-Logout" role="tabpanel" aria-labelledby="pills-Logout-tab">...
@@ -161,3 +179,69 @@
 </div>
 </div>
 @endsection
+<div class="modal pckg-modal  fade" id="subs-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="row mt1">
+                    <div class="col-lg-4 mb1">
+                        <div class="premium-card">
+                            <div class="premium-pckg">
+                                <div class="buy-pckg text-center">
+                                    <a href="{{route('premium-payment')}}">
+                                        <p>Players Premium Package (1 Months)</p>
+                                    </a>
+                                </div>
+                                <ul class="content-premium">
+                                    <li>Stand out and get in touch with hiring managers</li>
+                                </ul>
+                                <h1>$9.00</h1>
+                                <a href="{{route('premium-payment')}}">
+
+                                    <button class="premium-btn">Buy Now</button></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 mb1">
+                        <div class="premium-card">
+                            <div class="premium-pckg">
+                                <div class="buy-pckg text-center">
+                                    <a href="">
+                                        <p>Players Premium Package (3 Months)</p>
+                                    </a>
+                                </div>
+                                <ul class="content-premium">
+                                    <li>Stand out and get in touch with hiring managers</li>
+                                </ul>
+                                <h1>$20.00</h1>
+                                <a href="{{route('premium-payment')}}">
+                                <button class="premium-btn">Buy Now</button></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 mb1">
+                        <div class="premium-card">
+                            <div class="premium-pckg">
+                                <div class="buy-pckg text-center">
+                                    <a href="">
+                                        <p>Players Premium Package (1 year)</p>
+                                    </a>
+                                </div>
+                                <ul class="content-premium">
+                                    <li>Stand out and get in touch with hiring managers</li>
+
+                                </ul>
+                                <h1>$65.00</h1>
+                                <a href="{{route('premium-payment')}}">
+                                <button class="premium-btn">Buy Now</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

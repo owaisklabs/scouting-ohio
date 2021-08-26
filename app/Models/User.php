@@ -96,6 +96,14 @@ class User extends Authenticatable
     {
         return $this->hasOne(PlayerBasicInfo::class, 'user_id');
     }
+    public function scholarshipOffer()
+    {
+        return $this->hasMany(ScholarshipOffer::class, 'user_id');
+    }
+    public function PlayerProfileViewer()
+    {
+        return $this->hasMany(SeeProfile::class,'player_id');
+    }
     public function personalInfo()
     {
         return $this->hasOne(PlayerPersonalInfo::class, 'user_id');

@@ -5,8 +5,8 @@
 <div class="homeMain mainDiv">
     <div class="greenBanner">
         <div class="cPDiv">
-            <h1 class="wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.5s">Registration For</h1>
-            <div class="playerCoach d-flex justify-content-center gap-4 mt2">
+            <h1 class="wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.5s">Registration For <a href="https://scoutingohio.com/">SCOUTINGOHIO.COM</a></h1>
+            <div class="playerCoach d-flex justify-content-center gap-4">
                 <div class="player d-flex justify-content-center align-items-center">
                     <h2><a href="sign-up.php">
                             High School
@@ -17,7 +17,7 @@
                     </a>
                 </div>
                 <div class="coach d-flex justify-content-center align-items-center">
-                    <h2><a href="{{url('web_register?role=College Coach')}}">Collage coach</a></h2>
+                    <h2><a href="{{url('web_register?role=College Coach')}}">College coach</a></h2>
                     <a href="{{url('web_register?role=College Coach')}}">
                         <div class="greenHov"></div>
                     </a>
@@ -31,13 +31,13 @@
             </div>
         </div>
     </div>
-    <div class="sliderDiv mt6">
+    <div class="sliderDiv mt3">
         <div class="row g-0 flwx-wrape">
             <div class="col-lg-9">
                 <div class="fakeTabs">
                     <div class="col-lg-12 ">
-                        <h1 class="wow fadeInUp article-heading" data-wow-duration="0.5s" data-wow-delay="0.5s"
-                            style="font-family: 'bebuseRegular';">Articles</h1>
+                        <h1 class="wow fadeInUp article-heading Heavitas" data-wow-duration="0.5s" data-wow-delay="0.5s"
+                            >Articles</h1>
                     </div>
                     <!-- <ul class="nav nav-tabs justify-content-center gap-5" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
@@ -99,6 +99,54 @@
             <div class="twwetBy two"></div>
         </div> --}}
         @auth
+        @if (Auth::user()->type=="Admin")
+        <div class="twitter-body">
+            <h1 class="text">Login To See TweetS</h1>
+            <div class="titer twitter-overlay">
+                <div class="row mb-2">
+                    <div class="col-lg d-flex justify-content-between align-items-center">
+                        <div class="retweet">
+                            <i class="fa fa-retweet"></i>
+                            <label for="">ScoutingOhio.com Retweeted</label>
+                        </div>
+                        <i class="fa fa-twitter fa-2x"></i>
+                    </div>
+                </div>
+                <div class="row twitter-content">
+                    <div class="col-lg-12">
+                        <div class="twitter-profile d-flex align-items-start">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Cristiano_Ronaldo_2018.jpg"
+                                alt="">
+                            <div class="twitter-profile-det">
+                                <h5>Bucknuts</h5>
+                                <label for="">@Bucknuts247</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <p>
+                            <a href="">#Ohiostate</a> has an offer out to
+                            <a href="">#DindyGabriel</a>. What do the <a href="">#Buckeyes</a> like
+                            about the defensive lineman? <br>
+                            <a href="">@Mark__Porter</a> gave his evaluation (VIP)
+                            <a href="">247sprts.com/college/ohio-s</a>
+                        </p>
+                        <img class="mt-3" src="https://qph.fs.quoracdn.net/main-qimg-c423778894f61719e6e5344d6e2b3961.webp"
+                            alt="">
+                    </div>
+                    <div class="twitter-footer d-flex justify-content-between align-items-center">
+                        <div class="like-share-btn d-flex align-items-center">
+                            <button><i class="fa fa-heart-o"></i></button>
+                            <button><i class="fa fa-sign-out fa-lg"></i></button>
+                        </div>
+                        <div class="date-label">
+                            6 May 2021
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @else
         <div class="twitter-page">
             {{-- @foreach ($tweets as $tweet)
             <div class="twitter-body">
@@ -142,6 +190,7 @@
             @endforeach --}}
 
         </div>
+        @endif
         @endauth
 
         @guest
@@ -198,7 +247,7 @@
 <button id="vidModal" hidden="hidden" data-bs-toggle="modal" data-bs-target="#exampleModalVideo"></button>
 <div class="latestVideo">
     <div class="col-lg-12">
-        <h1 class="wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.5s">Latest Video</h1>
+        <h1 class="wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.5s">Latest Videos</h1>
     </div>
     <div class="tab-content" id="myTabContent2">
         <div class="tab-pane fade show active" id="Newest" role="tabpanel" aria-labelledby="Newest-tab">
@@ -228,11 +277,11 @@
 </div>
 <div class="offers mt2">
     <div class="col-lg-12 text-center">
-        <h1 class="wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.5s">Latest Collage Offers</h1>
+        <h1 class="wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.5s">Latest College Offers</h1>
     </div>
     <div class="userTableCustom">
         <div class="inner">
-            <div class="userRow d-flex">
+            <div class="userRow d-flex userR1">
                 <div class="img">
                     <!-- <img src="assets/img/1x/user1.png" height="100%" width="100%" alt=""> -->
                 </div>
@@ -267,7 +316,7 @@
         </div>
         <div class="col-lg-12 text-center">
             <a href="{{route('players')}}">
-                <button class="allBtn mt5">View All</button>
+                <button class="allBtn mt2">View All</button>
             </a>
         </div>
     </div>

@@ -16,9 +16,12 @@ use App\Models\Contact;
 use App\Models\PlayerLink;
 use App\Models\PlayerVideo;
 use App\Models\Region;
+use App\Models\ScholarshipOffer;
+use App\Models\SeeProfile;
 use App\Models\Video;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 
 use function GuzzleHttp\json_decode;
@@ -30,9 +33,9 @@ class HomeController extends Controller
         $articles = Article::all();
         $videos = PlayerVideo::latest()->get();
         $users = User::where('type', 'Player')
-        ->latest()
-        ->limit(6)
-        ->get();
+            ->latest()
+            ->limit(10)
+            ->get();
         // dd($users);
         $results = [];
         $tweets = "";
@@ -114,16 +117,37 @@ class HomeController extends Controller
             ->first();
         // dd($check);
         // return $user->playervideos;
-        $data=[];
-        $feeds = ChangeField::where('user_id',$id)->get();
+        $data = [];
+        $feeds = ChangeField::where('user_id', $id)->get();
         foreach ($feeds as $key => $value) {
-            $data_2 =json_decode($value->change_value,true);
+            $data_2 = json_decode($value->change_value, true);
             array_push($data, $data_2);
+        }
+        if (Auth::check()) {
+            $profile = SeeProfile::where('player_id', $id)
+                ->where('visiter_id', Auth::id())
+                ->where('count', '>',0)
+                ->first();
+            if ($profile) {
+                $profile->player_id = $id;
+                $profile->visiter_id = Auth::id();
+                $profile->increment('count');
+                $profile->status = "unseen";
+                $profile->save();
+                // dd($profile);
+            } else {
+                $profile = new SeeProfile();
+                $profile->player_id = $id;
+                $profile->visiter_id = Auth::id();
+                $profile->count=1;
+                $profile->status = "unseen";
+                $profile->save();
+            }
         }
         // return $data;
 
         // return $data;
-        return view('web.profile.player_profile', compact('user', 'check','data'));
+        return view('web.profile.player_profile', compact('user', 'check', 'data'));
     }
 
     public function about_us()
@@ -259,6 +283,36 @@ class HomeController extends Controller
         if ($request->search_player) {
             $result = $users->where('name', 'like', '%' . $request->search_player . '%')->get();
         }
+        if ($request->division) {
+            if ($request->FSB_Division_1_Offers) {
+                $result = $users->whereHas('scholarshipOffer', function ($q) use ($request) {
+                    $q->where('FBS_division_1_colleges', $request->division);
+                })->get();
+            }
+            if ($request->FSB_Division_1_Verbals) {
+                $result = $users->whereHas('scholarshipOffer', function ($q) use ($request) {
+                    $q->where('FBS_division_1_college', $request->division);
+                })->get();
+            }
+            if ($request->FCS_Division_aa_2_3_Offers) {
+
+                $result = $users->whereHas('scholarshipOffer', function ($q) use ($request) {
+                    $q->where('FCS_division_1aa_2_and_3_colleges', $request->division);
+                })->get();
+            }
+            if ($request->FCS_Division_1aa_2_3_Verbals) {
+                $result = $users->whereHas('scholarshipOffer', function ($q) use ($request) {
+                    $q->where('division_FCS_division_1aa_2_and_3_college', $request->division);
+                })->get();
+            }
+            //     else{
+            //     $result = $users->whereHas('scholarshipOffer', function($q)use($request){
+            //         $q->where('FBS_division_1_colleges',$request->division)
+            //         ->orWhere('FCS_division_1aa_2_and_3_colleges',$request->division);
+            //     })->get();
+            // }
+            // dd($result);
+        }
 
         return view('web.player.search-players', compact('result'));
     }
@@ -301,7 +355,37 @@ class HomeController extends Controller
         if ($request->search_player) {
             $result = $users->where('name', 'like', '%' . $request->search_player . '%')->get();
         }
-        if ($request->private_region) {
+        if ($request->division) {
+            if ($request->FSB_Division_1_Offers) {
+                $result = $users->whereHas('scholarshipOffer', function ($q) use ($request) {
+                    $q->where('FBS_division_1_colleges', $request->division);
+                })->get();
+            }
+            if ($request->FSB_Division_1_Verbals) {
+                $result = $users->whereHas('scholarshipOffer', function ($q) use ($request) {
+                    $q->where('FBS_division_1_college', $request->division);
+                })->get();
+            }
+            if ($request->FCS_Division_aa_2_3_Offers) {
+
+                $result = $users->whereHas('scholarshipOffer', function ($q) use ($request) {
+                    $q->where('FCS_division_1aa_2_and_3_colleges', $request->division);
+                })->get();
+            }
+            if ($request->FCS_Division_1aa_2_3_Verbals) {
+                $result = $users->whereHas('scholarshipOffer', function ($q) use ($request) {
+                    $q->where('division_FCS_division_1aa_2_and_3_college', $request->division);
+                })->get();
+            }
+            //     else{
+            //     $result = $users->whereHas('scholarshipOffer', function($q)use($request){
+            //         $q->where('FBS_division_1_colleges',$request->division)
+            //         ->orWhere('FCS_division_1aa_2_and_3_colleges',$request->division);
+            //     })->get();
+            // }
+            // dd($result);
+        }
+        if ($request->private_region !== 'null') {
             // dd($request->private_region);
             $finalCounties = [];
             $region = Region::find($request->private_region);
@@ -356,36 +440,34 @@ class HomeController extends Controller
             'password' => ['required'],
         ]);
         $user = User::where('email', $request->email)->first();
-        if ($user->type == 'college coach') {
-            if ($user->user_status == 1) {
-                if (Auth::attempt($credentials) ) {
-                    $request->session()->regenerate();
-                    return redirect('/');
+        if ($user) {
+            if ($user->type == 'college coach') {
+                if ($user->user_status == 1) {
+                    if (Auth::attempt($credentials)) {
+                        $request->session()->regenerate();
+                        return redirect('/');
+                    } else {
+                        return redirect()->back();
+                    }
                 } else {
-                    return redirect()->back();
-                }
-            }
-            else{
 
                     Session::flash('notVerified', 'This is a message!');
                     return redirect()->back();
                     // 'email' => 'Your reqiest is not approved please try leter';
+                }
+            } elseif (Auth::attempt($credentials) && $user->type !== 'college coach') {
+                $request->session()->regenerate();
+                return redirect('/');
+            } else {
+                return [
+
+                    'email' => 'Your reqiest is not approved please try leter',
+                ];
             }
-
-        } elseif (Auth::attempt($credentials) && $user->type !== 'college coach') {
-            $request->session()->regenerate();
-            return redirect('/');
         } else {
-            return [
-
-                'email' => 'Your reqiest is not approved please try leter',
-            ];
+            Session::flash('credentialsnot', 'This is a message!');
+            return redirect()->back();
         }
-
-
-        return [
-            'email' => 'The provided credentials do not match our records.',
-        ];
     }
     public function TwitterTweets($handle)
     {
@@ -420,15 +502,21 @@ class HomeController extends Controller
     }
     public function test(Request $request)
     {
-        // $data = ChangeField::find(1);
-        // $items=[];
-        // $decodedata = json_decode($data->change_value,true);
-        // $array = (array) $decodedata;
-        // // return $array;
-        // foreach ($array as $value) {
-        //    $items = $value;
-        // }
-        // return  $items;
+        // return $request->all();
+        // $user = User::find(Auth::id());
+        //     if (Cache::has('user-is-online-' . $user->id))
+        //         echo "User " . $user->name . " is online.";
+        //     else
+        //         echo "User " . $user->name . " is offline.";
 
+        $seenNotification = SeeProfile::where('player_id', $request->id)
+            ->where('status', 'unseen')
+            ->get();
+            // return $seenNotification;
+        foreach ($seenNotification as $item) {
+            $item->update([
+                'status' => 'seen'
+            ]);
+        }
     }
 }

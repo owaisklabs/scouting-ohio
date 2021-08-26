@@ -5,7 +5,7 @@
 <div class="PprofileMain mainDiv">
     <div class="sliderDiv ">
         <div class="row g-0 flwx-wrape">
-            <div class="col-lg-12">
+            <div class="col-lg-9">
 
                 <div class="profileM">
                     <div class="back"
@@ -23,7 +23,7 @@
                             </div>
                             <div class="nameD d-flex">
                                 <div class="d-flex flex-column w100  justify-content-end">
-                                    <h1 class="forMobile">{{$user->name}}</h1>
+                                    <h1 class="forMobile">{{$user->name ?? " "}}</h1>
                                     @auth
                                     @if (auth()->user()->type ==='college coach'||auth()->user()->type ==='Caoch')
                                     <div class="btns d-flex gap-2">
@@ -53,23 +53,23 @@
                                     @endauth
                                     @endif
                                     <div class="deta d-flex justify-content-between">
-                                        <h1 class="forDesktop">{{$user->name}}</h1>
+                                        <h1 class="forDesktop">{{$user->name ?? " "}}</h1>
                                         <div class="imgs d-flex">
                                             <div class="forDesktop">
                                                 <div class="tfour d-flex justify-content-end ">
-                                                   <a href="{{$user->userLink->database_rivals}}" target="_blank"> <img src="{{asset('img/1x/rivals-8.png')}}" height="" width=""
+                                                   <a href="{{$user->userLink->database_rivals ?? "https://n.rivals.com/" }}" target="_blank"> <img src="{{asset('img/1x/rivals-8.png')}}" height="" width=""
                                                     alt="">
                                                 </a>
-                                                    <a href="{{$user->userLink->database_24_7}}"target="_blank">
+                                                    <a href="{{$user->userLink->database_24_7 ?? "https://247sports.com/"}}"target="_blank">
                                                         <img src="{{asset('img/1x/24sports-8.png')}}" height="" width=""
                                                         alt="">
                                                     </a>
                                                     <div class="line"></div>
-                                                    <a href="{{$user->userLink->youtube}}" target="_blank">
+                                                    <a href="{{$user->userLink->youtube ?? "https://www.youtube.com/"}}" target="_blank">
                                                         <img src="{{asset('img/1x/youtube-8.png')}}" height="" width=""
                                                         alt="">
                                                     </a>
-                                                    <a href="{{$user->userLink->hudle}}" target="_blank">
+                                                    <a href="{{$user->userLink->hudle ?? "https://www.hudl.com/"}}" target="_blank">
                                                     <img src="{{asset('img/1x/hudl-8.png')}}" height="" width="" alt="">
                                                 </a>
                                                 </div>
@@ -106,9 +106,9 @@
                         </div>
                         <div class="basicInfo mt2 ">
                             <div class="col-lg-12 d-flex socialead">
-                                <a href="{{$user->userLink->instagram}}" target="_blank"><i class="fa fa-instagram"></i></a>
-                                <a href="{{$user->userLink->facebook}}" target="_blank"><i class="fa fa-facebook-f"></i></a>
-                                <a href="{{$user->userLink->twitter}}" target="_blank"><i class="fa fa-twitter"></i></a>
+                                <a href="{{$user->userLink->instagram ?? "https://www.instagram.com/"}}" target="_blank"><i class="fa fa-instagram"></i></a>
+                                <a href="{{$user->userLink->facebook ?? "https://www.facebook.com"}}" target="_blank"><i class="fa fa-facebook-f"></i></a>
+                                <a href="{{$user->userLink->twitter ?? "https://twitter.com/"}}" target="_blank"><i class="fa fa-twitter"></i></a>
                             </div>
 
                             <!-- basic info -->
@@ -116,58 +116,58 @@
                                 <h4>Basic Info</h4>
                             </div>
                             <div class="row g-0 infosRow">
-                                <div class="col-lg-6 d-flex align-items-center mb15">
-                                    <label for="">Full name:</label> <span>{{$user->user_name ?? "N/A"}}</span>
+                                <div class="col-lg-6 col-xxl-4 d-flex align-items-center mb15">
+                                    <label for="">Full name:</label> <span>{{$user->name ?? "N/A"}}</span>
                                 </div>
-                                <div class="col-lg-6 d-flex align-items-center mb15">
+                                <div class="col-lg-6 col-xxl-4 d-flex align-items-center mb15">
                                     <label for="">Best College Poition:</label>
-                                    <span>{{$user->basicInfo->best_college_poition ?? "N/A"}}QB</span>
+                                    <span>{{$user->basicInfo->best_college_poition ?? "N/A"}}</span>
                                 </div>
 
-                                <div class="col-lg-6 d-flex align-items-center mb15">
+                                <div class="col-lg-6 col-xxl-4 d-flex align-items-center mb15">
                                     <label for="">High School:</label>
                                     <span>{{$user->basicInfo->high_school ?? "N/A"}}</span>
                                 </div>
-                                <div class="col-lg-6 d-flex align-items-center mb15">
+                                <div class="col-lg-6 col-xxl-4 d-flex align-items-center mb15">
                                     <label for="">Offensive:</label>
                                     <span>{{$user->basicInfo->high_school_defensive ?? "N/A"}}</span>
                                 </div>
 
-                                <div class="col-lg-6 d-flex align-items-center mb15">
+                                <div class="col-lg-6 col-xxl-4 d-flex align-items-center mb15">
                                     <label for="">Class of:</label>
                                     <span>{{$user->basicInfo->class_off ?? "N/A"}}</span>
                                 </div>
-                                <div class="col-lg-6 d-flex align-items-center mb15">
+                                <div class="col-lg-6 col-xxl-4 d-flex align-items-center mb15">
                                     <label for="">Secondary Offensive:</label>
                                     <span>{{$user->basicInfo->secondry_offensive ?? "N/A"}}</span>
                                 </div>
 
-                                <div class="col-lg-6 d-flex align-items-center mb15">
+                                <div class="col-lg-6 col-xxl-4 d-flex align-items-center mb15">
                                     <label for="">Jersey Number:</label>
                                     <span>{{$user->basicInfo->jersey_number ?? "N/A"}}</span>
                                 </div>
-                                <div class="col-lg-6 d-flex align-items-center mb15">
+                                <div class="col-lg-6 col-xxl-4 d-flex align-items-center mb15">
                                     <label for="">DEFENSIVE:</label>
                                     <span>{{$user->basicInfo->jersey_defensive ?? "N/A"}}</span>
                                 </div>
 
-                                <div class="col-lg-6 d-flex align-items-center mb15">
+                                <div class="col-lg-6 col-xxl-4 d-flex align-items-center mb15">
                                     <label for="">Height:</label> <span>{{$user->basicInfo->height ?? "N/A"}}</span>
                                 </div>
-                                <div class="col-lg-6 d-flex align-items-center mb15">
+                                <div class="col-lg-6 col-xxl-4 d-flex align-items-center mb15">
                                     <label for="">Secondary DEFENSIVE:</label>
                                     <span>{{$user->basicInfo->secondry_defensive ?? "N/A"}}</span>
                                 </div>
 
-                                <div class="col-lg-6 d-flex align-items-center mb15">
+                                <div class="col-lg-6 col-xxl-4 d-flex align-items-center mb15">
                                     <label for="">Weight (lbs):</label>
                                     <span>{{$user->basicInfo->weight ?? "N/A"}}</span>
                                 </div>
-                                <!-- <div class="col-lg-6 d-flex align-items-center mb15">
+                                <!-- <div class="col-lg-6 col-xxl-4 d-flex align-items-center mb15">
                                     <label for="">Offers:</label> <span>School1, School2, School3, School4, School5, School4, School5 </span>
                                 </div> -->
-                                <div class="col-lg-6 d-flex align-items-center mb15">
-                                    <label for="">Special Team Position::</label>
+                                <div class="col-lg-6 col-xxl-4 d-flex align-items-center mb15">
+                                    <label for="">Special Team Position:</label>
                                     <span>{{$user->basicInfo->special_team_position ?? "N/A"}}</span>
                                 </div>
                             </div>
@@ -176,7 +176,7 @@
                 </div>
 
             </div>
-            {{-- <div class="col-lg-3">
+            <div class="col-lg-3">
                 <div class="twittercard">
                     <div class="head">Twitter</div>
                     <div class="twwetBy">
@@ -187,7 +187,7 @@
                     </div>
                     <div class="twwetBy two"></div>
                 </div>
-            </div> --}}
+            </div>
         </div>
         <!-- tabs -->
         <div class="tabsMain">
@@ -222,6 +222,11 @@
                     </li>
                     @endif
                     @endauth
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="AcademicInfo-tab" data-bs-toggle="tab"
+                            data-bs-target="#AcademicInfo" type="button" role="tab" aria-controls="AcademicInfo"
+                            aria-selected="false">Offer Scholarship</button>
+                    </li>
                     @auth
                     @if (auth()->user()->type === "college coach")
 
@@ -664,9 +669,10 @@
 
         <!-- articles -->
         <div class="articlesFeed">
-            <div class="col-lg-12 mt5 mb5 text-center">
-                <h2>Articles</h2>
+            <div class="col-lg-12 mt2 mb2 text-center">
+                <h2 class="Heavitas">Articles</h2>
             </div>
+            @if ($user->playerArticles->count() > 0)
             <div class="col-lg-12">
                 <div class="owl-carousel owl-theme artivle">
                     @foreach ($user->playerArticles as $article)
@@ -686,6 +692,9 @@
                     @endforeach
                 </div>
             </div>
+            @else
+            <h2 class="text-center">Not Found</h2>
+            @endif
         </div>
 
     </div>

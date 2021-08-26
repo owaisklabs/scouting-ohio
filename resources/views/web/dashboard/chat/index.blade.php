@@ -84,16 +84,21 @@
                     <div class="chatHeader">
                         <div class="ppic">
                             @if ($user->user_profile)
-                            <img src="{{asset('user_image').'/'.$user->user_profile}}" alt="">
+                            <img src="{{asset('user_image').'/'.$user->user_profile}}" alt="" style="text-decoration: none;color: #55d729;">
                             @else
-                            <img src="{{asset('img/noimg.jpg')}}" alt="">
+                            <img src="{{asset('img/noimg.jpg')}}" alt="" style="text-decoration: none;color: #55d729;">
                             @endif
 
                         </div>
                         <div class="name">
-                            <a href="{{route('user-profile',$user->id)}}">
+                            @if ($user->type == "Player")
+                            <a  style="text-decoration: none;color: #55d729;" href="{{route('user-profile',$user->id)}}">
+                                {{$user->name}}
+                            </a>
+                            @else
                             {{$user->name}}
-                        </a>
+                            @endif
+
                         </div>
                     </div>
                     <div class="chattBody">

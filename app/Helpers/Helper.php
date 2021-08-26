@@ -3,8 +3,10 @@
 use App\Models\User;
 use App\Models\Logo;
 use App\Models\Banner;
+use App\Models\SeeProfile;
 use App\Models\Setting;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 function get_main_logo(){
     if(!$logo = Logo::where('type', 'main')->first()){
@@ -33,7 +35,16 @@ function get_banner_by_page($page){
     }
     return $banner;
 }
-
+function notificationCount()
+{
+   $count = SeeProfile::where('player_id',Auth::id())->where('status','unseen')->count();
+   if ($count == 0) {
+       return '';
+   }
+   else{
+   return $count;
+   }
+}
 function get_setting_by_key($key){
     if(!$setting = Setting::where('key', $key)->first()){
         return '';

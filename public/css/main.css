@@ -3,6 +3,10 @@
     src: url(../fonts/bebas_neue/BebasNeue-Regular.otf);
 }
 @font-face {
+  font-family: Heavitas;
+  src: url(../fonts/Heavitas.ttf);
+}
+@font-face {
     font-family: poppinregular;
     src: url(../fonts/Poppins/Poppins-Regular.ttf);
 }
@@ -123,7 +127,7 @@ nav .extras a button,
 /* home */
 .homeMain .greenBanner{
     background-color: #ccf3bf;
-    height: 160px;
+    height: 122px;
     position: relative;
 }
 .homeMain .owl-stage-outer{
@@ -133,11 +137,28 @@ nav .extras a button,
 .latestVideo h1,
 .offers h1,
 .feeds h3{
-    color: #3d3d3d;
+    /* color: #3d3d3d;
     font-family: 'bebuseRegular';
     text-align: center;
-    font-size: 57px;
+    font-size: 57px; */
+    color: #3d3d3d;
+    font-family: 'Heavitas';
+    text-align: center;
+    font-size: 36px;
+
 }
+
+.topcarop .owl-nav{
+  display: none !important;
+}
+
+.Heavitas,
+.articlemain h1{
+  font-family: 'Heavitas' !important;
+    font-size: 34px;
+    font-weight: 200 !important;
+}
+
 .homeMain .greenBanner h2,
 .homeMain .greenBanner h2 a{
     color: #55d729;
@@ -188,7 +209,7 @@ nav .extras a button,
 
 .cPDiv{
     position: absolute;
-    top:73%;
+    top:63%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -247,7 +268,7 @@ nav .extras a button,
 #myTabContent2{
     padding-left:2rem ;
     padding-right:2rem ;
-    margin-top: 3rem;
+    margin-top: 1rem;
 }
 #myTabContent .cCard .img{
     height: 147px;
@@ -357,6 +378,7 @@ right: 6px;
 .latestVideo{
     background-color: #ccf3bf;
     padding: 2rem 0;
+    border: 5px solid #55d729;
 }
 .latestVideo h1{
     margin: 0;
@@ -410,12 +432,12 @@ right: 6px;
     padding: 0 2rem;
 }
 .userTableCustom .userRow .img{
-    overflow: hidden;
-    height: 150px;
-    width: 170px;
-    position: relative;
+  overflow: hidden;
+  height: 130px;
+  width: 146px;
+  position: relative;
 }
-.userTableCustom .userRow .img::after{
+/* .userTableCustom .userRow .img::after{
     content:"";
     height: 5px;
     width: 100%;
@@ -423,7 +445,7 @@ right: 6px;
     position: absolute;
     bottom: 0;
     left: 0;
-}
+} */
 .userTableCustom .userRow:nth-child(1) .img::after{
     background-color: transparent;
 }
@@ -540,12 +562,13 @@ right: 6px;
 }
 .userTableCustom .col-lg-6 input,
 .userTableCustom .col-lg-12 input,
-.userTableCustom .col-lg-12 textarea{
-    font-family: poppinregular;
-    background-color: transparent;
-    border: 1px solid #55d729;
-    padding: 10px;
-    border-radius: 3px;
+.userTableCustom .col-lg-12 textarea,
+.select2-container--default .select2-selection--multiple{
+    font-family: poppinregular !important;
+    background-color: transparent !important;
+    border: 1px solid #55d729 !important;
+    padding: 10px !important;
+    border-radius: 3px !important;
     resize: none;
 }
 .userTableCustom h2{
@@ -681,7 +704,8 @@ margin-left:15px}
 }
 /* Customize the label (the container) */
 .loginMain .container2,
-.signUpMain .container2{
+.signUpMain .container2,
+.checks .container2{
     display: block;
     position: relative;
     padding-left: 35px;
@@ -707,7 +731,8 @@ margin-left:15px}
   }
 /* Hide the browser's default checkbox */
 .loginMain .container2 input,
-.signUpMain .container2 input{
+.signUpMain .container2 input,
+.checks .container2 input{
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -717,7 +742,8 @@ margin-left:15px}
 
   /* Create a custom checkbox */
   .loginMain .checkmark,
-  .signUpMain .checkmark{
+  .signUpMain .checkmark,
+  .checks .checkmark{
     position: absolute;
     top: 0;
     left: 0;
@@ -730,7 +756,8 @@ margin-left:15px}
 
   /* Create the checkmark/indicator (hidden when not checked) */
   .loginMain .checkmark:after,
-  .signUpMain .checkmark:after{
+  .signUpMain .checkmark:after,
+  .checks .checkmark:after{
     content: "";
     position: absolute;
     display: none;
@@ -738,13 +765,15 @@ margin-left:15px}
 
   /* Show the checkmark when checked */
   .loginMain .container2 input:checked ~ .checkmark:after,
-  .signUpMain .container2 input:checked ~ .checkmark:after{
+  .signUpMain .container2 input:checked ~ .checkmark:after,
+  .checks .container2 input:checked ~ .checkmark:after{
     display: block;
   }
 
   /* Style the checkmark/indicator */
   .loginMain .container2 .checkmark:after,
-  .signUpMain .container2 .checkmark:after{
+  .signUpMain .container2 .checkmark:after,
+  .checks .container2 .checkmark:after{
     left: 2px;
     top: 2px;
     width: 12.3px;
@@ -809,7 +838,7 @@ margin-left:15px}
     padding-right: 0.7rem;
 }
 .PprofileMain .profileM .back{
-    height: 272px;
+    height: 250px;
     overflow: hidden;
 }
 .PprofileMain .proDetails .img img{
@@ -1488,9 +1517,9 @@ footer{
     /* margin-top: 5rem; */
 }
 .whiteDiv{
-    height: 130px;
-    background-color: #fff;
-    margin-top: 5rem;
+  height: 100px;
+  background-color: #fff;
+  margin-top: 0rem;
 }
 footer .allright{
     color: #8e8e8e;
@@ -1559,8 +1588,138 @@ footer .socialCol{
 }
 
 
+/* ahmed notification tab */
+.not-badge{
+  position: absolute;
+  top: -6px;
+  left: 15px;
+  background-color: #55d729 !important;
+  border-radius: 10px !important;
+  font-size:11px !important;
+}
+.bell-not{
+position: relative;
+}
+.not-list{
+  list-style: none;
+  padding-left: 0;
+  /* font-family: bebuseRegular; */
+  color: #515251;
+}
+.not-list p{
+  font-weight: bold;
+  margin-bottom:0.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  /* font-family: bebuseRegular; */
+}
+.not-list li:nth-child(odd){
+  background-color: #d6f5cb;
 
+}
+.not-list li{
+  padding: 0.5rem 1rem;
+  font-family: bebuseRegular;
 
+}
+.buy-pckg{
+  /* border: 1px solid #818282; */
+  padding: 0.5rem 0;
+  /* border-radius: 30px; */
+  width: 100%;
+  /* text-align: center; */
+  border-bottom: 1px solid #818282;
+  font-family: bebuseRegular;
+}
+.buy-pckg p{
+  margin-bottom: 0;
+}
+.content-premium{
+  margin-top: 1rem;
+}
+/* .buy-pckg:hover{
+  background-color: #55d729;
+    border: transparent;
+} */
+.buy-pckg a{
+  text-decoration: none;
+  color:#515251 !important;
+  font-family: bebuseRegular;
+  font-size: 20px;
+}
+.premium-card{
+  display: flex;
+  justify-content: center;
+}
+.premium-pckg{
+  display: flex;
+  align-items: center;
+  /* text-align: center; */
+  /* justify-content: center; */
+  flex-direction: column;
+  /* border: 1px solid #55d729; */
+  width: fit-content;
+  padding: 1rem;
+  border-radius: 20px;
+  border-top: 20px solid #55d729;
+  border-left: 1px solid #818282;
+  border-right: 1px solid #818282;
+  border-bottom: 1px solid #818282;
+  font-family: bebuseRegular;
+  color: #515251;
+}
+.premium-pckg ul{
+  /* list-style: none; */
+  /* padding-left: 0; */
+}
+.pckg-modal a .premium-btn{
+  font-family: bebuseRegular;
+  color: #515251;
+  padding: 9px 60px 5px 60px;
+  background-color: #55d729;
+  border: none;
+  width: 100%;
+}
+.fans-noti{
+width: 30%;
+height: 30%;
+position: relative;
+box-shadow: 4px 3px 10px 2px #00000029;
+margin-top: 1.5rem;
+}
+.fans-noti img{
+  object-fit: contain;
+}
+.players-and-fans-noti{
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  flex-wrap: wrap;
+}
+.notification-content p{
+  color: #0d6efd;
+}
+.college-viewer{
+  color:red !important;
+}
+.subscribe-link{
+  text-decoration: none;
+  color:#0d6efd;
+}
+.notification-content button{
+  background-color: transparent;
+  border: none;
+}
+.subs-modal .modal-body button:nth-child(1){
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  border: 1px solid #55d729;
+  border-radius: 20px;
+  color: black;
+}
 
 /* commons */
 .slowDiv{
@@ -1663,6 +1822,9 @@ button.more{
 body::-webkit-scrollbar {
     display: none;
 }
+.notification-content{
+  padding-bottom: 1rem;
+}
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .inner,
@@ -1729,6 +1891,313 @@ scrollbar-width: none;  /* Firefox */
 .inputarrow::-webkit-calendar-picker-indicator {
   display:none !important;
 }
+
+
+
+
+
+
+.signupDin{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 100%;
+  z-index: 1;
+}
+
+.packageCard
+{
+  width: 100%;
+  cursor: pointer;
+}
+.packji{
+  box-shadow: 1px 1px 7px -1px #2e7d1396;
+  padding: 10px;
+  height: 190px;
+  text-align: center;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: 0.5s all ease-in-out;
+  cursor: pointer;
+}
+.packageCard div div:nth-child(1){
+  font-family: 'bebuseRegular';
+  color: #55d729;
+  font-size: 28px;
+}
+.packageCard div div:nth-child(2){
+  font-family: 'bebuseRegular';
+  color: #767777;
+  font-size: 34px;
+  padding-top: 13px;
+}
+.packageCard div div:nth-child(3){
+  color: #000;
+  font-family: 'poppinregular';
+  margin-top: 10px;
+}
+.packageCard input[type="radio"]:checked + .packji {
+  background-color: #55d729;
+  box-shadow: 1px 1px 11px 1px #0000008f;
+}
+.packageCard input[type="radio"]:checked + .packji div:nth-child(1){
+  color: #fff;
+}
+
+/* chat */
+.chatHeader
+{
+  display: flex;
+  align-items: center;
+  height: 70px;
+  overflow: hidden;
+  box-shadow: 1px 6px 14px -2px #00000030;
+  font-family: bebuseRegular;
+  color: #55d729;
+  font-size: 32px;
+}
+.chatHeader .ppic img {
+  height: 60px;
+  width: 100%;
+}
+.chatHeader .ppic {
+  border-radius: 50px;
+  overflow: hidden;
+  margin-left: 10px;
+  margin-right: 2rem;
+}
+.chattBody{
+  position: relative;
+  height:100%
+}
+.chatScreen{
+  height: 100%;
+}
+.chattBody .message{
+
+  position: absolute;
+  bottom: 70px;
+  padding: 0 2rem 0 0;
+
+}
+.chaty{
+  height: 100%;
+}
+.chattBody .message input{
+  background-color: #efeeee;
+  font-family: poppinregular;
+  height: 50px;
+  border: none;
+  border-radius: 0;
+  width: 100%;
+  padding: 15px;
+}
+.chattBody .message i{
+  position: absolute;
+  bottom: 14px;
+  right: 3.5rem;
+  color: #55d729;
+  font-size: 22px;
+  cursor: pointer;
+}
+.chatMessage .messg img{
+  height: 50px;
+  border-radius: 50px;
+}
+.chatMessage  .messg{
+  display: flex;
+  align-items: flex-start;
+}
+.chatMessage  .messg p{
+  margin-left: 10px;
+  margin-bottom: 0;
+  font-family: 'poppinregular';
+  font-size: 14px;
+  background-color: #b3ff98;
+  color: #3c3c3c;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 16px;
+  margin-right: 10px;
+  min-width: 200px;
+}
+.chattBody .chatting{
+  padding: 2rem 1rem 70px 1rem;
+}
+.chattBody .dateTime{
+  text-align: end;
+  font-size: 12px;
+    font-family: 'poppinregular';
+    margin-top: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.chatMessage{
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  /* align-items: baseline; */
+  width: fit-content;
+}
+.chattBody .me .dateTime{
+  text-align: start;
+}
+.me .chatMessage  .messg p{
+  background-color: #d0d0d0;
+}
+.me .chatMessage{
+  /* align-items: flex-end; */
+  float: right;
+}
+.row.chatPushing{
+  max-height: 800px;
+  overflow: auto;
+}
+/* .multipleChosen, .multipleSelect2{
+  width: 300px;
+} */
+.select2-container
+{
+  width: 100% !important;
+}
+.select2-container--default .select2-search--inline .select2-search__field
+{
+  border: none !important;
+  padding:0 !important;
+  margin-top: 0 !important;
+  height: 25px !important;
+}
+.select2-container--default.select2-container--focus .select2-selection--multiple{
+  padding-top: 5px !important;
+}
+
+/* The container */
+.container45 {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container45 input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 26px;
+  width: 26px;
+  background-color: transparent;
+  border: 1px solid #55d729;
+}
+
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+.ml20{
+  margin-left: 20px;
+}
+.pNone{
+  pointer-events: none;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+/* Show the indicator (dot/circle) when checked */
+.container45 input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container45 .checkmark:after {
+  top: 4px;
+  left: 4px;
+  width: 16px;
+  height: 16px;
+  background: #55d729;
+}
+.profileM .back{
+  background-size: cover !important;
+  background-position: top!important;
+}
+.profileM .back img{
+  width: 100%;
+}
+.subH a,
+.cPDiv h1 a{
+  color: #3d3d3d  !important;
+  text-decoration: none !important;
+}
+.userR1 .img{
+  height: 70px !important;
+}
+.userTableCustom .userRow{
+  border: 5px solid #55d729;
+  margin-bottom: 10px;
+}
+.userR1 {
+  border: none !important;
+}
+
+
+
+.fans-noti .tooltiptext {
+  font-weight: bold;
+  visibility: hidden;
+  width: 300px;
+  background-color: #55d729e6;
+  color: #000;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 5px;
+  position: absolute;
+  z-index: 1;
+  font-size: 13px;
+  font-family: 'poppinregular';
+  top: -75px;
+  left: -65px;
+}
+
+.fans-noti .tooltiptext::after {
+  content: '';
+  position: absolute;
+  background-color: #55d729e6;
+  height: 20px;
+  width: 20px;
+  bottom: -6px;
+  transform: rotate(
+45deg
+);
+  left: 46%;
+  z-index: -1;
+  background: linear-gradient(
+311deg
+, #55d729e6,#55d729e6, transparent,transparent);
+}
+
+.fans-noti:hover .tooltiptext {
+  visibility: visible;
+}
+
 /* media queries*/
 
 @media only screen and (min-width:1920px){
@@ -1736,8 +2205,27 @@ scrollbar-width: none;  /* Firefox */
     .dGrid .dGItem {
         height: auto;
     }
+    .profileM .back{
+      height: 350px;
+    }
 }
-
+@media only screen and (min-width:1366px){
+  .col-lg-5 .fans-noti .tooltiptext {
+    font-weight: bold;
+    width: 165px;
+    background-color: #55d729e6;
+    color: #000;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 5px;
+    position: absolute;
+    z-index: 1;
+    font-size: 13px;
+    font-family: 'poppinregular';
+    top: -113px;
+    left: -26px;
+}
+}
 @media only screen and (max-width:1280px){
     .PprofileMain .profileM .back {
         height: 240px;
@@ -1936,6 +2424,22 @@ scrollbar-width: none;  /* Firefox */
     }
 }
 @media only screen and (max-width:600px){
+  .fans-noti .tooltiptext {
+    font-weight: bold;
+    /* visibility: hidden; */
+    width: 140px;
+    background-color: #55d729e6;
+    color: #000;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 5px;
+    position: absolute;
+    z-index: 1;
+    font-size: 13px;
+    font-family: 'poppinregular';
+    top: -128px;
+    left: -25px;
+}
     .dGrid {
         grid-template-columns: repeat(1,1fr);
     }
@@ -2228,164 +2732,4 @@ scrollbar-width: none;  /* Firefox */
         justify-content: center;
         margin-top: 10px;
     }
-}
-.signupDin{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  width: 100%;
-  z-index: 1;
-}
-
-.packageCard
-{
-  width: 100%;
-  cursor: pointer;
-}
-.packji{
-  box-shadow: 1px 1px 7px -1px #2e7d1396;
-  padding: 10px;
-  height: 190px;
-  text-align: center;
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  transition: 0.5s all ease-in-out;
-  cursor: pointer;
-}
-.packageCard div div:nth-child(1){
-  font-family: 'bebuseRegular';
-  color: #55d729;
-  font-size: 28px;
-}
-.packageCard div div:nth-child(2){
-  font-family: 'bebuseRegular';
-  color: #767777;
-  font-size: 34px;
-  padding-top: 13px;
-}
-.packageCard div div:nth-child(3){
-  color: #000;
-  font-family: 'poppinregular';
-  margin-top: 10px;
-}
-.packageCard input[type="radio"]:checked + .packji {
-  background-color: #55d729;
-  box-shadow: 1px 1px 11px 1px #0000008f;
-}
-.packageCard input[type="radio"]:checked + .packji div:nth-child(1){
-  color: #fff;
-}
-
-/* chat */
-.chatHeader
-{
-  display: flex;
-  align-items: center;
-  height: 70px;
-  overflow: hidden;
-  box-shadow: 1px 6px 14px -2px #00000030;
-  font-family: bebuseRegular;
-  color: #55d729;
-  font-size: 32px;
-}
-.chatHeader .ppic img {
-  height: 60px;
-  width: 100%;
-}
-.chatHeader .ppic {
-  border-radius: 50px;
-  overflow: hidden;
-  margin-left: 10px;
-  margin-right: 2rem;
-}
-.chattBody{
-  position: relative;
-  height:100%
-}
-.chatScreen{
-  height: 100%;
-}
-.chattBody .message{
-
-  position: absolute;
-  bottom: 70px;
-  padding: 0 2rem 0 0;
-
-}
-.chaty{
-  height: 100%;
-}
-.chattBody .message input{
-  background-color: #efeeee;
-  font-family: poppinregular;
-  height: 50px;
-  border: none;
-  border-radius: 0;
-  width: 100%;
-  padding: 15px;
-}
-.chattBody .message i{
-  position: absolute;
-  bottom: 14px;
-  right: 3.5rem;
-  color: #55d729;
-  font-size: 22px;
-  cursor: pointer;
-}
-.chatMessage .messg img{
-  height: 50px;
-  border-radius: 50px;
-}
-.chatMessage  .messg{
-  display: flex;
-  align-items: flex-start;
-}
-.chatMessage  .messg p{
-  margin-left: 10px;
-  margin-bottom: 0;
-  font-family: 'poppinregular';
-  font-size: 14px;
-  background-color: #b3ff98;
-  color: #3c3c3c;
-  font-weight: bold;
-  padding: 10px;
-  border-radius: 16px;
-  margin-right: 10px;
-  min-width: 200px;
-}
-.chattBody .chatting{
-  padding: 2rem 1rem 70px 1rem;
-}
-.chattBody .dateTime{
-  text-align: end;
-  font-size: 12px;
-    font-family: 'poppinregular';
-    margin-top: 5px;
-    padding-right: 10px;
-    padding-left: 10px;
-}
-.chatMessage{
-  margin-bottom: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  /* align-items: baseline; */
-  width: fit-content;
-}
-.chattBody .me .dateTime{
-  text-align: start;
-}
-.me .chatMessage  .messg p{
-  background-color: #d0d0d0;
-}
-.me .chatMessage{
-  /* align-items: flex-end; */
-  float: right;
-}
-.row.chatPushing{
-  max-height: 800px;
-  overflow: auto;
 }

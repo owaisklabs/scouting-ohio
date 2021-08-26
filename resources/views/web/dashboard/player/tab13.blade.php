@@ -9,15 +9,19 @@
                 </tr>
                 @foreach ($user->friends as $item )
 
-                @endforeach
                 <tr>
                     <td>
+                        @if ($item)
                         <a href="{{route('chat',$item->id)}}" style="    color: #5f5f5f;text-decoration: none;">
-                            {{$item->name}}
+                            {{@$item->name}}
                         </a>
+                        @else
+                        <h1>No Data Found</h1>
+                        @endif
                     </td>
 
                 </tr>
+                @endforeach
                 </table>
         <!-- </h1> -->
     </div>

@@ -3,7 +3,7 @@
 @section('content')
 <div class="userTableCustom mainDiv search">
     <div class="inner">
-        <div class="userRow d-flex playerRow">
+        <div class="userRow d-flex playerRow userR1 mt1">
             <div class="img">
                 <!-- <img src="assets/img/1x/user1.png" height="100%" width="100%" alt=""> -->
             </div>

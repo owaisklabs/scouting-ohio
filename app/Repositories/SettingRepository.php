@@ -11,18 +11,17 @@ use App\Models\Setting;
 abstract class SettingRepository implements RepositoryInterface
 {
     private $model;
-    
+
     public function __construct(Setting $setting)
     {
         $this->model = $setting;
     }
-    
+
     public function create(array $data)
     {
-        try 
-        {    
-            $setting = $this->model->create($data);
-            
+        try
+        {            $setting = $this->model->create($data);
+
             return [
                 'setting' => $this->find($setting->id)
             ];
@@ -31,7 +30,7 @@ abstract class SettingRepository implements RepositoryInterface
             return $exception->getMessage();
         }
     }
-    
+
     public function delete($id)
     {
         try {
@@ -55,7 +54,7 @@ abstract class SettingRepository implements RepositoryInterface
             throw new DeleteSettingException($exception->getMessage());
         }
     }
-    
+
     public function update(array $data, $id)
     {
         try {
@@ -69,7 +68,7 @@ abstract class SettingRepository implements RepositoryInterface
 
             $temp->update($data);
             $temp->save();
-            
+
             return [
                 'success' => true,
                 'message' => 'Updated successfully!',
@@ -80,10 +79,10 @@ abstract class SettingRepository implements RepositoryInterface
             throw new UpdateSettingException($exception->getMessage());
         }
     }
-    
+
     public function find($id)
     {
-        try 
+        try
         {
             $setting = $this->model::find($id);
             if(!$setting)
@@ -102,7 +101,7 @@ abstract class SettingRepository implements RepositoryInterface
 
         }
     }
-    
+
     public function all()
     {
         try {

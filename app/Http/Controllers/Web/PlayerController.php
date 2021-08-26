@@ -15,6 +15,7 @@ use App\Models\PlayerCombineResult;
 use App\Models\PlayerEvaluation;
 use App\Models\PlayerPersonalInfo;
 use App\Models\PlayerVideo;
+use App\Models\ScholarshipOffer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -312,22 +313,21 @@ class PlayerController extends Controller
             $items = $playerVideo->getChanges();
             Session::flash('message', 'This is a message!');
             return redirect()->back();
+        } else {
+            $playerVideo = new PlayerVideo();
+            if ($request->file('hudl_thumbnail')) {
+                // Storage::disk('public_videos')->delete($playerVideo->hudl_thumbnail);
+                $hudlThumbnail = $request->hudl_thumbnail;
+                $hudlThumbnailName = Str::random(10) . '.' . $hudlThumbnail->getClientOriginalExtension();
+                Storage::disk('public_videos')->put($hudlThumbnailName, \File::get($hudlThumbnail));
+                $playerVideo->hudl_thumbnail = $hudlThumbnailName;
+            }
+            $playerVideo->hudl_link = $request->hudl_link;
+            $playerVideo->User_id = Auth::id();
+            $playerVideo->save();
+            Session::flash('message', 'This is a message!');
+            return redirect()->back();
         }
-        else{
-        $playerVideo = new PlayerVideo();
-        if ($request->file('hudl_thumbnail')) {
-            // Storage::disk('public_videos')->delete($playerVideo->hudl_thumbnail);
-            $hudlThumbnail = $request->hudl_thumbnail;
-            $hudlThumbnailName = Str::random(10) . '.' . $hudlThumbnail->getClientOriginalExtension();
-            Storage::disk('public_videos')->put($hudlThumbnailName, \File::get($hudlThumbnail));
-            $playerVideo->hudl_thumbnail = $hudlThumbnailName;
-        }
-        $playerVideo->hudl_link = $request->hudl_link;
-        $playerVideo->User_id = Auth::id();
-        $playerVideo->save();
-        Session::flash('message', 'This is a message!');
-        return redirect()->back();
-    }
     } //store and update user video
     public function playerArticle(Request $request)
     {
@@ -435,6 +435,56 @@ class PlayerController extends Controller
             Session::flash('message', 'This is a message!');
             return redirect()->back();
         }
+    }
+    public function scholarShipOffer(Request $request)
+    {
+        $scholarshipOffer = ScholarshipOffer::where('user_id', Auth::id())->first();
+        if ($scholarshipOffer) {
+            $scholarshipOffer = ScholarshipOffer::where('user_id', Auth::id())->delete();
+            # code...
+        }
+        // dd($request->all());
+        if ($request->fbs) {
+            foreach ($request->fbs as $item) {
+                $scholarshipOffer = new ScholarshipOffer();
+                $scholarshipOffer->user_id = Auth::id();
+                $scholarshipOffer->FBS_division_1_colleges = $item;
+                $scholarshipOffer->FCS_division_1aa_2_and_3_colleges =null;
+                $scholarshipOffer->FBS_division_1_college =$request->fbs__division;
+                $scholarshipOffer->division_FCS_division_1aa_2_and_3_college =$request->fcs_division;
+                $scholarshipOffer->list_walk_wn_offers = null;
+                $scholarshipOffer->walk_on_committment = $request->walk_on_committment;
+                $scholarshipOffer->save();
+            }
+        }
+        if ($request->fcs) {
+            foreach ($request->fcs as $item) {
+                $scholarshipOffer = new ScholarshipOffer();
+                $scholarshipOffer->user_id = Auth::id();
+                $scholarshipOffer->FBS_division_1_colleges = null;
+                $scholarshipOffer->FCS_division_1aa_2_and_3_colleges =$item;
+                $scholarshipOffer->FBS_division_1_college =$request->fbs__division;
+                $scholarshipOffer->division_FCS_division_1aa_2_and_3_college =$request->fcs_division;
+                $scholarshipOffer->list_walk_wn_offers = null;
+                $scholarshipOffer->walk_on_committment = $request->walk_on_committment;
+                $scholarshipOffer->save();
+            }
+        }
+        if ($request->walkOnOffers) {
+            foreach ($request->walkOnOffers as $item) {
+                $scholarshipOffer = new ScholarshipOffer();
+                $scholarshipOffer->user_id = Auth::id();
+                $scholarshipOffer->FBS_division_1_colleges = null;
+                $scholarshipOffer->FCS_division_1aa_2_and_3_colleges =null;
+                $scholarshipOffer->FBS_division_1_college =$request->fbs__division;
+                $scholarshipOffer->division_FCS_division_1aa_2_and_3_college =$request->fcs_division;
+                $scholarshipOffer->list_walk_wn_offers = $item;
+                $scholarshipOffer->walk_on_committment = $request->walk_on_committment;
+                $scholarshipOffer->save();
+                return redirect()->back();
+            }
+        }
+
     }
     public function showArticleById(Request $request)
     {
@@ -609,5 +659,9 @@ class PlayerController extends Controller
             $coachPlayer->delete();
         }
         return redirect()->back();
+    }
+    public function premiumPayment()
+    {
+        return view('payment.index');
     }
 }

@@ -34,7 +34,7 @@
         head.appendChild(css);
     </script> -->
     {{-- assets/css/main.css --}}
-
+    <script src="https://www.paypal.com/sdk/js?client-id=AV1x3Rq6Ao-Z9G-FBTOrS9neOeRHH5M_mvFd4I3332n8w3luqDNhwNwfFS53AX24zcM85r8dzfSjGi4W"></script>
     <!-- fab -->
     <link rel="shortcut icon" href="{{get_favicon_logo()}}" type="image/x-icon">
     <!-- styles -->
@@ -63,7 +63,8 @@
         integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 </head>
 
@@ -162,6 +163,12 @@
 
 
             <div class="d-flex socialead">
+                @auth
+                @if (Auth::user()->type=="Player")
+                <a  href="javascript:void(0)" class="gotoNotif seenNotification"><i class="fa fa-bell bell-not"><span class="badge not-badge">{{notificationCount()}}</span></i></a>
+                @endif
+                @endauth
+
                 <a href="{{get_setting_by_key('Instagram')}}" target="_blank"><i class="fa fa-instagram"></i></a>
                 <a href="{{get_setting_by_key('Facebook')}}" target="_blank"><i class="fa fa-facebook-f"></i></a>
                 <a href="{{get_setting_by_key('Twitter')}}" target="_blank"><i class="fa fa-twitter"></i></a>
@@ -178,52 +185,49 @@
     </div>
     <footer>
         <div class="roundLogo">
-            <a href="<?php echo $path?>index.php">
+            <a href="{{route('home')}}">
                 <img src="{{get_footer_logo()}}" height="100%" width="100%" alt="">
             </a>
         </div>
         <div class="row g-0">
-            <div class="col-lg-3">
+            <div class="col-lg-4">
                 <div class="fHead">
                     Main
                 </div>
                 <div class="Fsub">
-                    <a href="<?php echo $path?>index.php">Home</a>
+                    <a href="{{route('home')}}">Home</a>
                 </div>
                 <!-- <div class="Fsub">
                     <a href="<?php echo $path?>feeds.php">Feeds</a>
                 </div> -->
                 <div class="Fsub">
-                    <a href="<?php echo $path?>sign-up.php">Registration</a>
+                    <a href="{{route('web_register')}}">Registration</a>
                 </div>
                 <div class="Fsub">
                     <a href="javascript:void()" data-bs-toggle="modal" data-bs-target="#searchmodal">Seacrh</a>
                 </div>
                 <div class="Fsub">
-                    <a href="<?php echo $path?>player-list.php">Player Page</a>
+                    <a href="{{route('players')}}">Player Page</a>
                 </div>
             </div>
-            <div class="col-lg-3 aboutCol">
+            {{-- <div class="col-lg-3 aboutCol">
                 <div class="fHead">
                     About
                 </div>
                 <div class="Fsub">
-                    <a href="javascript:void()">Home</a>
-                </div>
-                <!-- <div class="Fsub">
-                    <a href="javascript:void()">Feeds</a>
-                </div> -->
-                <div class="Fsub">
-                    <a href="javascript:void()">Registration</a>
+                    <a href="{{route('home')}}">Home</a>
                 </div>
                 <div class="Fsub">
-                    <a href="javascript:void()">Seacrh</a>
+                    <a href="{{route('web_register')}}">Registration</a>
                 </div>
                 <div class="Fsub">
-                    <a href="javascript:void()">Player Page</a>
+                    <a href="javascript:void()"data-bs-toggle="modal" data-bs-target="#searchmodal">Seacrh</a>
                 </div>
-            </div>
-            <div class="col-lg-1 socialCol">
+                <div class="Fsub">
+                    <a href="{{route('players')}}">Player Page</a>
+                </div>
+            </div> --}}
+            <div class="col-lg-2">
                 <div class="fHead">
                     Social
                 </div>
@@ -240,13 +244,13 @@
                     <a href="{{get_setting_by_key('Youtube')}}"><i class="fa fa-youtube-play"></i></a>
                 </div>
             </div>
-            <div class="col-lg-1"></div>
+            <div class="col-lg-2"></div>
             <div class="col-lg-4">
                 <div class="fHead">
                     Subscribe our Newsletter
                 </div>
                 <div class="sybH">
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
+                    {{get_setting_by_key('Footer')}}
                 </div>
                 <input type="email" name="email" id="email" placeholder="Email Address">
                 <button class="allBtn btn-submit" id="btn-submit">Send</button>
@@ -493,7 +497,8 @@
     </div>
 </div>
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
 @extends('web.common.searchmodel')
 @extends('web.common.scripts')
 
@@ -511,11 +516,35 @@
 </style>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
+    $('.seenNotification').click(function(){
+        // debugger
+        var url = '{{ route('test') }}';
+        $.ajax({
+        url: url,
+        type: 'POST',
+        data: {id: "{{ Auth::user()->id ?? ""}}"},
+        datatype: 'json',
+        success: function (data) {
+            console.log(data);
+            window.location.href = "{{route('player-dashboard')}}"
+        },
+        error: function (errorThrown) { console.log(errorThrown); }
+    });
+
+    })
      @if(Session::has('notVerified'))
     // console.log('kdkdkdk')
     swal({
         icon: "error",
         text: "Your Profile is not approve yet, Please try later"
+    });
+    @endif
+     @if(Session::has('credentialsnot'))
+    // console.log('kdkdkdk')
+    swal({
+        icon: "error",
+        title:"error",
+        text: "The provided credentials do not match our records"
     });
     @endif
 

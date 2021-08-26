@@ -23,6 +23,11 @@
                 loop:true,
                 margin:10,
                 dots:false,
+                nav:false,
+                autoplay:true,
+                autoplayTimeout:2000,
+                autoplayHoverPause:true,
+                autoplaySpeed:500,
                 responsive:{
                     0:{
                         items:1

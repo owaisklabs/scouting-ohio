@@ -22,7 +22,15 @@ function lateDiv(id){
 
 
 // on ready functions
+
 $(document).ready(function() {
+  // var sites = {!! json_encode($sites->toArray()) !!};
+  $('.js-example-basic-multiple').select2({
+    placeholder: "Select Value",
+    allowClear: true,
+  }
+  );
+
     var scrollCount = 0 ;
     if(!navigator.userAgent.includes('Firefox')){
         setTimeout(()=>{
@@ -170,4 +178,21 @@ inputForImage2.addEventListener('change',(e)=>{
   $(e.target.parentNode).find('img').attr('src',URL.createObjectURL(e.target.files[0]))
 
   console.log(e)
+})
+
+$('.gotoNotif').on('click',()=>{
+  window.localStorage.setItem('notification','yes')
+  // $('.pills-tab li button').removeClass('active')
+})
+
+
+$(document).ready(function(){
+  setTimeout(()=>{
+    window.localStorage.removeItem('notification')
+  },3000)
+  if(window.localStorage.getItem('notification')){
+    $('#pills-tab li button').removeClass('active')
+    $('.col-lg-9 .tab-content .tab-pane').removeClass('show active')
+    $('#pills-notification').addClass('show active')
+  }
 })
