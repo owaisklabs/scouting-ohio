@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Storage;
 
 class UserController extends Controller
 {
@@ -25,7 +25,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = $this->userService->paginate(env('PAGINATE'));
+        $users = User::latest()->get();
         // dd($users);
         return view('admin.user.user', compact('users'));
     }
@@ -86,34 +86,16 @@ class UserController extends Controller
     {
         // dd($request->all());
         $id = $request->hidden;
-
-        if(!(auth()->user()->id == $id || auth()->user()->type == "Admin"))
-        {
-            return response()->json([
-                'success' => FALSE,
-                'message' => 'Not allowed.'
-            ]);
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if ($request->password) {
+            $user->password = Hash::make($request->password);
         }
-        $validator = Validator::make($request->all(), [
-            'name' => 'sometimes|string|max:255',
-            'last_name' => 'sometimes|string|max:255',
-            'user_name' => 'sometimes|string|max:255',
-            'password' => 'sometimes',
-            'email' => 'sometimes|unique:users,email,'.$request->hidden,
-            'isKicker'   =>'sometimes',
-            'isPunter' =>'sometimes',
-            'isLongSnapper'=>'sometimes',
-        ]);
-
-        if($validator->fails())
-            return response()->json($validator->errors()->toArray(), 400);
-
-        if($request->password == NULL){
-            $request = Arr::except($request,['password']);
-        }
-
-        $this->userService->update($request->all(), $id);
-
+        $user->type = $request->type;
+        $user->user_status = $request->user_status;
+        $user->save();
+        // dd($user) ;
         return redirect()->back();
     }
 

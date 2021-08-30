@@ -17,11 +17,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     if (Auth::user()) {
+
         if (Auth::user()->type == 'Admin') {
             return redirect()->route('dashboard');
-        } elseif (Auth::user()->type == 'Player') {
+        } if (Auth::user()->type =='Player' || Auth::user()->type =='player') {
+            // dd("here");
             return redirect()->route('player-dashboard');
-        } elseif (Auth::user()->type == 'college coach' || Auth::user()->type == 'high school coach' && Auth::user()->user_status == 1) {
+        } if (Auth::user()->type == 'college coach' || Auth::user()->type == 'high school coach' && Auth::user()->user_status == 1) {
 
             return redirect()->route('coach-dashboard');
         }
@@ -124,7 +126,7 @@ Route::get('/articles-detail/{id}', 'Web\HomeController@articlesDetail')->name('
 Route::get('/web_register', 'Web\HomeController@web_register')->name('web_register');
 Route::get('/web_login', 'Web\HomeController@web_login')->name('web_login');
 Route::post('web_login', 'Web\HomeController@authenticate')->name('web-login');
-Route::post('/test', 'Web\HomeController@test')->name('test');
+Route::get('/test', 'Web\HomeController@test')->name('test');
 Route::get('cancel', 'user@cancel')->name('payment.cancel');
 Route::get('payment/success', 'Web\UserRegisterController@success')->name('payment.success');
 Route::get('cancel', 'PayPalController@cancel')->name('payment.cancel');

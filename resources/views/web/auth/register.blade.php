@@ -14,7 +14,7 @@
                 <select name="type" id="kchbhe">
                     <option value="college coach"  @if ($role === 'College Coach') selected @endif>College Caoch</option>
                     <option value="high school coach" @if ($role === 'School Coach'  ) selected @endif>High School Coach</option>
-                    <option value="player"  @if ($role === 'Player') selected @endif>Player</option>
+                    <option value="Player"  @if ($role === 'Player') selected @endif>Player</option>
                 </select>
             </div>
             <div class="col-lg-4 offset-lg-4 mt1">
@@ -32,40 +32,7 @@
             {{-- <div class="col-lg-4 offset-lg-4 mt1">
                 <input type="text" placeholder="Username" name="password_confirmation" required>
             </div> --}}
-            <div class="col-lg-8 showPackages offset-lg-2 mt2">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <label for="pack1" class="packageCard" >
-                            <input type="radio" id="pack1"  name="pkgInp" hidden value="monthly">
-                            <div class="packji">
-                                <div>Monthly</div>
-                                <div>$500</div>
-                                <div>Per Month</div>
-                            </div>
-                        </label>
-                    </div>
-                    <div class="col-lg-4">
-                        <label for="pack2" class="packageCard">
-                            <input type="radio" id="pack2"  name="pkgInp" hidden value="annual">
-                            <div class="packji">
-                                <div>Annual</div>
-                                <div>$500</div>
-                                <div>Per Month</div>
-                            </div>
-                        </label>
-                    </div>
-                    <div class="col-lg-4">
-                        <label for="pack3" class="packageCard" >
-                            <input type="radio" id="pack3"  name="pkgInp" hidden value="lifetime">
-                            <div class="packji">
-                                <div>Lifetime</div>
-                                <div>$500</div>
-                                <div>Per Month</div>
-                            </div>
-                        </label>
-                    </div>
-                </div>
-            </div>
+
             <div class="col-lg-4 offset-lg-4 mt2">
                 <div class="remember">
                     <label class="container2">
@@ -89,15 +56,6 @@
     </div>
 </div>
 <script>
-    var aplha ='player'
-    $('.showPackages').css('display','none')
-    $('#kchbhe').change((e)=>{
 
-        aplha=e.target.value
-        console.log(aplha)
-        aplha !== 'player' ?
-        $('.showPackages').css('display','none') :
-        $('.showPackages').css('display','block')
-    })
 </script>
 @endsection

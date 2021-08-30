@@ -195,4 +195,16 @@ $(document).ready(function(){
     $('.col-lg-9 .tab-content .tab-pane').removeClass('show active')
     $('#pills-notification').addClass('show active')
   }
+});
+
+var prenty;
+var inpolo;
+$('.uploadBtn.uploadAble').on('click',(e)=>{
+  prenty = $(e.target.parentNode);
+  inpolo = $(prenty).find('input')
+  $(prenty).find('input').trigger('click')
+
+  $(inpolo).change((e)=>{
+    $(prenty).find('span').text(e.target.files[0].name)
+  })
 })

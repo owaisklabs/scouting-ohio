@@ -121,7 +121,7 @@
 
             </ul>
             @auth
-            @if (auth()->user()->type ==="Player"||auth()->user()->type =="high school coach" || auth()->user()->type =="college coach" )
+            @if (auth()->user()->type =="Player"||auth()->user()->type =="high school coach" || auth()->user()->type =="college coach" )
             <div class="extras d-flex">
                 <form method="POST" action="{{route('logout')}}">
                     @csrf
@@ -300,7 +300,7 @@
                             </div> --}}
                             <div class="uploadAble image ">
                                 <i class="fa fa-plus"></i>
-                                <input type="file" class="articleInp imageInput2" hidden name="hudl_thumbnail">
+                                <input type="file" required class="articleInp imageInput2" hidden name="hudl_thumbnail">
                                 <img src="" alt="" height="100%" width="100%" id="output" class="hudl_img"
                                     hidden>
                                 <input type="hidden" name="hidden_id">
@@ -448,7 +448,7 @@
                             <div class="img you">
                                 <img src="{{asset('img/SVG/hudl.svg')}}" height="44px" width="80px" alt="">
                             </div>
-                            <input type="text" name="hudl_link" class="hudl_link">
+                            <input type="text" name="hudl_link" required class="hudl_link">
                             <input type="hidden" name="hidden_id">
                         </div>
                     </div>

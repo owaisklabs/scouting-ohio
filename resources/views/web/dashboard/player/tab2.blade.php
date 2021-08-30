@@ -59,7 +59,7 @@
             </div>
 
             <div class="col-lg-12 d-flex flex-column mt2">
-                <label>Football post season honors:</label>?
+                <label>Football post season honors:</label>
                 <textarea name="football_post_season_honors" value="" id="" cols="30" rows="10">{{@$combibeReslut->football_post_season_honors}}</textarea>
             </div>
             <div class="col-lg-12 d-flex flex-column mt2">

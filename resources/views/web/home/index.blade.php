@@ -5,41 +5,71 @@
 <div class="homeMain mainDiv">
     <div class="greenBanner">
         <div class="cPDiv">
-            <h1 class="wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.5s">Registration For <a href="https://scoutingohio.com/">SCOUTINGOHIO.COM</a></h1>
-            <div class="playerCoach d-flex justify-content-center gap-4">
+            @auth
+            <h1 class="wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.5s">welcome IN <a
+                    href="https://scoutingohio.com/">SCOUTINGOHIO.COM</a></h1>
+            {{-- <div class="playerCoach d-flex justify-content-center gap-4">
                 <div class="player d-flex justify-content-center align-items-center">
                     <h2><a href="sign-up.php">
                             High School
                             Player
                         </a></h2>
                     <a href="{{url('web_register?role=School Coach')}}">
-                        <div class="greenHov"></div>
-                    </a>
-                </div>
-                <div class="coach d-flex justify-content-center align-items-center">
-                    <h2><a href="{{url('web_register?role=College Coach')}}">College coach</a></h2>
-                    <a href="{{url('web_register?role=College Coach')}}">
-                        <div class="greenHov"></div>
-                    </a>
-                </div>
-                <div class="coach d-flex justify-content-center align-items-center">
-                    <h2><a href="{{url('web_register?role=Player')}}">High School coach</a></h2>
-                    <a href="{{url('web_register?role=Player')}}">
-                        <div class="greenHov"></div>
-                    </a>
-                </div>
-            </div>
+            <div class="greenHov"></div>
+            </a>
+        </div>
+        <div class="coach d-flex justify-content-center align-items-center">
+            <h2><a href="{{url('web_register?role=College Coach')}}">College coach</a></h2>
+            <a href="{{url('web_register?role=College Coach')}}">
+                <div class="greenHov"></div>
+            </a>
+        </div>
+        <div class="coach d-flex justify-content-center align-items-center">
+            <h2><a href="{{url('web_register?role=Player')}}">High School coach</a></h2>
+            <a href="{{url('web_register?role=Player')}}">
+                <div class="greenHov"></div>
+            </a>
+        </div>
+    </div> --}}
+    @endauth
+    @guest
+    <h1 class="wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.5s">Registration For <a
+            href="https://scoutingohio.com/">SCOUTINGOHIO.COM</a></h1>
+    <div class="playerCoach d-flex justify-content-center gap-4">
+        <div class="player d-flex justify-content-center align-items-center">
+            <h2><a href="sign-up.php">
+                    High School
+                    Player
+                </a></h2>
+            <a href="{{url('web_register?role=School Coach')}}">
+                <div class="greenHov"></div>
+            </a>
+        </div>
+        <div class="coach d-flex justify-content-center align-items-center">
+            <h2><a href="{{url('web_register?role=College Coach')}}">College coach</a></h2>
+            <a href="{{url('web_register?role=College Coach')}}">
+                <div class="greenHov"></div>
+            </a>
+        </div>
+        <div class="coach d-flex justify-content-center align-items-center">
+            <h2><a href="{{url('web_register?role=Player')}}">High School coach</a></h2>
+            <a href="{{url('web_register?role=Player')}}">
+                <div class="greenHov"></div>
+            </a>
         </div>
     </div>
-    <div class="sliderDiv mt3">
-        <div class="row g-0 flwx-wrape">
-            <div class="col-lg-9">
-                <div class="fakeTabs">
-                    <div class="col-lg-12 ">
-                        <h1 class="wow fadeInUp article-heading Heavitas" data-wow-duration="0.5s" data-wow-delay="0.5s"
-                            >Articles</h1>
-                    </div>
-                    <!-- <ul class="nav nav-tabs justify-content-center gap-5" id="myTab" role="tablist">
+    @endguest
+</div>
+</div>
+<div class="sliderDiv mt3">
+    <div class="row g-0 flwx-wrape">
+        <div class="col-lg-9">
+            <div class="fakeTabs">
+                <div class="col-lg-12 ">
+                    <h1 class="wow fadeInUp article-heading Heavitas" data-wow-duration="0.5s" data-wow-delay="0.5s">
+                        Articles</h1>
+                </div>
+                <!-- <ul class="nav nav-tabs justify-content-center gap-5" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
                           <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#tab1" type="button" role="tab" aria-controls="home" aria-selected="true" >Articles</button>
                         </li>
@@ -50,105 +80,104 @@
                           <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#tab3" type="button" role="tab" aria-controls="contact" aria-selected="false" onclick="lateDiv('tab3')">HeadLines</button>
                         </li>
                       </ul> -->
-                </div>
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="home-tab">
-                        <div class="owl-carousel owl-theme topcarop">
-                            @foreach ($articles as $article )
-                            <div class="item">
-                                <div class="cCard">
-                                    <div class="img">
-                                        <img src="{{asset('img/articles/'.$article->image)}}" height="" width="" alt="">
-                                    </div>
-                                    <div class="Chead">
-                                        <a style="color: #55d729;!important"
-                                            href="{{url('articles-detail/'.$article->id)}}">
-                                            {{$article->title}}
-                                        </a>
-                                    </div>
-                                    <div class="Ctxt">
-                                        {{$article->content}}
-                                    </div>
+            </div>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="home-tab">
+                    <div class="owl-carousel owl-theme topcarop">
+                        @foreach ($articles as $article )
+                        <div class="item">
+                            <div class="cCard">
+                                <div class="img">
+                                    <img src="{{asset('img/articles/'.$article->image)}}" height="" width="" alt="">
+                                </div>
+                                <div class="Chead">
                                     <a style="color: #55d729;!important"
                                         href="{{url('articles-detail/'.$article->id)}}">
-                                        <div class="CreaMore">
-                                            Read More
-                                        </div>
+                                        {{$article->title}}
                                     </a>
                                 </div>
+                                <div class="Ctxt">
+                                    {{$article->content}}
+                                </div>
+                                <a style="color: #55d729;!important" href="{{url('articles-detail/'.$article->id)}}">
+                                    <div class="CreaMore">
+                                        Read More
+                                    </div>
+                                </a>
                             </div>
-                            @endforeach
                         </div>
-                        <div class="col-lg-12 text-center mb3">
-                            <a href="{{route('articles')}}"><button class="more">More</button></a>
-                        </div>
+                        @endforeach
+                    </div>
+                    <div class="col-lg-12 text-center mb3">
+                        <a href="{{route('articles')}}"><button class="more">More</button></a>
                     </div>
                 </div>
-
-
             </div>
-            <div class="col-lg-3">
-                {{-- <div class="twittercard">
+
+
+        </div>
+        <div class="col-lg-3">
+            {{-- <div class="twittercard">
                     <div class="head"><span class="wow fadeInDown" data-wow-duration="0.5s" data-wow-delay="0.5s">Twitter</span></div>
                     <div class="twwetBy">
                         <span>Tweets By</span> <span>@mark_porter</span>
                     </div>
                     <div class="twwet">
                         <img src="{{asset('img/1x/twitter-8.png')}}" height="" width="" alt="" />
+        </div>
+        <div class="twwetBy two"></div>
+    </div> --}}
+    @auth
+    @if (Auth::user()->type=="Admin")
+    <div class="twitter-body">
+        <h1 class="text">Login To See TweetS</h1>
+        <div class="titer twitter-overlay">
+            <div class="row mb-2">
+                <div class="col-lg d-flex justify-content-between align-items-center">
+                    <div class="retweet">
+                        <i class="fa fa-retweet"></i>
+                        <label for="">ScoutingOhio.com Retweeted</label>
+                    </div>
+                    <i class="fa fa-twitter fa-2x"></i>
+                </div>
             </div>
-            <div class="twwetBy two"></div>
-        </div> --}}
-        @auth
-        @if (Auth::user()->type=="Admin")
-        <div class="twitter-body">
-            <h1 class="text">Login To See TweetS</h1>
-            <div class="titer twitter-overlay">
-                <div class="row mb-2">
-                    <div class="col-lg d-flex justify-content-between align-items-center">
-                        <div class="retweet">
-                            <i class="fa fa-retweet"></i>
-                            <label for="">ScoutingOhio.com Retweeted</label>
+            <div class="row twitter-content">
+                <div class="col-lg-12">
+                    <div class="twitter-profile d-flex align-items-start">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Cristiano_Ronaldo_2018.jpg"
+                            alt="">
+                        <div class="twitter-profile-det">
+                            <h5>Bucknuts</h5>
+                            <label for="">@Bucknuts247</label>
                         </div>
-                        <i class="fa fa-twitter fa-2x"></i>
                     </div>
                 </div>
-                <div class="row twitter-content">
-                    <div class="col-lg-12">
-                        <div class="twitter-profile d-flex align-items-start">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Cristiano_Ronaldo_2018.jpg"
-                                alt="">
-                            <div class="twitter-profile-det">
-                                <h5>Bucknuts</h5>
-                                <label for="">@Bucknuts247</label>
-                            </div>
-                        </div>
+                <div class="col-lg-12">
+                    <p>
+                        <a href="">#Ohiostate</a> has an offer out to
+                        <a href="">#DindyGabriel</a>. What do the <a href="">#Buckeyes</a> like
+                        about the defensive lineman? <br>
+                        <a href="">@Mark__Porter</a> gave his evaluation (VIP)
+                        <a href="">247sprts.com/college/ohio-s</a>
+                    </p>
+                    <img class="mt-3" src="https://qph.fs.quoracdn.net/main-qimg-c423778894f61719e6e5344d6e2b3961.webp"
+                        alt="">
+                </div>
+                <div class="twitter-footer d-flex justify-content-between align-items-center">
+                    <div class="like-share-btn d-flex align-items-center">
+                        <button><i class="fa fa-heart-o"></i></button>
+                        <button><i class="fa fa-sign-out fa-lg"></i></button>
                     </div>
-                    <div class="col-lg-12">
-                        <p>
-                            <a href="">#Ohiostate</a> has an offer out to
-                            <a href="">#DindyGabriel</a>. What do the <a href="">#Buckeyes</a> like
-                            about the defensive lineman? <br>
-                            <a href="">@Mark__Porter</a> gave his evaluation (VIP)
-                            <a href="">247sprts.com/college/ohio-s</a>
-                        </p>
-                        <img class="mt-3" src="https://qph.fs.quoracdn.net/main-qimg-c423778894f61719e6e5344d6e2b3961.webp"
-                            alt="">
-                    </div>
-                    <div class="twitter-footer d-flex justify-content-between align-items-center">
-                        <div class="like-share-btn d-flex align-items-center">
-                            <button><i class="fa fa-heart-o"></i></button>
-                            <button><i class="fa fa-sign-out fa-lg"></i></button>
-                        </div>
-                        <div class="date-label">
-                            6 May 2021
-                        </div>
+                    <div class="date-label">
+                        6 May 2021
                     </div>
                 </div>
             </div>
         </div>
-        @else
-        <div class="twitter-page">
-            {{-- @foreach ($tweets as $tweet)
+    </div>
+    @else
+    <div class="twitter-page">
+        {{-- @foreach ($tweets as $tweet)
             <div class="twitter-body">
                 <div class="row mb-2">
                 </div>
@@ -156,93 +185,117 @@
                     <div class="col-lg-12">
                         <div class="twitter-profile d-flex align-items-start">
                             <img src="{{$tweet['user']['profile_image_url_https']}}"
-                                alt="">
-                            <div class="twitter-profile-det">
-                                <h5> {{$tweet['user']['name']}}</h5>
-                                <label for=""> <span>@</span>{{$tweet['user']['screen_name']}}</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <p>
-
-                            {{ $tweet['text']}}
-                        </p>
-
-                        @if(count($tweet['entities']) > 4)
-                        <img class="mt-3"
-                            src="{{$tweet['extended_entities']['media'][0]['media_url']}}" alt="">
-                        @else
-                            <img hidden src="{{asset('img/SVG/youtube.svg')}}" alt="">
-                        @endif
-                    </div>
-                    <div class="twitter-footer d-flex justify-content-between align-items-center">
-                        <div class="like-share-btn d-flex align-items-center">
-                            <button hidden><i class="fa fa-heart-o"></i></button>
-                            <button hidden><i class="fa fa-sign-out fa-lg"></i></button>
-                        </div>
-                        <div class="date-label">
-                           {{$tweet['created_at']}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @endforeach --}}
-
+        alt="">
+        <div class="twitter-profile-det">
+            <h5> {{$tweet['user']['name']}}</h5>
+            <label for=""> <span>@</span>{{$tweet['user']['screen_name']}}</label>
         </div>
-        @endif
-        @endauth
-
-        @guest
-        <div class="twitter-body">
-            <h1 class="text">Login To See TweetS</h1>
-            <div class="titer twitter-overlay">
-                <div class="row mb-2">
-                    <div class="col-lg d-flex justify-content-between align-items-center">
-                        <div class="retweet">
-                            <i class="fa fa-retweet"></i>
-                            <label for="">ScoutingOhio.com Retweeted</label>
-                        </div>
-                        <i class="fa fa-twitter fa-2x"></i>
-                    </div>
-                </div>
-                <div class="row twitter-content">
-                    <div class="col-lg-12">
-                        <div class="twitter-profile d-flex align-items-start">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Cristiano_Ronaldo_2018.jpg"
-                                alt="">
-                            <div class="twitter-profile-det">
-                                <h5>Bucknuts</h5>
-                                <label for="">@Bucknuts247</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <p>
-                            <a href="">#Ohiostate</a> has an offer out to
-                            <a href="">#DindyGabriel</a>. What do the <a href="">#Buckeyes</a> like
-                            about the defensive lineman? <br>
-                            <a href="">@Mark__Porter</a> gave his evaluation (VIP)
-                            <a href="">247sprts.com/college/ohio-s</a>
-                        </p>
-                        <img class="mt-3" src="https://qph.fs.quoracdn.net/main-qimg-c423778894f61719e6e5344d6e2b3961.webp"
-                            alt="">
-                    </div>
-                    <div class="twitter-footer d-flex justify-content-between align-items-center">
-                        <div class="like-share-btn d-flex align-items-center">
-                            <button><i class="fa fa-heart-o"></i></button>
-                            <button><i class="fa fa-sign-out fa-lg"></i></button>
-                        </div>
-                        <div class="date-label">
-                            6 May 2021
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @endguest
     </div>
 </div>
+<div class="col-lg-12">
+    <p>
+
+        {{ $tweet['text']}}
+    </p>
+
+    @if(count($tweet['entities']) > 4)
+    <img class="mt-3" src="{{$tweet['extended_entities']['media'][0]['media_url']}}" alt="">
+    @else
+    <img hidden src="{{asset('img/SVG/youtube.svg')}}" alt="">
+    @endif
+</div>
+<div class="twitter-footer d-flex justify-content-between align-items-center">
+    <div class="like-share-btn d-flex align-items-center">
+        <button hidden><i class="fa fa-heart-o"></i></button>
+        <button hidden><i class="fa fa-sign-out fa-lg"></i></button>
+    </div>
+    <div class="date-label">
+        {{$tweet['created_at']}}
+    </div>
+</div>
+</div>
+</div>
+@endforeach --}}
+
+</div>
+@endif
+@endauth
+
+@guest
+<div class="twitter-body">
+    <h1 class="text">Login To See TweetS</h1>
+    <div class="titer twitter-overlay">
+        <div class="row mb-2">
+            <div class="col-lg d-flex justify-content-between align-items-center">
+                <div class="retweet">
+                    <i class="fa fa-retweet"></i>
+                    <label for="">ScoutingOhio.com Retweeted</label>
+                </div>
+                <i class="fa fa-twitter fa-2x"></i>
+            </div>
+        </div>
+        <div class="row twitter-content">
+            <div class="col-lg-12">
+                <div class="twitter-profile d-flex align-items-start">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Cristiano_Ronaldo_2018.jpg" alt="">
+                    <div class="twitter-profile-det">
+                        <h5>Bucknuts</h5>
+                        <label for="">@Bucknuts247</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <p>
+                    <a href="">#Ohiostate</a> has an offer out to
+                    <a href="">#DindyGabriel</a>. What do the <a href="">#Buckeyes</a> like
+                    about the defensive lineman? <br>
+                    <a href="">@Mark__Porter</a> gave his evaluation (VIP)
+                    <a href="">247sprts.com/college/ohio-s</a>
+                </p>
+                <img class="mt-3" src="https://qph.fs.quoracdn.net/main-qimg-c423778894f61719e6e5344d6e2b3961.webp"
+                    alt="">
+            </div>
+            <div class="twitter-footer d-flex justify-content-between align-items-center">
+                <div class="like-share-btn d-flex align-items-center">
+                    <button><i class="fa fa-heart-o"></i></button>
+                    <button><i class="fa fa-sign-out fa-lg"></i></button>
+                </div>
+                <div class="date-label">
+                    6 May 2021
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endguest
+</div>
+</div>
+</div>
+<div class="row">
+    <div class="col-lg-9"></div>
+    <div class="col-lg-3">
+        <div class="online-frnds-head mb1">
+            <h1>
+                Community - Whos Online
+            </h1>
+        </div>
+        <div class="online-frmds">
+            <img src="https://cdna.artstation.com/p/assets/images/images/017/845/948/large/gokul-sharma-iron-man-side-face.jpg?1557549483"
+                alt="">
+            <img src="https://cdna.artstation.com/p/assets/images/images/017/845/948/large/gokul-sharma-iron-man-side-face.jpg?1557549483"
+                alt="">
+            <img src="https://cdna.artstation.com/p/assets/images/images/017/845/948/large/gokul-sharma-iron-man-side-face.jpg?1557549483"
+                alt="">
+            <img src="https://cdna.artstation.com/p/assets/images/images/017/845/948/large/gokul-sharma-iron-man-side-face.jpg?1557549483"
+                alt="">
+            <img src="https://cdna.artstation.com/p/assets/images/images/017/845/948/large/gokul-sharma-iron-man-side-face.jpg?1557549483"
+                alt="">
+            <img src="https://cdna.artstation.com/p/assets/images/images/017/845/948/large/gokul-sharma-iron-man-side-face.jpg?1557549483"
+                alt="">
+            <img src="https://cdna.artstation.com/p/assets/images/images/017/845/948/large/gokul-sharma-iron-man-side-face.jpg?1557549483"
+                alt="">
+        </div>
+    </div>
 </div>
 <button id="vidModal" hidden="hidden" data-bs-toggle="modal" data-bs-target="#exampleModalVideo"></button>
 <div class="latestVideo">
@@ -258,7 +311,20 @@
                     <div class="dGrid">
                         @foreach ($chunk as $video)
                         <div class="dGItem">
-                            <img src="{{asset('img/videos/'.$video->hudl_thumbnail)}}" height="100%" width="100%" alt="">
+                            @if ($video->hudl_thumbnail)
+                            <img class="pl-img" src="{{asset('img/videos/'.$video->hudl_thumbnail)}}" height="100%"
+                                width="100%" alt="">
+                            @else
+                            <img class="pl-img" src="{{asset('img/noimg.jpg')}}" height="100%" width="100%" alt="">
+                            @endif
+
+                            <div class="img-txt">
+
+                                NAME {{$video->user->name}} - HIGH SCHOOL
+                                {{$video->user->basicInfo->high_school ?? " "}} <br /> CLASS
+                                OF{{$video->user->basicInfo->class_off ?? ""}} -
+                                POSITION{{$video->user->basicInfo->special_team_position?? ""}}
+                            </div>
                             <input type="hidden" value="{{$video->hudl_link}}" name="video_url"
                                 id="url_link{{$video->id}}">
                             <img src="{{asset('img/1x/plahhov.png')}}" height="100%" width="100%" class="forHover"
@@ -342,22 +408,24 @@
         background-color: #fff;
         padding: 1rem;
         width: 310px;
-         height: auto;
-         position: relative;
+        height: auto;
+        position: relative;
     }
-    .twitter-overlay{
+
+    .twitter-overlay {
         filter: blur(10px);
     }
-   .text{
-       position: absolute;
-       top: 40%;
-       left: 15%;
-       z-index: 100;
-       font-family: "bebuseRegular";
-       font-size: 2rem;
-       font-weight: bold;
-       COLOR: #55d729;
-   }
+
+    .text {
+        position: absolute;
+        top: 40%;
+        left: 15%;
+        z-index: 100;
+        font-family: "bebuseRegular";
+        font-size: 2rem;
+        font-weight: bold;
+        COLOR: #55d729;
+    }
 
 
     .twitter-profile img {
@@ -429,28 +497,81 @@
         color: black;
     }
 
+    .img-txt {
+        color: white;
+        position: absolute;
+        bottom: 0;
+        text-align: left;
+        font-size: 14px;
+        font-family: poppinsregular;
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+        padding: 0 1rem 0 0;
+        height: 30%;
+        width: 100%;
+        z-index: 1;
+        color: #fff;
+        font-family: 'poppinregular';
+        padding: 5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .img-txt::before {
+        content: "";
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #328018ad;
+        z-index: -1;
+    }
+
+    .pl-img {
+        position: relative;
+    }
+
+    .online-frmds {
+        height: 300px;
+        width: 100%;
+        overflow: scroll;
+
+    }
+
+    .online-frmds img {
+        width: 20%;
+        height: auto;
+        margin-bottom: 20px;
+    }
+
+    .online-frnds-head h1 {
+        font-size: 14px;
+        font-family: 'Heavitas' !important;
+        font-weight: 200 !important;
+    }
+
 </style>
 
 <script>
-
-
-
-
-    var tweety = {!! json_encode($tweets) !!}, arr = [];
+    var tweety = {
+            !!json_encode($tweets) !!
+        },
+        arr = [];
     console.log(tweety)
-    setTimeout(()=>{
-        for(var i =0;i < 100000;i++){
-        if(tweety[i] === undefined){
-            break
-        }else{
-            arr.push(tweety[i]);
-            tweetAppend(arr[i])
+    setTimeout(() => {
+        for (var i = 0; i < 100000; i++) {
+            if (tweety[i] === undefined) {
+                break
+            } else {
+                arr.push(tweety[i]);
+                tweetAppend(arr[i])
+            }
         }
-    }
-    },1000)
+    }, 1000)
 
     // var tweetyi = document.getElementsByClassName('twitter-page')[0]
-    function tweetAppend(d){
+    function tweetAppend(d) {
         console.log(moment("12-25-1995", "MM-DD-YYYY"))
         $('.twitter-page').append(`
         <div class="twitter-body">
@@ -501,21 +622,20 @@
 
 
     function urlify(text) {
-  var urlRegex = /(https?:\/\/[^\s]+)/g;
-  return text.replace(urlRegex, function(url) {
-    return '<a href="' + url + '">' + url + '</a>';
-  })
-  // or alternatively
-  // return text.replace(urlRegex, '<a href="$1">$1</a>')
-}
+        var urlRegex = /(https?:\/\/[^\s]+)/g;
+        return text.replace(urlRegex, function (url) {
+            return '<a href="' + url + '">' + url + '</a>';
+        })
+        // or alternatively
+        // return text.replace(urlRegex, '<a href="$1">$1</a>')
+    }
 
-var text = 'Find me at http://www.example.com and also at http://stackoverflow.com';
-var html = urlify(text);
+    var text = 'Find me at http://www.example.com and also at http://stackoverflow.com';
+    var html = urlify(text);
 
-console.log(html)
+    console.log(html)
 
 </script>
 
 
 @endsection
-

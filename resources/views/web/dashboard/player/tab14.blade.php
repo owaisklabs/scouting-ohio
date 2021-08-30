@@ -720,7 +720,7 @@
                         <label>If yes what FBS Division 1 college:</label>
                         {{-- <input type="text" value="{{@$basicInfo->secondry_defensive}}" name="secondry_defensive">
                         --}}
-                        <input list="fbs-division" name="fbs__division" value="" placeholder="FBS Division 1 college">
+                        <input list="fbs-division" name="fbs__division" value="{{$Scholarship[0]->FBS_division_1_college}}" placeholder="FBS Division 1 college">
                         <datalist id="fbs-division">
                             <option value="" selected="selected">Select Below</option>
                             <option value="Air Force">Air Force</option>
@@ -865,7 +865,7 @@
                     </div>
                     <div class="col-lg-6 d-flex flex-column mt2 pNone">
                         <label>If yes what Division FCS Division 1aa 2 and 3 college:</label>
-                        <input list="fcs-division" name="fcs_division" value=""
+                        <input list="fcs-division" name="fcs_division" value="{{$Scholarship[0]->division_FCS_division_1aa_2_and_3_college}}"
                             placeholder="what Division FCS Division 1aa 2 and 3 college">
                         <datalist id="fcs-division">
                             <option value="" selected="selected">Select Below</option>
@@ -2107,7 +2107,7 @@
                         <label>Walk-On Committment</label>
                         {{-- <input type="text" value="{{@$basicInfo->secondry_defensive}}" name="secondry_defensive">
                         --}}
-                        <input list="walk-on-committment" name="walk_on_committment" value=""
+                        <input list="walk-on-committment" name="walk_on_committment" value="{{$Scholarship[0]->walk_on_committment}}"
                             placeholder="Walk-On Committment">
                         <datalist id="walk-on-committment">
                             <option value="" selected="selected">Select Below</option>
@@ -2812,6 +2812,7 @@
         // },3000)
             var arr1 = [],arr2 = [],arr3 = [];
         var dataArr = {!! json_encode($Scholarship) !!};
+        console.log(dataArr);
 
         dataArr.forEach(e => {
             if(e.FBS_division_1_colleges != null){

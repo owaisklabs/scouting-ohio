@@ -438,10 +438,12 @@ class PlayerController extends Controller
     }
     public function scholarShipOffer(Request $request)
     {
-        $scholarshipOffer = ScholarshipOffer::where('user_id', Auth::id())->first();
+        $scholarshipOffer = ScholarshipOffer::where('user_id', Auth::id())->get();
         if ($scholarshipOffer) {
-            $scholarshipOffer = ScholarshipOffer::where('user_id', Auth::id())->delete();
-            # code...
+            foreach ($scholarshipOffer as $item) {
+                # code...   
+                $item = ScholarshipOffer::where('user_id', Auth::id())->delete();
+            }
         }
         // dd($request->all());
         if ($request->fbs) {

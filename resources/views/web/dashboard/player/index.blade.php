@@ -106,7 +106,12 @@
                             </div>
                             <div class="proPic d-flex gap-2">
                                 <div class="img">
+                                    @if ($user->user_profile)
                                     <img src="{{asset('user_image').'/'.$user->user_profile}}" alt="">
+                                    @else
+                                    <img src="{{asset('user_image/noimg.jpg')}}" alt="">
+                                    @endif
+
                                 </div>
                                 <div class="btns">
                                     <label for="profilePic">

@@ -159,8 +159,6 @@
                 <label>ALMA Mater:</label>
                 <input type="text" value="{{@$playerPersonalInfo->male_parent_alma_mater}}" name="male_parent_alma_mater">
             </div>
-
-            FemALE
             <h2 class="mt4 mb1">FemALE  pARENTS OR gUARDIANS</h2>
             <div class="col-lg-6 d-flex flex-column mt2 ">
                 <label>nAME:</label>

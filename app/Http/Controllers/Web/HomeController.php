@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Exports\UsersExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Setting;
@@ -23,6 +24,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Facades\Excel;
 
 use function GuzzleHttp\json_decode;
 
@@ -69,7 +71,7 @@ class HomeController extends Controller
                     return $obj['created_at'];
                 });
             }
-            if (Auth::user()->type === "Player") {
+            if (Auth::user()->type == "Player") {
                 $result = curl('Mark__Porter');
                 array_push($results, $result);
                 // return $results;
@@ -502,12 +504,7 @@ class HomeController extends Controller
     }
     public function test(Request $request)
     {
-        // return $request->all();
-        // $user = User::find(Auth::id());
-        //     if (Cache::has('user-is-online-' . $user->id))
-        //         echo "User " . $user->name . " is online.";
-        //     else
-        //         echo "User " . $user->name . " is offline.";
+        return Excel::download(new UsersExport,'export.xlsx');
 
         $seenNotification = SeeProfile::where('player_id', $request->id)
             ->where('status', 'unseen')

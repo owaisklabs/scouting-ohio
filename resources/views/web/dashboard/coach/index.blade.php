@@ -29,22 +29,22 @@
             <div class="tab-content" id="pills-tabContent">
 
                 <!-- profile Common -->
-                <!-- <div class="profileSec">
+                 <div class="profileSec">
                     <div class="cover">
-                        <div class="back" style="background: url(../assets/img/1x/cover-8.png) no-repeat center center / cover;">
-                            <img src="../assets/img/1x/greenbg-8.png" alt="">
+                        <div class="back" style="background:url('{{asset('img/1x/cover-8.png    ')}}') no-repeat center center / cover;">
+                            <img src="{{asset('img/1x/greenbg-8.png')}}" alt="">
                         </div>
                         <div class="proPic d-flex gap-2">
                             <div class="img">
-                                <img src="../assets/img/1x/coach.jpg" alt="">
+                                <img src="{{asset('img/1x/profile.jpg')}}" alt="">
                             </div>
                             <div class="btns">
                                 <button>Upload New Picture</button>
-                                <button>Delete</button>
+                                <button>Upload New Cover</button>
                             </div>
                         </div>
                     </div>
-                </div> -->
+                </div>
 
                 <!-- tab1 -->
                 @include('web.dashboard.coach.tab1')
