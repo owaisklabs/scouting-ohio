@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Srmklive\PayPal\Services\ExpressCheckout;
 
 class UserRegisterController extends Controller
@@ -77,36 +78,42 @@ class UserRegisterController extends Controller
         if ($request->pkgInp === 'annual') {
             dd($request->pkgInp);
         }
-        $request->validate([
-            'name' => 'required',
-            'type' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
-        ]);
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'name' => 'required',
+                'type' => 'required',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|min:6',
+                'password_confirmation' => 'required|same:password'
+            ]
+        );
+        if ($validator->fails()) {
+            // dd($validator->errors());
+            return Redirect::back()->withErrors($validator);
+        }
 
         $data = $request->all();
+
         $check = $this->create($data);
-        if ($check->type === "college coach"){
+        if ($check->type === "college coach") {
             return redirect("/");
-
-        }
-        else
-        $this->guard()->login($check);
+        } else
+            $this->guard()->login($check);
         return redirect("/");
-
     }
 
 
 
     protected function create(array $data)
     {
-        // dd($data);
+        dd($data);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'type' => $data['type'],
-            'user_status' => $data['type']==="college coach" ? '0' : '1',
+            'user_status' => $data['type'] === "college coach" ? '0' : '1',
         ]);
     }
     protected function guard()

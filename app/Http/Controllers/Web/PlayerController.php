@@ -23,6 +23,8 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
 class PlayerController extends Controller
 {
@@ -441,7 +443,7 @@ class PlayerController extends Controller
         $scholarshipOffer = ScholarshipOffer::where('user_id', Auth::id())->get();
         if ($scholarshipOffer) {
             foreach ($scholarshipOffer as $item) {
-                # code...   
+                # code...
                 $item = ScholarshipOffer::where('user_id', Auth::id())->delete();
             }
         }
@@ -451,9 +453,9 @@ class PlayerController extends Controller
                 $scholarshipOffer = new ScholarshipOffer();
                 $scholarshipOffer->user_id = Auth::id();
                 $scholarshipOffer->FBS_division_1_colleges = $item;
-                $scholarshipOffer->FCS_division_1aa_2_and_3_colleges =null;
-                $scholarshipOffer->FBS_division_1_college =$request->fbs__division;
-                $scholarshipOffer->division_FCS_division_1aa_2_and_3_college =$request->fcs_division;
+                $scholarshipOffer->FCS_division_1aa_2_and_3_colleges = null;
+                $scholarshipOffer->FBS_division_1_college = $request->fbs__division;
+                $scholarshipOffer->division_FCS_division_1aa_2_and_3_college = $request->fcs_division;
                 $scholarshipOffer->list_walk_wn_offers = null;
                 $scholarshipOffer->walk_on_committment = $request->walk_on_committment;
                 $scholarshipOffer->save();
@@ -464,9 +466,9 @@ class PlayerController extends Controller
                 $scholarshipOffer = new ScholarshipOffer();
                 $scholarshipOffer->user_id = Auth::id();
                 $scholarshipOffer->FBS_division_1_colleges = null;
-                $scholarshipOffer->FCS_division_1aa_2_and_3_colleges =$item;
-                $scholarshipOffer->FBS_division_1_college =$request->fbs__division;
-                $scholarshipOffer->division_FCS_division_1aa_2_and_3_college =$request->fcs_division;
+                $scholarshipOffer->FCS_division_1aa_2_and_3_colleges = $item;
+                $scholarshipOffer->FBS_division_1_college = $request->fbs__division;
+                $scholarshipOffer->division_FCS_division_1aa_2_and_3_college = $request->fcs_division;
                 $scholarshipOffer->list_walk_wn_offers = null;
                 $scholarshipOffer->walk_on_committment = $request->walk_on_committment;
                 $scholarshipOffer->save();
@@ -477,16 +479,15 @@ class PlayerController extends Controller
                 $scholarshipOffer = new ScholarshipOffer();
                 $scholarshipOffer->user_id = Auth::id();
                 $scholarshipOffer->FBS_division_1_colleges = null;
-                $scholarshipOffer->FCS_division_1aa_2_and_3_colleges =null;
-                $scholarshipOffer->FBS_division_1_college =$request->fbs__division;
-                $scholarshipOffer->division_FCS_division_1aa_2_and_3_college =$request->fcs_division;
+                $scholarshipOffer->FCS_division_1aa_2_and_3_colleges = null;
+                $scholarshipOffer->FBS_division_1_college = $request->fbs__division;
+                $scholarshipOffer->division_FCS_division_1aa_2_and_3_college = $request->fcs_division;
                 $scholarshipOffer->list_walk_wn_offers = $item;
                 $scholarshipOffer->walk_on_committment = $request->walk_on_committment;
                 $scholarshipOffer->save();
                 return redirect()->back();
             }
         }
-
     }
     public function showArticleById(Request $request)
     {
@@ -520,7 +521,17 @@ class PlayerController extends Controller
     public function userProfileUpload(Request $request)
     {
         $user = User::find(Auth::id());
+
         // dd($request->all());
+        $validator = Validator::make(
+            $request->all(),
+            ['profileImage' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048']
+        );
+
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator);
+        }
+
         if ($request->file('profileImage')) {
             $user_img = $request->profileImage;
             $userImgName = Str::random(20) . '.' . $user_img->getClientOriginalExtension();
