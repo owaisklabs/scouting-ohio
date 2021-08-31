@@ -208,3 +208,10 @@ $('.uploadBtn.uploadAble').on('click',(e)=>{
     $(prenty).find('span').text(e.target.files[0].name)
   })
 })
+
+
+
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
+

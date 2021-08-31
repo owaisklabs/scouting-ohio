@@ -419,6 +419,10 @@ right: 6px;
 .userTableCustom.search .userRow .userData{
     grid-template-columns: repeat(7,1fr);
 }
+ .CustomCoachPage .userRow .userData {
+  grid-template-columns: repeat(5,1fr) !important;
+
+ }
 .userTableCustom.search .userRow:first-child{
     background-color:transparent !important;
 }
@@ -2198,7 +2202,64 @@ scrollbar-width: none;  /* Firefox */
   visibility: visible;
 }
 
+/* new Comment */
+.tooltip1 {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip1 img {
+  width: 100% !important;
+}
+.tooltip1 {
+  height: 13% !important;
+}
+
+.customClassheight {
+  height: 90% !important;
+}
+
+.tooltip1 .tooltiptext1 {
+  font-weight: bold;
+    visibility: hidden;
+    width: 110px;
+    background-color: #55d729e6;
+    color: #000;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 5px;
+    position: absolute;
+    z-index: 1;
+    font-size: 13px;
+    font-family: 'poppinregular';
+    top: -75px;
+    left: -65px;
+
+
+
+
+  z-index: 1;
+  top: 100%;
+  left: 65%;
+  margin-left: -60px;
+}
+
+.tooltip1:hover .tooltiptext1 {
+  visibility: visible;
+}
+
 /* media queries*/
+
+@media only screen and (max-width:2560px) {
+  .tooltip1 {
+    height: 18% !important;
+}
+.tooltip1 .tooltiptext1 {
+  left: 44%;
+  width: 143px;
+}
+}
 
 @media only screen and (min-width:1920px){
     #myTabContent .cCard .img,
@@ -2422,6 +2483,13 @@ scrollbar-width: none;  /* Firefox */
     #exampleModalDetails .modal-dialog {
         width: 35%;
     }
+    .tooltip1 {
+      height: 30% !important;
+  }
+  .tooltip1 .tooltiptext1 {
+    left: 32%;
+    width: 200px;
+  }
 }
 @media only screen and (max-width:600px){
   .fans-noti .tooltiptext {
@@ -2586,6 +2654,9 @@ scrollbar-width: none;  /* Firefox */
     .vidos {
         height: 190px;
     }
+    .tooltip1 {
+      height: 27% !important;
+  }
 }
 @media only screen and (max-width:414px){
 
@@ -2686,7 +2757,9 @@ scrollbar-width: none;  /* Firefox */
     #searchmodal .selectOp ~ a button{
         width: 100%;
     }
-
+    .tooltip1 {
+      height: 25% !important;
+  }
 }
 @media only screen and (max-width:375px){
     .dGrid .dGItem {
@@ -2733,3 +2806,5 @@ scrollbar-width: none;  /* Firefox */
         margin-top: 10px;
     }
 }
+
+

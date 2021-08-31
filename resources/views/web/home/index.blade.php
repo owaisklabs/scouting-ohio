@@ -269,36 +269,76 @@
 </div>
 @endguest
 </div>
-</div>
-</div>
 <div class="row">
-    <div class="col-lg-9"></div>
+    <div class="col-lg-9">
+        <div class="latestVideo">
+            <div class="col-lg-12">
+                <h1 class="wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.5s">Latest Videos</h1>
+            </div>
+            <div class="tab-content" id="myTabContent2">
+                <div class="tab-pane fade show active" id="Newest" role="tabpanel" aria-labelledby="Newest-tab">
+                    <div class="owl-carousel owl-theme videos">
+                        @foreach ($videos->chunk(6) as $chunk)
+                        <div class="item">
+
+                            <div class="dGrid">
+                                @foreach ($chunk as $video)
+                                <div class="dGItem">
+                                    @if ($video->hudl_thumbnail)
+                                    <img class="pl-img" src="{{asset('img/videos/'.$video->hudl_thumbnail)}}" height="100%"
+                                        width="100%" alt="">
+                                    @else
+                                    <img class="pl-img" src="{{asset('img/noimg.jpg')}}" height="100%" width="100%" alt="">
+                                    @endif
+
+                                    <div class="img-txt">
+
+                                        NAME {{$video->user->name}} - HIGH SCHOOL
+                                        {{$video->user->basicInfo->high_school ?? " "}} <br /> CLASS
+                                        OF{{$video->user->basicInfo->class_off ?? ""}} -
+                                        POSITION{{$video->user->basicInfo->special_team_position?? ""}}
+                                    </div>
+                                    <input type="hidden" value="{{$video->hudl_link}}" name="video_url"
+                                        id="url_link{{$video->id}}">
+                                    <img src="{{asset('img/1x/plahhov.png')}}" height="100%" width="100%" class="forHover"
+                                        onclick="geturl('url_link'+{{$video->id}})" alt="">
+
+                                </div>
+
+                                @endforeach
+                            </div>
+                        </div>
+                        @endforeach
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="col-lg-3">
         <div class="online-frnds-head mb1">
             <h1>
                 Community - Whos Online
             </h1>
         </div>
-        <div class="online-frmds">
-            <img src="https://cdna.artstation.com/p/assets/images/images/017/845/948/large/gokul-sharma-iron-man-side-face.jpg?1557549483"
-                alt="">
-            <img src="https://cdna.artstation.com/p/assets/images/images/017/845/948/large/gokul-sharma-iron-man-side-face.jpg?1557549483"
-                alt="">
-            <img src="https://cdna.artstation.com/p/assets/images/images/017/845/948/large/gokul-sharma-iron-man-side-face.jpg?1557549483"
-                alt="">
-            <img src="https://cdna.artstation.com/p/assets/images/images/017/845/948/large/gokul-sharma-iron-man-side-face.jpg?1557549483"
-                alt="">
-            <img src="https://cdna.artstation.com/p/assets/images/images/017/845/948/large/gokul-sharma-iron-man-side-face.jpg?1557549483"
-                alt="">
-            <img src="https://cdna.artstation.com/p/assets/images/images/017/845/948/large/gokul-sharma-iron-man-side-face.jpg?1557549483"
-                alt="">
-            <img src="https://cdna.artstation.com/p/assets/images/images/017/845/948/large/gokul-sharma-iron-man-side-face.jpg?1557549483"
-                alt="">
+        <div class="online-frmds customClassheight">
+            @foreach ($displayUsers as $displayUser )
+            <div class="fans-noti tooltip1">
+                {{-- <h1>{{$displayUser['id']}}</h1> --}}
+                <a href="{{route('user-profile',$displayUser['id'])}}">
+                    <img src="{{asset('user_image/noimg.jpg')}}"
+                    alt="">
+                </a>
+                <span class="tooltiptext1">{{$displayUser['first_name']}}</span>
+            </div>
+            @endforeach
+
         </div>
     </div>
 </div>
+</div>
 <button id="vidModal" hidden="hidden" data-bs-toggle="modal" data-bs-target="#exampleModalVideo"></button>
-<div class="latestVideo">
+{{-- <div class="latestVideo">
     <div class="col-lg-12">
         <h1 class="wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.5s">Latest Videos</h1>
     </div>
@@ -340,7 +380,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 <div class="offers mt2">
     <div class="col-lg-12 text-center">
         <h1 class="wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.5s">Latest College Offers</h1>
@@ -360,7 +400,7 @@
                     <div class="dataG1">Graduation Year</div>
                 </div>
             </div>
-            @foreach ($users as $item)
+            @foreach ($Players as $item)
             <div class="userRow d-flex">
                 <div class="img">
                     @if ($item->user_profile)
@@ -497,6 +537,25 @@
         color: black;
     }
 
+    .online-frmds {
+        height: 300px;
+        width: 100%;
+        overflow: scroll;
+
+    }
+
+    .online-frmds img {
+        width: 20%;
+        height: auto;
+        margin-bottom: 20px;
+    }
+
+    .online-frnds-head h1 {
+        font-size: 14px;
+        font-family: 'Heavitas' !important;
+        font-weight: 200 !important;
+    }
+
     .img-txt {
         color: white;
         position: absolute;
@@ -532,31 +591,10 @@
         position: relative;
     }
 
-    .online-frmds {
-        height: 300px;
-        width: 100%;
-        overflow: scroll;
-
-    }
-
-    .online-frmds img {
-        width: 20%;
-        height: auto;
-        margin-bottom: 20px;
-    }
-
-    .online-frnds-head h1 {
-        font-size: 14px;
-        font-family: 'Heavitas' !important;
-        font-weight: 200 !important;
-    }
-
 </style>
 
 <script>
-    var tweety = {
-            !!json_encode($tweets) !!
-        },
+    var tweety = {!!json_encode($tweets)!!},
         arr = [];
     console.log(tweety)
     setTimeout(() => {

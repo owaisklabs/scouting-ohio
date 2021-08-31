@@ -34,13 +34,29 @@ class HomeController extends Controller
     {
         $articles = Article::all();
         $videos = PlayerVideo::latest()->get();
-        $users = User::where('type', 'Player')
+        $Players = User::where('type', 'Player')
             ->latest()
             ->limit(10)
             ->get();
-        // dd($users);
         $results = [];
         $tweets = "";
+        $users = Cache::get('online-users');
+        // if(!$users) return null;
+
+        $onlineUsers = collect($users);
+        $dbUsers = User::find($onlineUsers->pluck('id')->toArray());
+        $displayUsers = [];
+        foreach ($dbUsers as $user){
+            $onlineUser = $onlineUsers->firstWhere('id', $user['id']) ;
+            $displayUsers[] = [
+                'id' => $user->id,
+                'first_name' => $user->name,
+                'img'=> $user->user_profile,
+                'type'=> $user->type
+            ];
+        }
+        // return $displayUsers;
+
         // return User::find(Auth::id())->coachFriend;
         if (Auth::check()) {
             $checkUser = User::find(Auth::id());
@@ -102,7 +118,7 @@ class HomeController extends Controller
         //     $result = curl($user->twitter_username);
         //     array_push($results, $result);
         // }
-        return view('web.home.index', compact('articles', 'videos', 'users', 'tweets'));
+        return view('web.home.index', compact('articles', 'videos', 'Players', 'tweets','displayUsers'));
     }
 
     public function players(Request $request)
@@ -111,6 +127,15 @@ class HomeController extends Controller
         $users = User::where('type', 'Player')->get();
         return view('web.player.players', compact('users'));
     }
+    public function coaches(Request $request)
+
+    {
+        $users = User::where('type','!=' ,'Player')
+        ->where('type','!=' ,'Admin')
+        ->get();
+        return view('web.coach.coahes', compact('users'));
+    }
+
     public function playersProfile($id, Request $request)
     {
         $user = User::find($id);
@@ -150,6 +175,11 @@ class HomeController extends Controller
 
         // return $data;
         return view('web.profile.player_profile', compact('user', 'check', 'data'));
+    }
+    public function coachProfile($id)
+    {
+        $user = User::find($id);
+        return view('web.profile.coach_profile', compact('user'));
     }
 
     public function about_us()
@@ -504,7 +534,7 @@ class HomeController extends Controller
     }
     public function test(Request $request)
     {
-        return Excel::download(new UsersExport,'export.xlsx');
+        // return Excel::download(new UsersExport,'export.xlsx');
 
         $seenNotification = SeeProfile::where('player_id', $request->id)
             ->where('status', 'unseen')

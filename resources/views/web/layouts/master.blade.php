@@ -116,7 +116,11 @@
 
                 <li class="nav-item">
                     <a class="nav-link <?php if (stripos($_SERVER['REQUEST_URI'],'players') !== false) {echo 'active';} ?>"
-                        href="{{route('players')}}">Player Page</a>
+                        href="{{route('players')}}">Players</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <?php if (stripos($_SERVER['REQUEST_URI'],'coaches') !== false) {echo 'active';} ?>"
+                        href="{{route('coaches')}}">Coaches</a>
                 </li>
 
             </ul>
