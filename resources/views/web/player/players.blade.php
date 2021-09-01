@@ -46,19 +46,88 @@
                  <button class='offerEditbtn' data-bs-toggle="modal" data-bs-target="#exampleModalDetails">Read More</button>
                 </div> -->
                 <div class="dataG1">
-                    <a href="{{route('players-profile')}}">{{$user->basicInfo->offer ?? " - "}}</a>
+                    {{-- <a href="{{route('players-profile')}}">{{$user->basicInfo->offer ?? " - "}}</a> --}}
                     <div class="ratings">
-                    <button class='offerEditbtn' data-bs-toggle="modal" data-bs-target="#exampleModalDetails">Read More</button>
+                    <button class='offerEditbtn fetchuserData'data-key ="{{$user->id}}" >Click to see</button>
+                    <button data-bs-toggle="modal" data-bs-target="#exampleModalDetails" class="showDModal" hidden></button>
                     </div>
                 </div>
                 <div class="dataG1">{{$user->personalInfo->player_state ?? " - "}}</div>
             </div>
         </div>
         @endforeach
-
-
-
     </div>
 
 </div>
+<script>
+
+    const AppendedData = (d)=>{
+        console.log(d)
+        $('#exampleModalDetails .modalDataDB').append(
+            `
+            <label for="" class="mt1 ">${d.type}Offers:</label>
+            <div class="row">
+                <p class='namePl mt1'>
+                    ${d.data.toString()}
+                </p>
+            </div>
+            `
+        )
+        $('.showDModal').trigger('click')
+    }
+    const modalShowdFunction = (data)=>{
+        console.log(data)
+        var fbs = [{'type':'FBS division 1 colleges','data':[]}]
+        ,fcs = [{'type':'FCS division 1aa 2 and 3 colleges','data':[]}],
+        walkin = [{'type':'List walk wn offers','data':[]}]
+        data.forEach(element => {
+            if(element.FBS_division_1_colleges != null){
+                fbs[0].data.push(element.FBS_division_1_colleges)
+            } if(element.FCS_division_1aa_2_and_3_colleges != null){
+                fcs[0].data.push(element.FCS_division_1aa_2_and_3_colleges)
+            }if(element.list_walk_wn_offers != null){
+                walkin[0].data.push(element.list_walk_wn_offers)
+            }
+        });
+
+        fbs.map((val,i)=>{
+            AppendedData(val)
+        })
+        fcs.map((val,i)=>{
+            AppendedData(val)
+        })
+        walkin.map((val,i)=>{
+            AppendedData(val)
+        })
+        // console.log(fbs,fcs,walkin)
+
+
+
+    }
+        function fetch_article(id){
+            console.log(id)
+        $.ajax({
+            url: '<?php echo(route("player-for-players-page")); ?>',
+            type: 'GET',
+            data: {id: id,
+            },
+            dataType: 'JSON',
+            success: function (data) {
+                console.log('data',data.user)
+                $('#exampleModalDetails .modalDataDB').empty()
+                // console.log($('#exampleModalDetails .modal-body .pName'))
+                $('#exampleModalDetails .modal-body .pName .namePl').text(data.user.name)
+                if (data.user.user_profile)
+                    $('#exampleModalDetails .modal-body .img img').attr('src','{{asset("user_image")}}'+'/'+data.user.user_profile);
+                else
+                $('#exampleModalDetails .modal-body .img img').attr('src','{{asset("img/noimg.jpg")}}');
+                modalShowdFunction(data.offers)
+            }
+        });
+    }
+    $('.fetchuserData').click(function() {
+        var id = $(this).attr("data-key");
+        fetch_article(id);
+});
+</script>
 @endsection

@@ -2511,7 +2511,7 @@
                             </datalist>
                             <i class="fa fa-angle-down"></i>
                         </div>
-                        <div class="checks checksJkl">
+                        <div class="checks checkdefault">
                             <label class="container2">FSB Division 1 Offers
                                 <input type="checkbox" name="FSB_Division_1_Offers">
                                 <span class="checkmark"></span>
@@ -5236,13 +5236,4 @@
 
 </style>
 <script>
-    $('.checksJkl').css('display','none')
-    $('.chnageDetect').on('input',(e)=>{
-        console.log(e.target.value)
-        if(e.target.value == '' || e.target.value == null){
-            $('.checksJkl').css('display','none')
-        }else{
-            $('.checksJkl').css('display','block')
-        }
-    })
 </script>

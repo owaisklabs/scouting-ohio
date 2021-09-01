@@ -117,6 +117,7 @@ Route::post('subscription-store', 'Admin\SubscriptionController@store');
 
 
 Route::post('search', 'Web\HomeController@search_players')->name('search');
+Route::get('player-for-players-page', 'Web\HomeController@playerForPlayersPage')->name('player-for-players-page');
 Route::post('private-search', 'Web\HomeController@privateSearch')->name('private-search');
 Route::get('/home', 'Web\HomeController@index')->name('home');
 Route::get('/players', 'Web\HomeController@players')->name('players');
@@ -128,7 +129,7 @@ Route::get('/articles-detail/{id}', 'Web\HomeController@articlesDetail')->name('
 Route::get('/web_register', 'Web\HomeController@web_register')->name('web_register');
 Route::get('/web_login', 'Web\HomeController@web_login')->name('web_login');
 Route::post('web_login', 'Web\HomeController@authenticate')->name('web-login');
-Route::post('/test', 'Web\HomeController@test')->name('test');
+Route::get('/test', 'Web\HomeController@test')->name('test');
 Route::get('cancel', 'user@cancel')->name('payment.cancel');
 Route::get('payment/success', 'Web\UserRegisterController@success')->name('payment.success');
 Route::get('cancel', 'PayPalController@cancel')->name('payment.cancel');

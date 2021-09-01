@@ -484,12 +484,13 @@
                         <div class="namePl">Chandler Bing</div>
                     </div>
                 </div>
-                <label for="" class="mt3 ">Offers:</label>
-                <div class="row">
-                    <!-- <div class="col-lg-6 namePl mt1">Southlake,TX</div> -->
-                    <p class='namePl mt1'>
-                        Southlake,TX
-                    </p>
+                <div class="modalDataDB mt2">
+                    {{-- <label for="" class="mt3 ">Offers:</label>
+                    <div class="row">
+                        <p class='namePl mt1'>
+                            Southlake,TX
+                        </p>
+                    </div> --}}
                 </div>
 
             </div>

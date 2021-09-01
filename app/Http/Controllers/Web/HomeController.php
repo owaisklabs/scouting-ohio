@@ -345,6 +345,22 @@ class HomeController extends Controller
             // }
             // dd($result);
         }
+        if ($request->FSB_Division_1_Offers) {
+            $result = $users->whereHas('scholarshipOffer', function ($q) use ($request) {
+                $q->whereNotNull('FBS_division_1_colleges');
+            })->get();
+        }
+        if ($request->FSB_Division_1_Verbals) {
+            $result = $users->whereHas('scholarshipOffer', function ($q) use ($request) {
+                $q->whereNotNull('FBS_division_1_college');
+            })->get();
+        }
+        if ($request->FSB_Division_1_Verbals) {
+            $result = $users->whereHas('scholarshipOffer', function ($q) use ($request) {
+                $q->whereNotNull('FBS_division_1_college');
+            })->get();
+        }
+        // dd($result);
 
         return view('web.player.search-players', compact('result'));
     }
@@ -534,7 +550,7 @@ class HomeController extends Controller
     }
     public function test(Request $request)
     {
-        // return Excel::download(new UsersExport,'export.xlsx');
+        return Excel::download(new UsersExport,'ScountingOHIO_'.now().'_by_'.Auth::user()->name.'.xlsx');
 
         $seenNotification = SeeProfile::where('player_id', $request->id)
             ->where('status', 'unseen')
@@ -545,5 +561,14 @@ class HomeController extends Controller
                 'status' => 'seen'
             ]);
         }
+    }
+    public function playerForPlayersPage(Request $request)
+    {
+        $user= User::find($request->id);
+        return[
+            'offers'=>$user->scholarshipOffer,
+            'user'=>$user
+        ];
+    //    return $user->scholarshipOffer;
     }
 }

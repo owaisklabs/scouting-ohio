@@ -324,6 +324,7 @@
         <div class="online-frmds customClassheight">
             @foreach ($displayUsers as $displayUser )
             <div class="fans-noti tooltip1">
+                <i class="fa fa-circle float-end"></i>
                 {{-- <h1>{{$displayUser['id']}}</h1> --}}
                 <a href="{{route('user-profile',$displayUser['id'])}}">
                     <img src="{{asset('user_image/noimg.jpg')}}"
@@ -426,6 +427,7 @@
             </a>
         </div>
     </div>
+</div>
 </div>
 </div>
 <script>
@@ -590,7 +592,18 @@
     .pl-img {
         position: relative;
     }
+    .tooltip1{
+        position: relative;
+    }
+    .tooltip1 i{
+        color: #55d729
+    }
+    @media only screen and (max-width:1960px){
+        .online-frnds-head{
+            margin-top:2rem;
 
+        }
+    }
 </style>
 
 <script>

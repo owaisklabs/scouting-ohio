@@ -440,6 +440,13 @@ class PlayerController extends Controller
     }
     public function scholarShipOffer(Request $request)
     {
+        // dd($request->all());
+        $fbs_collection = collect($request->fbs);
+        $fcs_collection = collect($request->fcs);
+        $walkin_collection = collect($request->walkOnOffers);
+        $fbsJson = $fbs_collection->implode(',');
+        $fcsJson=$fcs_collection->implode(',');
+        $walkinJson=$walkin_collection->implode(',');
         $scholarshipOffer = ScholarshipOffer::where('user_id', Auth::id())->get();
         if ($scholarshipOffer) {
             foreach ($scholarshipOffer as $item) {
@@ -458,6 +465,9 @@ class PlayerController extends Controller
                 $scholarshipOffer->division_FCS_division_1aa_2_and_3_college = $request->fcs_division;
                 $scholarshipOffer->list_walk_wn_offers = null;
                 $scholarshipOffer->walk_on_committment = $request->walk_on_committment;
+                $scholarshipOffer->fcs_offer_json = $fcsJson;
+                $scholarshipOffer->fbs_offers_json = $fbsJson;
+                $scholarshipOffer->walkin_offer_json = $walkinJson;
                 $scholarshipOffer->save();
             }
         }
@@ -471,10 +481,14 @@ class PlayerController extends Controller
                 $scholarshipOffer->division_FCS_division_1aa_2_and_3_college = $request->fcs_division;
                 $scholarshipOffer->list_walk_wn_offers = null;
                 $scholarshipOffer->walk_on_committment = $request->walk_on_committment;
+                $scholarshipOffer->fcs_offer_json = $fcsJson;
+                $scholarshipOffer->fbs_offers_json = $fbsJson;
+                $scholarshipOffer->walkin_offer_json = $walkinJson;
                 $scholarshipOffer->save();
             }
         }
         if ($request->walkOnOffers) {
+            // dd($request->walkOnOffers);
             foreach ($request->walkOnOffers as $item) {
                 $scholarshipOffer = new ScholarshipOffer();
                 $scholarshipOffer->user_id = Auth::id();
@@ -484,10 +498,14 @@ class PlayerController extends Controller
                 $scholarshipOffer->division_FCS_division_1aa_2_and_3_college = $request->fcs_division;
                 $scholarshipOffer->list_walk_wn_offers = $item;
                 $scholarshipOffer->walk_on_committment = $request->walk_on_committment;
+                $scholarshipOffer->fcs_offer_json = $fcsJson;
+                $scholarshipOffer->fbs_offers_json = $fbsJson;
+                $scholarshipOffer->walkin_offer_json = $walkinJson;
                 $scholarshipOffer->save();
-                return redirect()->back();
             }
         }
+        return redirect()->back();
+
     }
     public function showArticleById(Request $request)
     {

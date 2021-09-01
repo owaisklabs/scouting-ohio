@@ -842,8 +842,10 @@ margin-left:15px}
     padding-right: 0.7rem;
 }
 .PprofileMain .profileM .back{
-    height: 250px;
+    height: 275px;
     overflow: hidden;
+    background-size: cover !important;
+    background-position: center !important;
 }
 .PprofileMain .proDetails .img img{
     height: 100%;
@@ -2145,6 +2147,7 @@ scrollbar-width: none;  /* Firefox */
 }
 .profileM .back img{
   width: 100%;
+  height: 100%;
 }
 .subH a,
 .cPDiv h1 a{
