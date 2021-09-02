@@ -1,5 +1,5 @@
 <div class="tab-pane fade " id="pills-ScholarshipOffers" role="tabpanel" aria-labelledby="pills-ScholarshipOffers-tab">
-    <form action="{{route("scholarship-offer")}}" method="POST">
+    <form action="{{ route('scholarship-offer') }}" method="POST">
         @csrf
         <div class="userTableCustom mt4">
             <div class="col-lg-12">
@@ -718,9 +718,10 @@
                     </div>
                     <div class="col-lg-6 d-flex flex-column mt2 pNone">
                         <label>If yes what FBS Division 1 college:</label>
-                        {{-- <input type="text" value="{{@$basicInfo->secondry_defensive}}" name="secondry_defensive">
-                        --}}
-                        <input list="fbs-division" name="fbs__division" value="{{$Scholarship[0]->FBS_division_1_college ?? ""}}" placeholder="FBS Division 1 college">
+                        {{-- <input type="text" value="{{@$basicInfo->secondry_defensive}}" name="secondry_defensive"> --}}
+                        <input list="fbs-division" name="fbs__division"
+                            value="{{ $Scholarship[0]->FBS_division_1_college ?? '' }}"
+                            placeholder="FBS Division 1 college">
                         <datalist id="fbs-division">
                             <option value="" selected="selected">Select Below</option>
                             <option value="Air Force">Air Force</option>
@@ -861,11 +862,13 @@
                             <label class="container45 ml20">No
                                 <input type="radio" checked="checked" name="FCS" value="No" class="showHide1">
                                 <span class="checkmark"></span>
-                            </label></div>
+                            </label>
+                        </div>
                     </div>
                     <div class="col-lg-6 d-flex flex-column mt2 pNone">
                         <label>If yes what Division FCS Division 1aa 2 and 3 college:</label>
-                        <input list="fcs-division" name="fcs_division" value="{{$Scholarship[0]->division_FCS_division_1aa_2_and_3_college ?? " "}}"
+                        <input list="fcs-division" name="fcs_division"
+                            value="{{ $Scholarship[0]->division_FCS_division_1aa_2_and_3_college ?? ' ' }}"
                             placeholder="what Division FCS Division 1aa 2 and 3 college">
                         <datalist id="fcs-division">
                             <option value="" selected="selected">Select Below</option>
@@ -2105,9 +2108,9 @@
                     </div>
                     <div class="col-lg-6 d-flex flex-column mt2">
                         <label>Walk-On Committment</label>
-                        {{-- <input type="text" value="{{@$basicInfo->secondry_defensive}}" name="secondry_defensive">
-                        --}}
-                        <input list="walk-on-committment" name="walk_on_committment" value="{{$Scholarship[0]->walk_on_committment?? ""}}"
+                        {{-- <input type="text" value="{{@$basicInfo->secondry_defensive}}" name="secondry_defensive"> --}}
+                        <input list="walk-on-committment" name="walk_on_committment"
+                            value="{{ $Scholarship[0]->walk_on_committment ?? '' }}"
                             placeholder="Walk-On Committment">
                         <datalist id="walk-on-committment">
                             <option value="" selected="selected">Select Below</option>
@@ -2792,49 +2795,103 @@
 
 <script>
     $('.showHide1').change((e) => {
-            var column = e.target.parentNode.parentNode.parentNode
-            console.log(e.target.parentNode.parentNode.parentNode)
-            if (e.target.value == 'Yes') {
-                $(column.nextElementSibling).removeClass('pNone')
-            } else {
-                $(column.nextElementSibling).addClass('pNone')
+        var column = e.target.parentNode.parentNode.parentNode
+        console.log(column.nextElementSibling);
+        if (e.target.value == 'Yes') {
+            $(column.nextElementSibling).removeClass('pNone')
+        } else {
+            $(column.nextElementSibling).addClass('pNone')
+        }
+    })
+    // setTimeout(()=>{
+    //     console.log($('.select2-selection ul'))
+    // $('.select2-selection ul').append(
+
+    //     `
+    //     <button type="button" class="select2-selection__clear" tabindex="-1" title="Remove all items" aria-label="Remove all items" aria-describedby="select2-walkOnOffers-n9-container" data-select2-id="select2-data-679-784h"><span aria-hidden="true">×</span></button><ul class="select2-selection__rendered" id="select2-walkOnOffers-n9-container"><li class="select2-selection__choice" title="Abilene Christian" data-select2-id="select2-data-678-chy0"><button type="button" class="select2-selection__choice__remove" tabindex="-1" title="Remove item" aria-label="Remove item" aria-describedby="select2-walkOnOffers-n9-container-choice-mlru-Abilene Christian"><span aria-hidden="true">×</span></button><span class="select2-selection__choice__display" id="select2-walkOnOffers-n9-container-choice-mlru-Abilene Christian">Abilene Christian</span></li></ul><span class="select2-search select2-search--inline"><textarea class="select2-search__field" type="search" tabindex="0" autocorrect="off" autocapitalize="none" spellcheck="false" role="searchbox" aria-autocomplete="list" autocomplete="off" aria-label="Search" aria-describedby="select2-walkOnOffers-n9-container" placeholder="" style="width: 0.75em;"></textarea></span>
+    // `
+
+    // )
+    // },3000)
+    var arr1 = [],
+        arr2 = [],
+        arr3 = [];
+    var dataArr = {!! json_encode($Scholarship) !!};
+
+    // console.log(dataArr[0].division_FCS_division_1aa_2_and_3_college);
+
+    //FBS division college null=no & data=yes
+    const fbs_yes = $("input[name='FBS']")[0];
+    const fbs_no = $("input[name='FBS']")[1];
+    const collegeDivision_input = $(".pNone");
+    console.log(collegeDivision_input);
+    if (dataArr[0].FBS_division_1_college == null) {
+        if (collegeDivision_input.length > 0) {
+            if (!collegeDivision_input[0].classList.contains("pNone")) {
+                collegeDivision_input[0].classList.add("pNone");
             }
-        })
-        // setTimeout(()=>{
-        //     console.log($('.select2-selection ul'))
-        // $('.select2-selection ul').append(
-
-        //     `
-        //     <button type="button" class="select2-selection__clear" tabindex="-1" title="Remove all items" aria-label="Remove all items" aria-describedby="select2-walkOnOffers-n9-container" data-select2-id="select2-data-679-784h"><span aria-hidden="true">×</span></button><ul class="select2-selection__rendered" id="select2-walkOnOffers-n9-container"><li class="select2-selection__choice" title="Abilene Christian" data-select2-id="select2-data-678-chy0"><button type="button" class="select2-selection__choice__remove" tabindex="-1" title="Remove item" aria-label="Remove item" aria-describedby="select2-walkOnOffers-n9-container-choice-mlru-Abilene Christian"><span aria-hidden="true">×</span></button><span class="select2-selection__choice__display" id="select2-walkOnOffers-n9-container-choice-mlru-Abilene Christian">Abilene Christian</span></li></ul><span class="select2-search select2-search--inline"><textarea class="select2-search__field" type="search" tabindex="0" autocorrect="off" autocapitalize="none" spellcheck="false" role="searchbox" aria-autocomplete="list" autocomplete="off" aria-label="Search" aria-describedby="select2-walkOnOffers-n9-container" placeholder="" style="width: 0.75em;"></textarea></span>
-        // `
-
-        // )
-        // },3000)
-            var arr1 = [],arr2 = [],arr3 = [];
-        var dataArr = {!! json_encode($Scholarship) !!};
-        console.log(dataArr);
-
-        dataArr.forEach(e => {
-            if(e.FBS_division_1_colleges != null){
-                arr1.push(e.FBS_division_1_colleges)
-            }else if(e.FCS_division_1aa_2_and_3_colleges != null){
-                arr2.push(e.FCS_division_1aa_2_and_3_colleges)
-            }else if(e.list_walk_wn_offers != null){
-                arr3.push(e.list_walk_wn_offers)
+        }
+        fbs_no.checked = true;
+    } else {
+        if (collegeDivision_input.length > 0) {
+            if (collegeDivision_input[0].classList.contains("pNone")) {
+                collegeDivision_input[0].classList.remove("pNone");
             }
-        });
+        }
+        fbs_yes.checked = true;
+    }
 
-        // console.log(arr)
+    //FCS division college null=no & data=yes
+    const fcs_yes = $("input[name='FCS']")[0];
+    const fcs_no = $("input[name='FCS']")[1];
+    if (dataArr[0].division_FCS_division_1aa_2_and_3_college == null) {
+        if (collegeDivision_input.length > 0) {
+            if (collegeDivision_input.length > 1) {
+                if (!collegeDivision_input[1].classList.contains("pNone")) {
+                    collegeDivision_input[1].classList.add("pNone");
+                }
+            }else{
+                if (!collegeDivision_input[0].classList.contains("pNone")) {
+                    collegeDivision_input[0].classList.add("pNone");
+                }
+            }
+        }
+        fcs_no.checked = true;
+    } else {
+        if (collegeDivision_input.length > 0) {
+            if (collegeDivision_input.length > 1) {
+                if (collegeDivision_input[1].classList.contains("pNone")) {
+                    collegeDivision_input[1].classList.remove("pNone");
+                }
+            }else{
+                if (collegeDivision_input[0].classList.contains("pNone")) {
+                    collegeDivision_input[0].classList.remove("pNone");
+                }
+            }
+        }
+        fcs_yes.checked = true;
+    }
 
-        setTimeout(()=>{
-            $('.js-example-basic-multiple.frst').val(arr1)
-            $('.js-example-basic-multiple.frst').trigger('change');
+    dataArr.forEach(e => {
+        if (e.FBS_division_1_colleges != null) {
+            arr1.push(e.FBS_division_1_colleges)
+        } else if (e.FCS_division_1aa_2_and_3_colleges != null) {
+            arr2.push(e.FCS_division_1aa_2_and_3_colleges)
+        } else if (e.list_walk_wn_offers != null) {
+            arr3.push(e.list_walk_wn_offers)
+        }
+    });
 
-            $('.js-example-basic-multiple.scnd').val(arr2)
-            $('.js-example-basic-multiple.scnd').trigger('change');
+    // console.log(arr)
 
-            $('.js-example-basic-multiple.thrd').val(arr3)
-            $('.js-example-basic-multiple.thrd').trigger('change');
-        },3000)
+    setTimeout(() => {
+        $('.js-example-basic-multiple.frst').val(arr1)
+        $('.js-example-basic-multiple.frst').trigger('change');
 
+        $('.js-example-basic-multiple.scnd').val(arr2)
+        $('.js-example-basic-multiple.scnd').trigger('change');
+
+        $('.js-example-basic-multiple.thrd').val(arr3)
+        $('.js-example-basic-multiple.thrd').trigger('change');
+    }, 3000)
 </script>

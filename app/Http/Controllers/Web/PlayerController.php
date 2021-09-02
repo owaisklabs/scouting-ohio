@@ -177,8 +177,22 @@ class PlayerController extends Controller
     } // store update honor award
     public function academicInfo(Request $request)
     {
-        // dd($request->file('transcript'));
+        // dd($request->all());
         // return $request->file('transcript')->getClientOriginalName();
+
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'transcript' => "sometimes|mimes:pdf,jpg,jpeg|max:10000",
+                'attach_act_sat_result' => "sometimes|mimes:pdf,jpg,jpeg|max:10000",
+                'football_bio' => "sometimes|mimes:pdf,jpg,jpeg|max:10000"
+            ]
+        );
+
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator);
+        }
+
         $academicInfo = AcademicInfo::where('user_id', Auth::id())->first();
         if ($academicInfo) {
             $academicInfo->gpa = $request->gpa;

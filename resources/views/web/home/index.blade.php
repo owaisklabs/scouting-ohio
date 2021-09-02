@@ -6,7 +6,7 @@
     <div class="greenBanner">
         <div class="cPDiv">
             @auth
-            <h1 class="wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.5s">welcome IN <a
+            <h1 class="wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.5s">welcome to <a
                     href="https://scoutingohio.com/">SCOUTINGOHIO.COM</a></h1>
             {{-- <div class="playerCoach d-flex justify-content-center gap-4">
                 <div class="player d-flex justify-content-center align-items-center">
@@ -394,8 +394,8 @@
                 </div>
                 <div class="userData">
                     <div class="dataG1">Player name</div>
-                    <div class="dataG1">HT</div>
-                    <div class="dataG1">WT</div>
+                    <div class="dataG1">Height</div>
+                    <div class="dataG1">Weight</div>
                     <div class="dataG1">From</div>
                     <div class="dataG1">High School</div>
                     <div class="dataG1">Graduation Year</div>
@@ -412,8 +412,14 @@
                 </div>
                 <div class="userData">
                     <div class="dataG1"><a href="{{route('user-profile',$item->id)}}">{{$item->name}}</a></div>
-                    <div class="dataG1">{{$item->basicInfo->height ?? ""}}"</div>
-                    <div class="dataG1">{{$item->basicInfo->weight ?? " "}} KG</div>
+                    <div class="dataG1">{{$item->basicInfo->height ?? " "}}</div>
+                    <div class="dataG1">{{$item->basicInfo->weight ?? " "}}
+                    @if (empty($item->basicInfo->weight))
+                        --
+                    @else
+                        LBS
+                    @endif
+                    </div>
                     <div class="dataG1">{{$item->basicInfo->high_school ?? ""}}</div>
                     <div class="dataG1">{{$item->personalInfo->player_state ?? ""}}</div>
                     <div class="dataG1"> 2022</div>

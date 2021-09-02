@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Web;
 
 use App\Exports\UsersExport;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Setting;
 use App\Models\Article;
 use App\Models\Brand;
@@ -21,6 +20,7 @@ use App\Models\ScholarshipOffer;
 use App\Models\SeeProfile;
 use App\Models\Video;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
