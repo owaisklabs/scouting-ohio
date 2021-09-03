@@ -188,6 +188,12 @@
     </div>
     </div>
     </div>
+    <script>
+        $('.premium-btn').on("click",function(){
+            const price = ($(this).data('id'));
+            $('#packageprice').val(price);
+        });
+    </script>
 @endsection
 <div class="modal pckg-modal  fade" id="subs-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -196,11 +202,13 @@
             <div class="modal-body">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="row mt1">
+                    <form action="{{route('premium-payment')}}" method="POST">
+                        @csrf
                     <div class="col-lg-4 mb1">
                         <div class="premium-card">
                             <div class="premium-pckg">
                                 <div class="buy-pckg text-center">
-                                    <a href="{{ route('premium-payment') }}">
+                                    <a href="javascript:void(0)" class="selectedPackage2">
                                         <p>Players Premium Package (1 Months)</p>
                                     </a>
                                 </div>
@@ -208,9 +216,8 @@
                                     <li>Stand out and get in touch with hiring managers</li>
                                 </ul>
                                 <h1>$9.00</h1>
-                                <a href="{{ route('premium-payment') }}">
-
-                                    <button class="premium-btn">Buy Now</button></a>
+                                <a href="javascript:void(0)" class="selectedPackage">
+                                    <button type="submit" class="premium-btn" data-id='9.00'>Buy Now</button></a>
                             </div>
                         </div>
                     </div>
@@ -218,7 +225,7 @@
                         <div class="premium-card">
                             <div class="premium-pckg">
                                 <div class="buy-pckg text-center">
-                                    <a href="">
+                                    <a href="javascript:void(0)"  class="selectedPackage2">
                                         <p>Players Premium Package (3 Months)</p>
                                     </a>
                                 </div>
@@ -226,8 +233,8 @@
                                     <li>Stand out and get in touch with hiring managers</li>
                                 </ul>
                                 <h1>$20.00</h1>
-                                <a href="{{ route('premium-payment') }}">
-                                    <button class="premium-btn">Buy Now</button></a>
+                                <a href="javascript:void(0)" class="selectedPackage">
+                                    <button type="submit" class="premium-btn" data-id='20.00'>Buy Now</button></a>
                             </div>
                         </div>
                     </div>
@@ -235,7 +242,7 @@
                         <div class="premium-card">
                             <div class="premium-pckg">
                                 <div class="buy-pckg text-center">
-                                    <a href="">
+                                    <a href="javascript:void(0)"  class="selectedPackage2">
                                         <p>Players Premium Package (1 year)</p>
                                     </a>
                                 </div>
@@ -244,15 +251,17 @@
 
                                 </ul>
                                 <h1>$65.00</h1>
-                                <a href="{{ route('premium-payment') }}">
-                                    <button class="premium-btn">Buy Now</button>
+                                <a href="javascript:void(0)" class="selectedPackage">
+                                    <button type="submit" class="premium-btn" data-id='65.00'>Buy Now</button>
                                 </a>
                             </div>
                         </div>
                     </div>
-
+                    <input type="text" class="packageVaue" name="packageVaue" value="0" id="packageprice" hidden>
+                </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+

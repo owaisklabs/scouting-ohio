@@ -705,8 +705,9 @@ class PlayerController extends Controller
         }
         return redirect()->back();
     }
-    public function premiumPayment()
+    public function premiumPayment(Request $request)
     {
-        return view('payment.index');
+        $price = $request->packageVaue;
+        return view('payment.index',compact('price'));
     }
 }

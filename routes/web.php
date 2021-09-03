@@ -99,7 +99,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Route::get('delete-addtional-coach-by-id', 'Web\PlayerController@deleteAddtionalCoachById')->name('delete-addtional-coach-by-id');
     Route::get('show-addtional-coach-by-id', 'Web\PlayerController@showAddtionalCoachById')->name('show-addtional-coach-by-id');
     Route::post('addtional-coach-update', 'Web\PlayerController@addtionalCoachUpdate')->name('addtional-coach-update');
-    Route::get('premium-payment', 'Web\PlayerController@premiumPayment')->name('premium-payment');
+    Route::post('premium-payment', 'Web\PlayerController@premiumPayment')->name('premium-payment');
 
 
     // coach Dashboard Funcationalty
