@@ -67,6 +67,19 @@
                     <textarea name="hobbies_extracurricular_activities" id="" cols="30"
                         rows="10">{{ @$academicInfo->hobbies_extracurricular_activities }}</textarea>
                 </div>
+            </div>
+            <div class="col-lg-6 d-flex flex-column mt2">
+                <label>DESIRED MAJOR IN COLLEGE:</label>
+                <input type="text" value="{{@$academicInfo->desire_majro_in_college}}" name="desire_majro_in_college" id="">
+            </div>
+            <div class="col-lg-6 d-flex flex-column mt2">
+                <label>sat:</label>
+                <input type="text" value="{{@$academicInfo->sat}}" name="sat" id="">
+            </div>
+            <div class="col-lg-6 d-flex flex-column mt2">
+                <label>Clearing House Id:</label>
+                <input type="text" value="{{@$academicInfo->clearing_house_id}}" name="clearing_house_id" id="">
+            </div>
         </div>
     </div>
     <div class="userTableCustom mt3 saveBtnMain">

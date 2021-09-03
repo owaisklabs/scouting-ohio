@@ -41,7 +41,7 @@
                     High School
                     Player
                 </a></h2>
-            <a href="{{url('web_register?role=School Coach')}}">
+            <a href="{{url('web_register?role=Player')}}">
                 <div class="greenHov"></div>
             </a>
         </div>

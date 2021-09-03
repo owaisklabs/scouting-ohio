@@ -136,7 +136,7 @@
                 <label>dATE oF bIRTH:</label>
                 <input type="text" value="{{@$playerPersonalInfo->player_dob}}" name="player_dob">
             </div>
-
+            <h2 class="mt4 mb1 text-center">Please help us to give college coaches as much info as possible about you</h2>
             <!-- mALE pARENTS -->
             <h2 class="mt4 mb1">mALE pARENTS OR gUARDIANS</h2>
             <div class="col-lg-6 d-flex flex-column mt2 ">

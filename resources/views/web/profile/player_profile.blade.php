@@ -223,9 +223,9 @@
                     @endif
                     @endauth
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="AcademicInfo-tab" data-bs-toggle="tab"
-                            data-bs-target="#AcademicInfo" type="button" role="tab" aria-controls="AcademicInfo"
-                            aria-selected="false">Offer Scholarship</button>
+                        <button class="nav-link" id="PlayerOffer-tab" data-bs-toggle="tab"
+                            data-bs-target="#PlayerOffer" type="button" role="tab" aria-controls="PlayerOffer"
+                            aria-selected="false">Offers/Verbals</button>
                     </li>
                     @auth
                     @if (auth()->user()->type === "college coach")
@@ -298,7 +298,11 @@
                         </div>
 
                     </div>
+                </div>
 
+                <!-- tab2 -->
+                <div class="tab-pane fade show " id="ScholarshipOffers" role="tabpanel"
+                    aria-labelledby="ScholarshipOffers-tab">
                     <div class="infosRow2">
                         <div class="col-lg-12  mt2">
                             <span>Football post season honors:</span>
@@ -307,7 +311,7 @@
                             {{$user->combineResult->football_post_season_honors?? "N/A"}}
                         </p>
                         <div class="col-lg-12  mt2">
-                            <span>Football Statics:</span>
+                            <span>Football statistics:</span>
                         </div>
                         <p>
                             {{$user->combineResult->football_statics?? "N/A"}}
@@ -341,38 +345,6 @@
                         </div>
                         <p>
                             {{$user->combineResult->list_official_college_visits_you_will_tak_have_taken?? "N/A"}}
-                        </p>
-                    </div>
-
-                </div>
-
-                <!-- tab2 -->
-                <div class="tab-pane fade show " id="ScholarshipOffers" role="tabpanel"
-                    aria-labelledby="ScholarshipOffers-tab">
-                    <div class="infosRow2">
-                        <div class="col-lg-12  mt2">
-                            <span>Football post season honors:</span>
-                        </div>
-                        <p>
-                            {{$user->honorAward->football_post_season_honors?? "N/A"}}
-                        </p>
-                        <div class="col-lg-12  mt3">
-                            <span>Football Statics:</span>
-                        </div>
-                        <p>
-                            {{$user->honorAward->football_statics?? "N/A"}}
-                        </p>
-                        <div class="col-lg-12  mt3">
-                            <span>COther Sports and Athletic Honors:</span>
-                        </div>
-                        <p>
-                            {{$user->honorAward->other_sports_and_athletic_honors?? "N/A"}}
-                        </p>
-                        <div class="col-lg-12  mt3">
-                            <span>Hobbies, Extracurricular activities:</span>
-                        </div>
-                        <p>
-                            {{$user->honorAward->hobbies_extracurricular_activities?? "N/A"}}
                         </p>
                     </div>
                 </div>
@@ -419,12 +391,46 @@
                             <span>{{$user->academicInfo->clearing_house_id?? "N/A"}}</span>
                         </div>
                     </div>
-                    <div class="col-lg-12 infosRow mt1">
-                        <label for="">Hobbies, Extracurricular activities:</label>
+                </div>
+                <div class="tab-pane fade show " id="PlayerOffer" role="tabpanel" aria-labelledby="PlayerOffer-tab">
+                    <div class="infosRow2 font-size-18">
+                        <div class="col-lg-12  mt2">
+                            <span>FBS Division 1 Offers :</span>
+                        </div>
+                        <p>
+                            {{$user->scholarshipOffer[0]->fbs_offers_json ?? "N/A"}}.
+                        </p>
+                        <div class="col-lg-12  mt3">
+                            <span>FBS Division 1 Verbals :</span>
+                        </div>
+                        <p>
+                            {{$user->scholarshipOffer[0]->FBS_division_1_college ?? "N/A"}}.
+                        </p>
+                        <div class="col-lg-12  mt3">
+                            <span>FCS Division 1aa, 2 & 3 Offers :</span>
+                        </div>
+                        <p>
+                            {{$user->scholarshipOffer[0]->fcs_offer_json?? "N/A"}}.
+                        </p>
+                        <div class="col-lg-12  mt3">
+                            <span>FCS Division 1aa, 2 & 3 Verbals:</span>
+                        </div>
+                        <p>
+                            {{$user->scholarshipOffer[0]->division_FCS_division_1aa_2_and_3_college ?? "N/A"}}.
+                        </p>
+                        <div class="col-lg-12  mt3">
+                            <span>List Walk On Offers :</span>
+                        </div>
+                        <p>
+                            {{$user->scholarshipOffer[0]->walkin_offer_json ?? "N/A"}}.
+                        </p>
+                        <div class="col-lg-12  mt3">
+                            <span>Walk On Committment :</span>
+                        </div>
+                        <p>
+                            {{$user->scholarshipOffer[0]->walk_on_committment ?? "N/A"}}.
+                        </p>
                     </div>
-                    <p>
-                        {{$user->academicInfo->hobbies_extracurricular_activities?? "N/A"}}
-                    </p>
                 </div>
 
                 <!-- tab4 -->
@@ -738,6 +744,10 @@
 
 </script>
 <style>
+    .font-size-18 p{
+        font-size: 18px !important;
+        font-family: bebuseRegular !important;
+    }
     .msg-btn {
         color: #55d729;
         background-color: #3c3c3c;

@@ -1230,7 +1230,44 @@
 
                 <div class="col-lg-6 d-flex flex-column mt2">
                     <label>Height:</label>
-                    <input type="text" value="{{@$basicInfo->height}}" name="height">
+                    <input list="height-drop" name="defensive" placeholder="Height"
+                        value="{{@$basicInfo->height}}">
+                    <datalist id="height-drop">
+                        <option value="4′ 1″"></option>
+                        <option value="4′ 2″"></option>
+                        <option value="4′ 3″"></option>
+                        <option value="4′ 4″"></option>
+                        <option value="4′ 5″"></option>
+                        <option value="4′ 6″"></option>
+                        <option value="4′ 7″"></option>
+                        <option value="4′ 8″"></option>
+                        <option value="4′ 9″"></option>
+                        <option value="4′ 10″"></option>
+                        <option value="4′ 11″"></option>
+                        <option value="5′ 0″"></option>
+                        <option value="5′ 1″"></option>
+                        <option value="5′ 2″"></option>
+                        <option value="5′ 3″"></option>
+                        <option value="5′ 4″"></option>
+                        <option value="5′ 5″"></option>
+                        <option value="5′ 6″"></option>
+                        <option value="5′ 7″"></option>
+                        <option value="5′ 8″"></option>
+                        <option value="5′ 10″"></option>
+                        <option value="5′ 11″"></option>
+                        <option value="6′ 0″"></option>
+                        <option value="6′ 1″"></option>
+                        <option value="6′ 2″"></option>
+                        <option value="6′ 3″"></option>
+                        <option value="6′ 4″"></option>
+                        <option value="6′ 5″"></option>
+                        <option value="6′ 6″"></option>
+                        <option value="6′ 7″"></option>
+                        <option value="6′ 9″"></option>
+                        <option value="6′ 10″"></option>
+                        <option value="6′ 11″"></option>
+                        <option value="7′ 0″"></option>
+                    </datalist>
                 </div>
                 <div class="col-lg-6 d-flex flex-column mt2">
                     <label>Secondary DEFENSIVE:</label>

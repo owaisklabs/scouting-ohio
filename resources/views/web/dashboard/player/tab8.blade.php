@@ -8,11 +8,12 @@
             <!-- <h2 class="mt4 mb1">Videos</h2> -->
             <form action="{{route('my-links')}}" method="POST">
                 @csrf
+                <h2 class="mt4 mb1 text-center">Help Coaches find and learn about you</h2>
             <div class="col-lg-6 d-flex flex-column mt2 ">
                 <div class="img">
                     <img src="{{asset('img/SVG/hudl.svg')}}" height="100%" width="100%" alt="">
                 </div>
-                <input type="text" value="{{@$playerLink->hudle}}" name="hudle">
+                <input type="text" required value="{{@$playerLink->hudle}}" name="hudle">
             </div>
             <div class="col-lg-6 d-flex flex-column mt2 ">
                 <div class="img you">
@@ -33,7 +34,7 @@
                 <div class="img you">
                 <i class="fa fa-twitter"></i>
                 </div>
-                <input type="text" value="{{@$playerLink->twitter}}" name="twitter">
+                <input type="text" required value="{{@$playerLink->twitter}}" name="twitter">
             </div>
             <div class="col-lg-6 d-flex flex-column mt2 ">
                 <div class="img">

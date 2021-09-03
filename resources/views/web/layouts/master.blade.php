@@ -34,7 +34,7 @@
         head.appendChild(css);
     </script> -->
     {{-- assets/css/main.css --}}
-    <script src="https://www.paypal.com/sdk/js?client-id=AV1x3Rq6Ao-Z9G-FBTOrS9neOeRHH5M_mvFd4I3332n8w3luqDNhwNwfFS53AX24zcM85r8dzfSjGi4W"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AV1x3Rq6Ao-Z9G-FBTOrS9neOeRHH5M_mvFd4I3332n8w3luqDNhwNwfFS53AX24zcM85r8dzfSjGi4W&disable-funding=credit"></script>
     <!-- fab -->
     <link rel="shortcut icon" href="{{get_favicon_logo()}}" type="image/x-icon">
     <!-- styles -->

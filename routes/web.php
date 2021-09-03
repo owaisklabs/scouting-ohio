@@ -121,12 +121,13 @@ Route::get('player-for-players-page', 'Web\HomeController@playerForPlayersPage')
 Route::post('private-search', 'Web\HomeController@privateSearch')->name('private-search');
 Route::get('/home', 'Web\HomeController@index')->name('home');
 Route::get('/players', 'Web\HomeController@players')->name('players');
+Route::get('/export-player-search', 'Web\HomeController@exportPlayerSearch')->name('export-player-search');
 Route::get('/coaches', 'Web\HomeController@coaches')->name('coaches');
 Route::get('/player-profile', 'Web\HomeController@playersProfile')->name('players-profile');
 Route::get('/coach-profile/{id}', 'Web\HomeController@coachProfile')->name('coach-profile');
 Route::get('/articles', 'Web\HomeController@articles')->name('articles');
 Route::get('/articles-detail/{id}', 'Web\HomeController@articlesDetail')->name('article-view');
-Route::get('/web_register', 'Web\HomeController@web_register')->name('web_register');
+Route::get('/web_register', 'Web\HomeController@    ')->name('web_register');
 Route::get('/web_login', 'Web\HomeController@web_login')->name('web_login');
 Route::post('web_login', 'Web\HomeController@authenticate')->name('web-login');
 Route::get('/test', 'Web\HomeController@test')->name('test');

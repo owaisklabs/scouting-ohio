@@ -1,11 +1,11 @@
 @extends('web.layouts.master')
 @section('content')
 <div class="row mt10 align-items-center ">
-    <div class="col-lg-6 d-flex justify-content-center">
+    <div class="col-lg-12 d-flex justify-content-center">
         <img src="{{asset('dow')}}" alt="">
         <div id="paypal-button-container"></div>
     </div>
-    <div class="col-lg-6">
+    {{-- <div class="col-lg-6">
         <h1 class="pay-head">Credit/Debit Card</h1>
         <div action="" class="db-form">
             <div class="row cc-form">
@@ -32,9 +32,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
 <script>
+    var paymentData =[]
     paypal.Buttons({
       createOrder: function(data, actions) {
         // This function sets up the details of the transaction, including the amount and line item details.
@@ -43,6 +44,7 @@
             amount: {
               value: {!! json_encode($price)!!}
             }
+
           }]
         });
       },
@@ -50,12 +52,16 @@
         // This function captures the funds from the transaction.
         return actions.order.capture().then(function(details) {
           // This function shows a transaction success message to your buyer.
+          paymentData.push({
+              'key',detail.val
+          })
           console.log(details)
           alert('Transaction completed by ' + details.payer.name.given_name);
         });
       }
     }).render('#paypal-button-container');
     //This function displays Smart Payment Buttons on your web page.
+
   </script>
 @endsection
 

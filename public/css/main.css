@@ -2811,3 +2811,6 @@ scrollbar-width: none;  /* Firefox */
 }
 
 
+#paypal-button-container{
+  width:400px
+}

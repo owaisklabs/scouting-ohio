@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Exports\SearchPlayerExport;
 use App\Exports\UsersExport;
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
@@ -74,9 +75,15 @@ class HomeController extends Controller
                 $tweets = [];
                 foreach ($results as $user) {
                     foreach ($user as $tweet) {
-                        // dd($tweet['created_at'],Carbon::parse($tweet['created_at']));
-                        $tweet['created_at'] = Carbon::parse($tweet['created_at']);
+                        // dd($tweet[0]['code'] );
+
+
+                            $tweet['created_at'] = Carbon::parse($tweet['created_at']);
                         array_push($tweets, $tweet);
+
+                        // dd($tweet['created_at'],Carbon::parse($tweet['created_at']));
+
+
                     }
                 }
                 // sorting tweets
@@ -145,7 +152,7 @@ class HomeController extends Controller
         // dd($check);
         // return $user->playervideos;
         $data = [];
-        $feeds = ChangeField::where('user_id', $id)->get();
+        $feeds = ChangeField::where('user_id', $id)->latest()->get();
         foreach ($feeds as $key => $value) {
             $data_2 = json_decode($value->change_value, true);
             array_push($data, $data_2);
@@ -355,12 +362,19 @@ class HomeController extends Controller
                 $q->whereNotNull('FBS_division_1_college');
             })->get();
         }
-        if ($request->FSB_Division_1_Verbals) {
+        if ($request->FCS_Division_aa_2_3_Offers) {
             $result = $users->whereHas('scholarshipOffer', function ($q) use ($request) {
-                $q->whereNotNull('FBS_division_1_college');
+                $q->whereNotNull('FCS_division_1aa_2_and_3_colleges');
             })->get();
         }
-        // dd($result);
+        if ($request->FCS_Division_1aa_2_3_Verbals) {
+            $result = $users->whereHas('scholarshipOffer', function ($q) use ($request) {
+                $q->whereNotNull('division_FCS_division_1aa_2_and_3_college');
+            })->get();
+            // dd($result);
+        }
+        $product = collect($result);
+        Session::put('exportPlayer', $product);
 
         return view('web.player.search-players', compact('result'));
     }
@@ -570,5 +584,10 @@ class HomeController extends Controller
             'user'=>$user
         ];
     //    return $user->scholarshipOffer;
+    }
+    public function exportPlayerSearch()
+    {
+        return Excel::download(new SearchPlayerExport,'ScountingOHIO_'.now().'_by_'.Auth::user()->name.'.xlsx');
+    //    dd($players);
     }
 }

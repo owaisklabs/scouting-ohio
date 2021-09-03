@@ -6,21 +6,32 @@
                 @csrf
                 <div class="col-lg-12 d-flex flex-column mt2">
                     <label>Football post season honors:</label>
-                    <textarea name="football_post_season_honors" id="" cols="30" rows="10">{{@$honorAward->football_post_season_honors}}</textarea>
+                    <textarea name="football_post_season_honors" value="" id="" cols="30" rows="10">{{@$combibeReslut->football_post_season_honors}}</textarea>
                 </div>
                 <div class="col-lg-12 d-flex flex-column mt2">
-                    <label>Football Statics:</label>
-                    <textarea name="football_statics" id="" cols="30" rows="10">{{@$honorAward->football_statics}}</textarea>
+                    <label>Football Statistics:</label>
+                    <textarea name="football_statics" value="" id="" cols="30" rows="10">{{@$combibeReslut->football_statics}}</textarea>
                 </div>
                 <div class="col-lg-12 d-flex flex-column mt2">
                     <label>Other Sports and Athletic Honors:</label>
-                    <textarea name="other_sports_and_athletic_honors" id="" cols="30" rows="10">{{@$honorAward->other_sports_and_athletic_honors}}</textarea>
+                    <textarea name="other_sports_and_athletic_honors" value="" id="" cols="30" rows="10">{{@$combibeReslut->other_sports_and_athletic_honors}}</textarea>
                 </div>
                 <div class="col-lg-12 d-flex flex-column mt2">
                     <label>Hobbies, Extracurricular activities:</label>
-                    <textarea name="hobbies_extracurricular_activities" id="" cols="30" rows="10">{{@$honorAward->hobbies_extracurricular_activities}}</textarea>
+                    <textarea name="Hobbies_extracurricular_activities" value="" id="" cols="30" rows="10">{{@$combibeReslut->Hobbies_extracurricular_activities}}</textarea>
                 </div>
-
+                <div class="col-lg-12 d-flex flex-column mt2">
+                    <label>Camp & combines:</label>
+                    <textarea name="Camp_combines" value="" id="" cols="30" rows="10">{{@$combibeReslut->Camp_combines}}</textarea>
+                </div>
+                <div class="col-lg-12 d-flex flex-column mt2">
+                    <label>List College recruiting you:</label>
+                    <textarea name="list_college_recruiting_you" value="" id="" cols="30" rows="10">{{@$combibeReslut->list_college_recruiting_you}}</textarea>
+                </div>
+                <div class="col-lg-12 d-flex flex-column mt2">
+                    <label>List official college visits you will tak,/ have taken?</label>
+                    <textarea name="list_official_college_visits_you_will_tak_have_taken" value="" id="" cols="30" rows="10">{{@$combibeReslut->list_official_college_visits_you_will_tak_have_taken}}</textarea>
+                </div>
         </div>
     </div>
     <div class="userTableCustom mt3 saveBtnMain">
