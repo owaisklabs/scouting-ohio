@@ -2,37 +2,8 @@
 @section('content')
 <div class="row mt10 align-items-center ">
     <div class="col-lg-12 d-flex justify-content-center">
-        <img src="{{asset('dow')}}" alt="">
         <div id="paypal-button-container"></div>
     </div>
-    {{-- <div class="col-lg-6">
-        <h1 class="pay-head">Credit/Debit Card</h1>
-        <div action="" class="db-form">
-            <div class="row cc-form">
-                <div class="col-lg-12 mt1">
-                    <label for="">Name On Card</label>
-                    <input placeholder="Name On Card" type="text">
-                </div>
-                <div class="col-lg-12 mt1">
-                    <label for="">Card Number</label>
-                    <input placeholder="Card Number" type="text">
-                </div>
-
-                <div class="col-lg-4 mt1">
-                    <label for="">CVV</label>
-                    <input placeholder="123" type="text">
-                </div>
-                <div class="col-lg-4 mt1">
-                    <label for="">Expriration Month</label>
-                    <input placeholder="10" type="text">
-                </div>
-                <div class="col-lg-4 mt1">
-                    <label for="">Expiration year</label>
-                    <input placeholder="2025" type="text">
-                </div>
-            </div>
-        </div>
-    </div> --}}
 </div>
 <script>
     var paymentData =[]
@@ -52,15 +23,27 @@
         // This function captures the funds from the transaction.
         return actions.order.capture().then(function(details) {
           // This function shows a transaction success message to your buyer.
-          paymentData.push({
-              'key',detail.val
-          })
-          console.log(details)
-          alert('Transaction completed by ' + details.payer.name.given_name);
+          paymentData.push(
+              details
+          )
+          console.log(paymentData)
+          $.ajax({
+                url: '{{route('test')}}',
+                method: "POST",
+                data: {
+                    paymaentInfo: paymentData
+                },
+                success: function (response) {
+                    console.log('response',response)
+                },
+
+            });
         });
-      }
+
+         }
     }).render('#paypal-button-container');
     //This function displays Smart Payment Buttons on your web page.
+
 
   </script>
 @endsection

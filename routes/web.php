@@ -127,10 +127,10 @@ Route::get('/player-profile', 'Web\HomeController@playersProfile')->name('player
 Route::get('/coach-profile/{id}', 'Web\HomeController@coachProfile')->name('coach-profile');
 Route::get('/articles', 'Web\HomeController@articles')->name('articles');
 Route::get('/articles-detail/{id}', 'Web\HomeController@articlesDetail')->name('article-view');
-Route::get('/web_register', 'Web\HomeController@    ')->name('web_register');
+Route::get('/web_register', 'Web\HomeController@web_register')->name('web_register');
 Route::get('/web_login', 'Web\HomeController@web_login')->name('web_login');
 Route::post('web_login', 'Web\HomeController@authenticate')->name('web-login');
-Route::get('/test', 'Web\HomeController@test')->name('test');
+Route::post('/test', 'Web\HomeController@test')->name('test');
 Route::get('cancel', 'user@cancel')->name('payment.cancel');
 Route::get('payment/success', 'Web\UserRegisterController@success')->name('payment.success');
 Route::get('cancel', 'PayPalController@cancel')->name('payment.cancel');

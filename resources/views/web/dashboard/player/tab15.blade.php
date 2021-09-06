@@ -60,7 +60,7 @@
             <div class="col-lg-5 mt2 text-center">
                 <div class="notification-content">
                     <h4>College Coaches</h4>
-                    @if (Auth::user()->is_premium=== 0)
+                    @if (Auth::user()->is_premium== 0)
                     <div>
                         <p class="college-viewer">Viewed by {{count($collegeCoach)}} College Coaches</p>
                         <p>You need a premium subscription to see college stalkers</p>

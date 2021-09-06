@@ -49,183 +49,166 @@
                 </datalist>
             </div>
             <div class="col-lg-4 offset-lg-4 mt1 textFeildHide">
-                <input type="text" placeholder="Home Address" name="" required>
-                {{-- @if ($errors->has('email'))
-                        <div class="error">{{ $errors->first('email') }}</div>
-            @endif --}}
+                <input type="text" placeholder="Home Address" name="homeAddress" class="forRequired">
+
+            </div>
+            <div class="col-lg-4 offset-lg-4 mt1 textFeildHide">
+                <input type="text" placeholder="City" name="city" class="forRequired">
+
+            </div>
+            <div class="col-lg-4 offset-lg-4 mt1 textFeildHide">
+                <input type="text" placeholder="State" name="state" class="forRequired">
+
+            </div>
+            <div class="col-lg-4 offset-lg-4 mt1 textFeildHide">
+                <input type="text" placeholder="Zip Code" name="zip_code" class="forRequired">
+
+            </div>
+            <div class="col-lg-4 offset-lg-4 mt1 textFeildHide">
+                <input name="player_country" list="priv-county-drop"
+                    placeholder="County">
+                <datalist id="priv-county-drop">
+                    <option value="Adams">Adams</option>
+                    <option value="Allen">Allen</option>
+                    <option value="Ashland">Ashland</option>
+                    <option value="Ashtabula">Ashtabula</option>
+                    <option value="Athens">Athens</option>
+                    <option value="Auglaize">Auglaize</option>
+                    <option value="Belmont">Belmont</option>
+                    <option value="Brown">Brown</option>
+                    <option value="Butler">Butler</option>
+                    <option value="Carroll">Carroll</option>
+                    <option value="Champaign">Champaign</option>
+                    <option value="Clark">Clark</option>
+                    <option value="Clermont">Clermont</option>
+                    <option value="Clinton">Clinton</option>
+                    <option value="Columbiana">Columbiana</option>
+                    <option value="Coshocton">Coshocton</option>
+                    <option value="Crawford">Crawford</option>
+                    <option value="Cuyahoga">Cuyahoga</option>
+                    <option value="Darke">Darke</option>
+                    <option value="Defiance">Defiance</option>
+                    <option value="Delaware">Delaware</option>
+                    <option value="Erie">Erie</option>
+                    <option value="Fairfield">Fairfield</option>
+                    <option value="Fayette">Fayette</option>
+                    <option value="Franklin">Franklin</option>
+                    <option value="Fulton">Fulton</option>
+                    <option value="Gallia">Gallia</option>
+                    <option value="Geauga">Geauga</option>
+                    <option value="Greene">Greene</option>
+                    <option value="Guernsey">Guernsey</option>
+                    <option value="Hamilton">Hamilton</option>
+                    <option value="Hancock">Hancock</option>
+                    <option value="Hardin">Hardin</option>
+                    <option value="Harrison">Harrison</option>
+                    <option value="Henry">Henry</option>
+                    <option value="Highland">Highland</option>
+                    <option value="Hocking">Hocking</option>
+                    <option value="Holmes">Holmes</option>
+                    <option value="Huron">Huron</option>
+                    <option value="Jackson">Jackson</option>
+                    <option value="Jefferson">Jefferson</option>
+                    <option value="Knox">Knox</option>
+                    <option value="Lake">Lake</option>
+                    <option value="Lawrence">Lawrence</option>
+                    <option value="Licking">Licking</option>
+                    <option value="Logan">Logan</option>
+                    <option value="Lorain">Lorain</option>
+                    <option value="Lucas">Lucas</option>
+                    <option value="Madison">Madison</option>
+                    <option value="Mahoning">Mahoning</option>
+                    <option value="Marion">Marion</option>
+                    <option value="Medina">Medina</option>
+                    <option value="Meigs">Meigs</option>
+                    <option value="Mercer">Mercer</option>
+                    <option value="Miami">Miami</option>
+                    <option value="Monroe">Monroe</option>
+                    <option value="Montgomery">Montgomery</option>
+                    <option value="Morgan">Morgan</option>
+                    <option value="Morrow">Morrow</option>
+                    <option value="Muskingum">Muskingum</option>
+                    <option value="Noble">Noble</option>
+                    <option value="Ottawa">Ottawa</option>
+                    <option value="Paulding">Paulding</option>
+                    <option value="Perry">Perry</option>
+                    <option value="Pickaway">Pickaway</option>
+                    <option value="Pike">Pike</option>
+                    <option value="Portage">Portage</option>
+                    <option value="Preble">Preble</option>
+                    <option value="Putnam">Putnam</option>
+                    <option value="Richland">Richland</option>
+                    <option value="Ross">Ross</option>
+                    <option value="Sandusky">Sandusky</option>
+                    <option value="Scioto">Scioto</option>
+                    <option value="Seneca">Seneca</option>
+                    <option value="Shelby">Shelby</option>
+                    <option value="Stark">Stark</option>
+                    <option value="Summit">Summit</option>
+                    <option value="Trumbull">Trumbull</option>
+                    <option value="Tuscarawas">Tuscarawas</option>
+                    <option value="Union">Union</option>
+                    <option value="Van Wert">Van Wert</option>
+                    <option value="Vinton">Vinton</option>
+                    <option value="Warren">Warren</option>
+                    <option value="Washington">Washington</option>
+                    <option value="Wayne">Wayne</option>
+                    <option value="Williams">Williams</option>
+                    <option value="Wood">Wood</option>
+                    <option value="Wyandot">Wyandot</option>
+                </datalist>
+
+            </div>
+            <div class="col-lg-4 offset-lg-4 mt1 textFeildHide">
+                <input type="number" placeholder='Cell Phone Number "best number to text"' name="number" class="forRequired">
+
+            </div>
+            <div class="col-lg-4 offset-lg-4 mt1 textFeildHide">
+                <input type="text" placeholder="Home Phone or secondary Number" name="testt"  class="forRequired">
+
+            </div>
+            <div class="col-lg-4 offset-lg-4 mt1 textFeildHide">
+                <input type="date" placeholder="Date of Birth" name="DOB" class="forRequired">
+
+            </div>
+
+
+
+            <div class="col-lg-4 offset-lg-4 mt1">
+                <input type="password" placeholder="Passsword" name="password" class="forRequired">
+                @if ($errors->has('password'))
+                <div class="error">{{ $errors->first('password') }}</div>
+                @endif
+            </div>
+            <div class="col-lg-4 offset-lg-4 mt1">
+                <input type="password" placeholder="Password Confirmation" name="password_confirmation" class="forRequired">
+                @if ($errors->has('password_confirmation'))
+                <div class="error">{{ $errors->first('password_confirmation') }}</div>
+                @endif
+            </div>
+
+
+            <div class="col-lg-4 offset-lg-4 mt2">
+                <div class="remember">
+                    <label class="container2">
+                        <span>Create an account means you’re okay with our <br />
+                            <a href="">Terms & Services, Privacy Policy.</a></span>
+                        <input checked type="checkbox" name="testt">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="col-lg-4 offset-lg-4 mt3">
+                <button type="submit">Sign Up</button>
+            </div>
+        </form>
+
+        <div class="col-lg-4 offset-lg-4 mt2 ">
+            <div class="newHere text-center">
+                Already have a account? <a href="login.php">Sign in</a>
+            </div>
+        </div>
     </div>
-    <div class="col-lg-4 offset-lg-4 mt1 textFeildHide">
-        <input type="text" placeholder="City" name="" required>
-        {{-- @if ($errors->has('email'))
-                        <div class="error">{{ $errors->first('email') }}</div>
-    @endif --}}
-</div>
-<div class="col-lg-4 offset-lg-4 mt1 textFeildHide">
-    <input type="text" placeholder="State" name="" required>
-    {{-- @if ($errors->has('email'))
-                        <div class="error">{{ $errors->first('email') }}</div>
-@endif --}}
-</div>
-<div class="col-lg-4 offset-lg-4 mt1 textFeildHide">
-    <input type="text" placeholder="Zip Code" name="" required>
-    {{-- @if ($errors->has('email'))
-                        <div class="error">{{ $errors->first('email') }}</div>
-@endif --}}
-</div>
-<div class="col-lg-4 offset-lg-4 mt1 textFeildHide">
-    <input name="player_country" list="priv-county-drop" value="{{@$playerPersonalInfo->player_country}}" placeholder="County">
-                    <datalist id="priv-county-drop">
-                        <option value="Adams">Adams</option>
-                        <option value="Allen">Allen</option>
-                        <option value="Ashland">Ashland</option>
-                        <option value="Ashtabula">Ashtabula</option>
-                        <option value="Athens">Athens</option>
-                        <option value="Auglaize">Auglaize</option>
-                        <option value="Belmont">Belmont</option>
-                        <option value="Brown">Brown</option>
-                        <option value="Butler">Butler</option>
-                        <option value="Carroll">Carroll</option>
-                        <option value="Champaign">Champaign</option>
-                        <option value="Clark">Clark</option>
-                        <option value="Clermont">Clermont</option>
-                        <option value="Clinton">Clinton</option>
-                        <option value="Columbiana">Columbiana</option>
-                        <option value="Coshocton">Coshocton</option>
-                        <option value="Crawford">Crawford</option>
-                        <option value="Cuyahoga">Cuyahoga</option>
-                        <option value="Darke">Darke</option>
-                        <option value="Defiance">Defiance</option>
-                        <option value="Delaware">Delaware</option>
-                        <option value="Erie">Erie</option>
-                        <option value="Fairfield">Fairfield</option>
-                        <option value="Fayette">Fayette</option>
-                        <option value="Franklin">Franklin</option>
-                        <option value="Fulton">Fulton</option>
-                        <option value="Gallia">Gallia</option>
-                        <option value="Geauga">Geauga</option>
-                        <option value="Greene">Greene</option>
-                        <option value="Guernsey">Guernsey</option>
-                        <option value="Hamilton">Hamilton</option>
-                        <option value="Hancock">Hancock</option>
-                        <option value="Hardin">Hardin</option>
-                        <option value="Harrison">Harrison</option>
-                        <option value="Henry">Henry</option>
-                        <option value="Highland">Highland</option>
-                        <option value="Hocking">Hocking</option>
-                        <option value="Holmes">Holmes</option>
-                        <option value="Huron">Huron</option>
-                        <option value="Jackson">Jackson</option>
-                        <option value="Jefferson">Jefferson</option>
-                        <option value="Knox">Knox</option>
-                        <option value="Lake">Lake</option>
-                        <option value="Lawrence">Lawrence</option>
-                        <option value="Licking">Licking</option>
-                        <option value="Logan">Logan</option>
-                        <option value="Lorain">Lorain</option>
-                        <option value="Lucas">Lucas</option>
-                        <option value="Madison">Madison</option>
-                        <option value="Mahoning">Mahoning</option>
-                        <option value="Marion">Marion</option>
-                        <option value="Medina">Medina</option>
-                        <option value="Meigs">Meigs</option>
-                        <option value="Mercer">Mercer</option>
-                        <option value="Miami">Miami</option>
-                        <option value="Monroe">Monroe</option>
-                        <option value="Montgomery">Montgomery</option>
-                        <option value="Morgan">Morgan</option>
-                        <option value="Morrow">Morrow</option>
-                        <option value="Muskingum">Muskingum</option>
-                        <option value="Noble">Noble</option>
-                        <option value="Ottawa">Ottawa</option>
-                        <option value="Paulding">Paulding</option>
-                        <option value="Perry">Perry</option>
-                        <option value="Pickaway">Pickaway</option>
-                        <option value="Pike">Pike</option>
-                        <option value="Portage">Portage</option>
-                        <option value="Preble">Preble</option>
-                        <option value="Putnam">Putnam</option>
-                        <option value="Richland">Richland</option>
-                        <option value="Ross">Ross</option>
-                        <option value="Sandusky">Sandusky</option>
-                        <option value="Scioto">Scioto</option>
-                        <option value="Seneca">Seneca</option>
-                        <option value="Shelby">Shelby</option>
-                        <option value="Stark">Stark</option>
-                        <option value="Summit">Summit</option>
-                        <option value="Trumbull">Trumbull</option>
-                        <option value="Tuscarawas">Tuscarawas</option>
-                        <option value="Union">Union</option>
-                        <option value="Van Wert">Van Wert</option>
-                        <option value="Vinton">Vinton</option>
-                        <option value="Warren">Warren</option>
-                        <option value="Washington">Washington</option>
-                        <option value="Wayne">Wayne</option>
-                        <option value="Williams">Williams</option>
-                        <option value="Wood">Wood</option>
-                        <option value="Wyandot">Wyandot</option>
-                    </datalist>
-    {{-- @if ($errors->has('email'))
-                        <div class="error">{{ $errors->first('email') }}</div>
-@endif --}}
-</div>
-<div class="col-lg-4 offset-lg-4 mt1 textFeildHide">
-    <input type="number" placeholder='Cell Phone Number "best number to text"' name="" required>
-    {{-- @if ($errors->has('email'))
-                        <div class="error">{{ $errors->first('email') }}</div>
-@endif --}}
-</div>
-<div class="col-lg-4 offset-lg-4 mt1 textFeildHide">
-    <input type="text" placeholder="Home Phone or secondary Number" name="" required>
-    {{-- @if ($errors->has('email'))
-                        <div class="error">{{ $errors->first('email') }}</div>
-@endif --}}
-</div>
-<div class="col-lg-4 offset-lg-4 mt1 textFeildHide">
-    <input type="date" placeholder="Date of Birth" name="" required>
-    {{-- @if ($errors->has('email'))
-                        <div class="error">{{ $errors->first('email') }}</div>
-@endif --}}
-</div>
-
-
-{{--  --}}
-<div class="col-lg-4 offset-lg-4 mt1">
-    <input type="password" placeholder="Passsword" name="password" required>
-    @if ($errors->has('password'))
-    <div class="error">{{ $errors->first('password') }}</div>
-    @endif
-</div>
-<div class="col-lg-4 offset-lg-4 mt1">
-    <input type="password" placeholder="Password Confirmation" name="password_confirmation" required>
-    @if ($errors->has('password_confirmation'))
-    <div class="error">{{ $errors->first('password_confirmation') }}</div>
-    @endif
-</div>
-{{-- <div class="col-lg-4 offset-lg-4 mt1">
-                <input type="text" placeholder="Username" name="password_confirmation" required>
-            </div> --}}
-
-<div class="col-lg-4 offset-lg-4 mt2">
-    <div class="remember">
-        <label class="container2">
-            <span>Create an account means you’re okay with our <br />
-                <a href="">Terms & Services, Privacy Policy.</a></span>
-            <input checked type="checkbox">
-            <span class="checkmark"></span>
-        </label>
-    </div>
-</div>
-<div class="col-lg-4 offset-lg-4 mt3">
-    <button type="submit">Sign Up</button>
-</div>
-</form>
-
-<div class="col-lg-4 offset-lg-4 mt2 ">
-    <div class="newHere text-center">
-        Already have a account? <a href="login.php">Sign in</a>
-    </div>
-</div>
-</div>
 </div>
 <script>
     var sites = {!!json_encode($role) !!};
@@ -246,9 +229,10 @@
         console.log('test run', e.target.value)
         if (e.target.value == 'Player') {
             $('.textFeildHide').show()
+            // $('.forRequired').attr('required','true')
         } else {
             $('.textFeildHide').hide()
-
+            // $('.forRequired').removeAttr('required');​​​​​
         }
     })
 

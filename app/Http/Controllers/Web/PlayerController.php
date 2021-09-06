@@ -708,6 +708,7 @@ class PlayerController extends Controller
     public function premiumPayment(Request $request)
     {
         $price = $request->packageVaue;
+        // dd($price);
         return view('payment.index',compact('price'));
     }
 }

@@ -137,8 +137,7 @@ class HomeController extends Controller
     public function coaches(Request $request)
 
     {
-        $users = User::where('type','!=' ,'Player')
-        ->where('type','!=' ,'Admin')
+        $users = User::where('type' ,'college coach')
         ->get();
         return view('web.coach.coahes', compact('users'));
     }
@@ -517,14 +516,13 @@ class HomeController extends Controller
                     return redirect()->back();
                     // 'email' => 'Your reqiest is not approved please try leter';
                 }
-            } elseif (Auth::attempt($credentials) && $user->type !== 'college coach') {
+            }
+            if (Auth::attempt($credentials) && $user->type !== 'college coach') {
                 $request->session()->regenerate();
                 return redirect('/');
             } else {
-                return [
-
-                    'email' => 'Your reqiest is not approved please try leter',
-                ];
+                Session::flash('credentialsnot', 'This is a message!');
+                return redirect()->back();
             }
         } else {
             Session::flash('credentialsnot', 'This is a message!');
@@ -564,6 +562,7 @@ class HomeController extends Controller
     }
     public function test(Request $request)
     {
+        return $request->paymaentInfo[0];
         return Excel::download(new UsersExport,'ScountingOHIO_'.now().'_by_'.Auth::user()->name.'.xlsx');
 
         $seenNotification = SeeProfile::where('player_id', $request->id)

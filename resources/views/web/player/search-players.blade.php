@@ -2,9 +2,13 @@
 @section('content')
 
 <div class="userTableCustom mainDiv search">
-    <a style="    display: flex;justify-content: flex-end;text-decoration: none;" href="{{route('export-player-search')}}">
-        <button style="background-color: #55d729;" type="button" class="ali btn btn-success mb-2">Print Result</button>
-    </a>
+    @auth
+        @if (Auth::User()->type=="college coach")
+        <a style="display: flex;justify-content: flex-end;text-decoration: none;" href="{{route('export-player-search')}}">
+            <button style="background-color: #55d729;" type="button" class="ali btn btn-success mb-2">Print Result</button>
+        </a>
+        @endif
+    @endauth
     <div class="inner">
         @if ($result)
         <div class="userRow d-flex">

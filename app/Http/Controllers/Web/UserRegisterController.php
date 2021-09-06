@@ -43,41 +43,6 @@ class UserRegisterController extends Controller
 
     public function resgister(Request $request)
     {
-        // dd($request->pkgInp);
-        if ($request->pkgInp === 'lifetime') {
-            $data = [];
-            $data['items'] = [
-                [
-                    'name' => 'ItSolutionStuff.com',
-                    'price' => 100,
-                    'desc'  => 'Description for ItSolutionStuff.com',
-                    'qty' => 1
-                ]
-            ];
-
-            $data['invoice_id'] = 1;
-            $data['invoice_description'] = "Order #{$data['invoice_id']} Invoice";
-            $data['return_url'] = route('payment.success');
-            $data['cancel_url'] = route('payment.cancel');
-            $data['total'] = 100;
-
-            $provider = new ExpressCheckout;
-            // ( $provider->setExpressCheckout($data));
-
-            $response = $provider->setExpressCheckout($data);
-
-            $response = $provider->setExpressCheckout($data, true);
-
-            return redirect($response['paypal_link']);
-        }
-
-
-        if ($request->pkgInp === 'monthly') {
-            dd($request->pkgInp);
-        }
-        if ($request->pkgInp === 'annual') {
-            dd($request->pkgInp);
-        }
         $validator = Validator::make(
             $request->all(),
             [
@@ -97,6 +62,7 @@ class UserRegisterController extends Controller
 
         $check = $this->create($data);
         if ($check->type === "college coach") {
+            // dd("College coach");
             return redirect("/");
         } else
             $this->guard()->login($check);
@@ -107,7 +73,7 @@ class UserRegisterController extends Controller
 
     protected function create(array $data)
     {
-        dd($data);
+        // dd($data);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
