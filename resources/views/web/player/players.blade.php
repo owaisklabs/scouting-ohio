@@ -61,7 +61,7 @@
 </div>
 <script>
 
-    const AppendedData = (d)=>{
+    const AppendedData = (d,c)=>{
         console.log(d)
         $('#exampleModalDetails .modalDataDB').append(
             `
@@ -73,7 +73,14 @@
             </div>
             `
         )
-        $('.showDModal').trigger('click')
+        if(c)
+        {
+            // $('.showDModal').trigger('click')
+            var myModal = new bootstrap.Modal(document.getElementById('exampleModalDetails'), {
+                keyboard: true
+            })
+            myModal.show()
+        }
     }
     const modalShowdFunction = (data)=>{
         console.log(data)
@@ -91,13 +98,13 @@
         });
 
         fbs.map((val,i)=>{
-            AppendedData(val)
+            AppendedData(val,false)
         })
         fcs.map((val,i)=>{
-            AppendedData(val)
+            AppendedData(val,false)
         })
         walkin.map((val,i)=>{
-            AppendedData(val)
+            AppendedData(val,true)
         })
         // console.log(fbs,fcs,walkin)
 

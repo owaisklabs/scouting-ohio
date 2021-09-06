@@ -148,11 +148,15 @@ class PlayerController extends Controller
     {
         $honorAward = HonorAward::where('user_id', Auth::id())->first();
         if ($honorAward) {
+            // dd($request->all());
             $honorAward->User_id = Auth::id();
             $honorAward->football_post_season_honors = $request->football_post_season_honors;
             $honorAward->football_statics = $request->football_statics;
             $honorAward->other_sports_and_athletic_honors = $request->other_sports_and_athletic_honors;
-            $honorAward->hobbies_extracurricular_activities = $request->hobbies_extracurricular_activities;
+            $honorAward->hobbies_extracurricular_activities = $request->Hobbies_extracurricular_activities;
+            $honorAward->camp_combines = $request->Camp_combines;
+            $honorAward->list_college_recruiting_you = $request->list_college_recruiting_you;
+            $honorAward->list_official_college_visits_you_will_tak_have_taken = $request->list_official_college_visits_you_will_tak_have_taken;
             $honorAward->save();
             $items = $honorAward->getChanges();
             $jsonData = json_encode($items);
@@ -169,7 +173,10 @@ class PlayerController extends Controller
             $honorAward->football_post_season_honors = $request->football_post_season_honors;
             $honorAward->football_statics = $request->football_statics;
             $honorAward->other_sports_and_athletic_honors = $request->other_sports_and_athletic_honors;
-            $honorAward->hobbies_extracurricular_activities = $request->hobbies_extracurricular_activities;
+            $honorAward->hobbies_extracurricular_activities = $request->Hobbies_extracurricular_activities;
+            $honorAward->camp_combines = $request->Camp_combines;
+            $honorAward->list_college_recruiting_you = $request->list_college_recruiting_you;
+            $honorAward->list_official_college_visits_you_will_tak_have_taken = $request->list_official_college_visits_you_will_tak_have_taken;
             $honorAward->save();
             Session::flash('message', 'This is a message!');
             return redirect()->back();

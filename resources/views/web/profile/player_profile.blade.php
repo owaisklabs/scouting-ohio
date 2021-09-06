@@ -25,7 +25,7 @@
                                 <div class="d-flex flex-column w100  justify-content-end">
                                     <h1 class="forMobile">{{$user->name ?? " "}}</h1>
                                     @auth
-                                    @if (auth()->user()->type ==='college coach'||auth()->user()->type ==='Caoch')
+                                    @if (auth()->user()->type ==='college coach'||auth()->user()->type ==='high school coach')
                                     <div class="btns d-flex gap-2">
                                         @if ($check)
                                         <form action="{{route('remove-friend')}}" method="POST">

@@ -23,7 +23,7 @@
             </div>
             <div class="col-lg-12 d-flex flex-column mt2">
                 <label>Summer Football Camps:</label>
-                <textarea name="summer_football_camps" id="" cols="30" rows="10" placeholder="Camps dates, Times and Location">{{$user->twitter_link}}</textarea>
+                <textarea name="summer_football_camps" id="" cols="30" rows="10" placeholder="Camps dates, Times and Location">{{$user->summer_football_camps}}</textarea>
             </div>
 
         </div>

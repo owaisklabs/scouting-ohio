@@ -21,6 +21,10 @@
                 <div class="d-flex align-items-center">
                     <button type="button" class="uploadBtn uploadAble Transcript">Upload</button> <span class="TranscriptSpan"></span>
                     <input type="file" name="transcript" class="TranscriptInp" value=""  hidden>
+                    @if ($errors->has('transcript'))
+                        <div class="error">{{ $errors->first('transcript') }}</div>
+                    @endif
+
                 </div>
             </div>
             <div class="col-lg-6 d-flex flex-column mt2 ">
@@ -28,6 +32,9 @@
                 <div class="d-flex align-items-center">
                     <button type="button" class="uploadBtn uploadAble aTTACHact">Upload</button> <span class="aTTACHactSpan"></span>
                     <input type="file" name="attach_act_sat_result" class="aTTACHactInp" hidden>
+                    @if ($errors->has('attach_act_sat_result'))
+                    <div class="error">{{ $errors->first('attach_act_sat_result') }}</div>
+                @endif
                 </div>
             </div>
             <div class="col-lg-6 d-flex flex-column mt2 ">
@@ -35,6 +42,9 @@
                 <div class="d-flex align-items-center">
                     <button type="button" class="uploadBtn uploadAble fOOTbALLbIO">Upload</button> <span class="fOOTbALLbIOSpan"></span>
                     <input type="file" name="football_bio" class="fOOTbALLbIOInp" hidden>
+                    @if ($errors->has('football_bio'))
+                    <div class="error">{{ $errors->first('football_bio') }}</div>
+                @endif
                 </div>
             </div>
             <div class="col-lg-6 d-flex flex-column mt2">

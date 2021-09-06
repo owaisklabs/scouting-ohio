@@ -77,7 +77,7 @@ class User extends Authenticatable
     }
     public function friends()
     {
-        return $this->belongsToMany(User::class, 'coach_players', 'player_id', 'coach_id')->where('status', CoachPlayer::ACCEPTED);
+        return $this->belongsToMany(User::class, 'coach_players', 'player_id', 'coach_id');
     }
     public function coachFriend()
     {
