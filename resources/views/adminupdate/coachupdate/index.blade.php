@@ -11,18 +11,18 @@
                     <li class="nav-item" role="Articles">
                         <button class="nav-link" id="pills-Articles-tab" data-bs-toggle="pill" data-bs-target="#pills-Articles" type="button" role="tab" aria-controls="pills-additionalCoaches" aria-selected="false">Aditional Coaches</button>
                     </li>
-                    <li class="nav-item" role="Player'sFriends">
+                    {{-- <li class="nav-item" role="Player'sFriends">
                         <button class="nav-link" id="pills-Friends-tab" data-bs-toggle="pill" data-bs-target="#pills-Friends" type="button" role="tab" aria-controls="pills-additionalCoaches" aria-selected="false">Player's Mutual Friends</button>
-                    </li>
+                    </li> --}}
                     <li class="nav-item" role="ChangePassword">
                         <button class="nav-link" id="pills-ChangePassword-tab" data-bs-toggle="pill" data-bs-target="#pills-ChangePassword" type="button" role="tab" aria-controls="pills-ChangePassword" aria-selected="false">Change Password</button>
                     </li>
-                    <li class="nav-item" role="Logout">
+                    {{-- <li class="nav-item" role="Logout">
                         <form id="logout-form" action="{{ route('logout') }}" method="POST">
                             @csrf
                         <button type="submit" class="nav-link" id="pills-Logout-tab" data-bs-toggle="pill" data-bs-target="#pills-Logout" type="button" role="tab" aria-controls="pills-Logout" aria-selected="false">Logout</button>
                         </form>
-                    </li>
+                    </li> --}}
                 </ul>
 
             </div>
@@ -61,7 +61,7 @@
                                     <a href=""><button type="submit" id="updateImages" hidden>Update</button></a>
                                     @if ($errors->has('profileImage'))
                                         <div class="error">{{ $errors->first('profileImage') }}</div>
-                                    @endif
+                                        @endif
                                 </div>
                             </div>
                         </form>
@@ -70,17 +70,17 @@
 
 
                 <!-- tab1 -->
-                @include('web.dashboard.coach.tab1')
+                @include('adminupdate.coachupdate.tab1')
 
                 <!-- tab2 -->
-                @include('web.dashboard.coach.tab2')
+                @include('adminupdate.coachupdate.tab2')
 
                 <!-- tab 3 -->
-                @include('web.dashboard.coach.tab3')
+                {{-- @include('adminupdate.coachupdate.tab3') --}}
 
 
                 <!-- tab4 -->
-                @include('web.dashboard.coach.tab4')
+                @include('adminupdate.coachupdate.tab4')
 
                 <!-- tab5-->
 

@@ -101,6 +101,10 @@
                                     <a href="#" class="deleteButton" data-id="{{$user->id}}">
                                         <i class="fas fa-trash red ml-1"></i>
                                     </a>
+                                    {{-- to the desired player dashboard--}}
+                                    <a href="{{ route('viewdashboard',$user->id) }}" class="settingsButton" data-id="{{$user->id}}">
+                                        <i class="fas fa-user-cog"></i>
+                                    </a>
                                 </td>
                             </tr>
                             @endforeach

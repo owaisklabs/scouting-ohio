@@ -368,6 +368,43 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade exampleModal" id="exampleModalCOAH2" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="d-flex flex-wrap">
+                    <!-- <div class="imga">
+                            <label for="">Upload Image</label>
+                            <div class="uploadAble image article" >
+                                <i class="fa fa-plus"></i>
+                                <input type="file" class="articleInp" hidden>
+                                <img src="" alt="" height="100%" width="100%" id="output" class="uploadAble nn article" hidden>
+                            </div>
+                        </div> -->
+                    <form action="{{route('adminupdatescoach_additionalcoaches')}}" method="POST" class="w-100">
+                        @csrf
+                        <div class="content" style="margin: 0;">
+                            <div class="d-flex flex-column">
+                                <label for="">Name</label>
+                                <input type="text" name="name">
+                            </div>
+                            <div class="d-flex flex-column">
+                                <label for="" class="mt0p">Email Address</label>
+                                <input type="email" name="email">
+                            </div>
+                        </div>
+                </div>
+                <div class="d-flex justify-content-end mt2">
+                    <button type="button" class="closeModal" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit">Save</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="modal fade exampleModal" id="editexampleModalCOAH" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -383,6 +420,43 @@
                             </div>
                         </div> -->
                     <form action="{{route('addtional-coach-update')}}" method="POST" class="w-100">
+                        @csrf
+                        <div class="content" style="margin: 0;">
+                            <div class="d-flex flex-column">
+                                <label for="">Name</label>
+                                <input type="text" name="name">
+                            </div>
+                            <div class="d-flex flex-column">
+                                <label for="" class="mt0p">Email Address</label>
+                                <input type="hidden" name="id" id="">
+                                <input type="email" name="email">
+                            </div>
+                        </div>
+                </div>
+                <div class="d-flex justify-content-end mt2">
+                    <button type="button" class="closeModal" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit">Save</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade exampleModal" id="editexampleModalCOAH2" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="d-flex flex-wrap">
+                    <!-- <div class="imga">
+                            <label for="">Upload Image</label>
+                            <div class="uploadAble image article" >
+                                <i class="fa fa-plus"></i>
+                                <input type="file" class="articleInp" hidden>
+                                <img src="" alt="" height="100%" width="100%" id="output" class="uploadAble nn article" hidden>
+                            </div>
+                        </div> -->
+                    <form action="{{route('adminupdatescoach_edit_additionalcoaches')}}" method="POST" class="w-100">
                         @csrf
                         <div class="content" style="margin: 0;">
                             <div class="d-flex flex-column">
