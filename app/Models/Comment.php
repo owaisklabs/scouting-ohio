@@ -5,12 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ChangeField extends Model
+class Comment extends Model
 {
     use HasFactory;
-    protected $guarded=[];
+    public function article()
+    {
+        return $this->belongsTo(Article::class,'article_id');
+    }
     public function user()
     {
         return $this->belongsTo(User::class,'user_id');
+    }
+    public function likes()
+    {
+        return $this->hasMany(Like::class,'comment_id');
     }
 }

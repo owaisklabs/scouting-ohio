@@ -30,7 +30,7 @@
             </div>
             {{--  --}}
             <div class="col-lg-4 offset-lg-4 mt1 textFeildHide">
-                <input list="class-off" name="class_off" placeholder="CLASS OFF" value="">
+                <input list="class-off" name="class_off" class="forRequired" placeholder="CLASS OFF" value="">
                 <datalist id="class-off">
                     <option value="2017">2017</option>
                     <option value="2018">2018</option>
@@ -66,7 +66,7 @@
             </div>
             <div class="col-lg-4 offset-lg-4 mt1 textFeildHide">
                 <input name="player_country" list="priv-county-drop"
-                    placeholder="County">
+                    placeholder="County" class="forRequired">
                 <datalist id="priv-county-drop">
                     <option value="Adams">Adams</option>
                     <option value="Allen">Allen</option>
@@ -192,7 +192,7 @@
                 <div class="remember">
                     <label class="container2">
                         <span>Create an account means you’re okay with our <br />
-                            <a href="">Terms & Services, Privacy Policy.</a></span>
+                            <a href="{{route('terms-condtions')}}">Terms & Services, Privacy Policy.</a></span>
                         <input checked type="checkbox" name="testt">
                         <span class="checkmark"></span>
                     </label>
@@ -218,6 +218,7 @@
             console.log('true')
             $('.textFeildHide').hide()
         } else {
+            $(".forRequired").prop('required',true);
             console.log('false')
             $('.textFeildHide').show()
 
@@ -229,6 +230,7 @@
         console.log('test run', e.target.value)
         if (e.target.value == 'Player') {
             $('.textFeildHide').show()
+            $(".forRequired").prop('required',true);
             // $('.forRequired').attr('required','true')
         } else {
             $('.textFeildHide').hide()

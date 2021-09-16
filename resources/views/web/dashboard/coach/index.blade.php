@@ -62,6 +62,8 @@
                                     @if ($errors->has('profileImage'))
                                         <div class="error">{{ $errors->first('profileImage') }}</div>
                                     @endif
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -87,4 +89,14 @@
         </div>
     </div>
 </div>
+<script>
+    @if (Session::has('payment-success'))
+    swal({
+  title: "Good job!",
+  text: "You clicked the button!",
+  icon: "success",
+  button: "Aww yiss!",
+});
+    @endif
+</script>
 @endsection

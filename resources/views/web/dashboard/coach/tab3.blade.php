@@ -1,6 +1,5 @@
 <div class="tab-pane fade " id="pills-Friends" role="tabpanel" aria-labelledby="pills-Friends-tab">
     <div class="userTableCustom mt6">
-        <!-- <h1 class="mb4 d-flex justify-content-between align-items-center"> -->
         <table>
                 <tr>
                     <th>
@@ -19,6 +18,5 @@
                 @endforeach
 
                 </table>
-        <!-- </h1> -->
     </div>
 </div>

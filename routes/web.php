@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ChatController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -66,6 +67,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     // Route::resource('/contact_detail', 'Admin\ContactController');
     Route::resource('/subscription', 'Admin\SubscriptionController');
     Route::resource('/video', 'Admin\VideoController');
+    Route::resource('/terms-conditions', 'Admin\TermsAndCondtionsController');
 
 
 
@@ -90,6 +92,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Route::post('req-accept', 'Web\PlayerController@reqAccept')->name('req-accept');
     Route::post('req-decline', 'Web\PlayerController@reqDecline')->name('req-decline');
     Route::post('scholarship-offer', 'Web\PlayerController@scholarshipOffer')->name('scholarship-offer');
+    Route::post('paypal-payment', 'Web\PlayerController@paypalPayment')->name('paypal-payment');
 
     Route::get('chat/{id}',[ChatController::class,'chating'])->name('chat');
     Route::post('chat-store', [ChatController::class,'chatStore'])->name('chat-store');
@@ -100,6 +103,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Route::get('show-addtional-coach-by-id', 'Web\PlayerController@showAddtionalCoachById')->name('show-addtional-coach-by-id');
     Route::post('addtional-coach-update', 'Web\PlayerController@addtionalCoachUpdate')->name('addtional-coach-update');
     Route::post('premium-payment', 'Web\PlayerController@premiumPayment')->name('premium-payment');
+    Route::post('comment', [CommentController::class,'store'])->name('comment');
+    Route::post('like', [CommentController::class,'like'])->name('like');
 
 
     // coach Dashboard Funcationalty
@@ -130,6 +135,7 @@ Route::get('/articles-detail/{id}', 'Web\HomeController@articlesDetail')->name('
 Route::get('/web_register', 'Web\HomeController@web_register')->name('web_register');
 Route::get('/web_login', 'Web\HomeController@web_login')->name('web_login');
 Route::post('web_login', 'Web\HomeController@authenticate')->name('web-login');
+Route::get('terms-condtions', 'Web\HomeController@termsCondtions')->name('terms-condtions');
 Route::post('/test', 'Web\HomeController@test')->name('test');
 Route::get('cancel', 'user@cancel')->name('payment.cancel');
 Route::get('payment/success', 'Web\UserRegisterController@success')->name('payment.success');

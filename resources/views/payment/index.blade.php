@@ -28,17 +28,22 @@
           )
           console.log(paymentData)
           $.ajax({
-                url: '{{route('test')}}',
-                method: "POST",
-                data: {
-                    paymaentInfo: paymentData
-                },
-                success: function (response) {
-                    console.log('response',response)
-                },
+                        url: '{{ route('paypal-payment') }}',
+                        method: "POST",
+                        data: {
+                            paymaentInfo: paymentData
+                        },
+                        success: function(response) {
+                            // console.log('response:',response);
+                            swal("Payment Successfull", "You subscribed to permuim", "success");
+                            console.log($('.swal-button--confirm'));
+                            $('.swal-button--confirm').click(function(){
+                                window.location.href = "{{route('player-dashboard')}}";
+                            });
+                        },
+                        })
+                    });
 
-            });
-        });
 
          }
     }).render('#paypal-button-container');

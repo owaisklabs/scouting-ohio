@@ -1,5 +1,5 @@
 <div class="tab-pane fade " id="pills-Articles" role="tabpanel" aria-labelledby="pills-Articles-tab">
-    <div class="userTableCustom mt6">
+    <div class="userTableCustom mt4">
         <h1 class="mb4 d-flex justify-content-between align-items-center">
             Aditional Coaches
             <i class="fa fa-plus" data-bs-toggle="modal" data-bs-target="#exampleModalCOAH"></i>
@@ -34,6 +34,7 @@
     </div>
 
 </div>
+
 <script>
     function fetch_video(id){
         $.ajax({

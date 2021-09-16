@@ -34,7 +34,7 @@
         head.appendChild(css);
     </script> -->
     {{-- assets/css/main.css --}}
-    <script src="https://www.paypal.com/sdk/js?client-id=AV1x3Rq6Ao-Z9G-FBTOrS9neOeRHH5M_mvFd4I3332n8w3luqDNhwNwfFS53AX24zcM85r8dzfSjGi4W&disable-funding=credit"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AVho5RBSVCEmADIjdJ44qk5eN9FC_dy-zapmI-lR7kM5r3UnAN3gqCmD67OPr2eezWL6917iAzHpHRaM&disable-funding=credit"></script>
     <!-- fab -->
     <link rel="shortcut icon" href="{{get_favicon_logo()}}" type="image/x-icon">
     <!-- styles -->
@@ -46,6 +46,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <!-- wow -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     {{-- sweet Aleart --}}
@@ -291,7 +292,7 @@
             <div class="modal-body">
                 <div class="d-flex flex-wrap">
                     <div class="imga">
-                        <form action="{{route('player-article')}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('player-article')}}" method="POST" enctype="multipart/form-data" novalidate>
                             @csrf
                             <label for="">Upload Image</label>
                             {{-- <div class="uploadAble image article">

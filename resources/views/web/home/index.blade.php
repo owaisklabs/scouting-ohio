@@ -285,10 +285,11 @@
                                 @foreach ($chunk as $video)
                                 <div class="dGItem">
                                     @if ($video->hudl_thumbnail)
-                                    <img class="pl-img" src="{{asset('img/videos/'.$video->hudl_thumbnail)}}" height="100%"
-                                        width="100%" alt="">
+                                    <img class="pl-img" src="{{asset('img/videos/'.$video->hudl_thumbnail)}}"
+                                        height="100%" width="100%" alt="">
                                     @else
-                                    <img class="pl-img" src="{{asset('img/noimg.jpg')}}" height="100%" width="100%" alt="">
+                                    <img class="pl-img" src="{{asset('img/noimg.jpg')}}" height="100%" width="100%"
+                                        alt="">
                                     @endif
 
                                     <div class="img-txt">
@@ -300,8 +301,8 @@
                                     </div>
                                     <input type="hidden" value="{{$video->hudl_link}}" name="video_url"
                                         id="url_link{{$video->id}}">
-                                    <img src="{{asset('img/1x/plahhov.png')}}" height="100%" width="100%" class="forHover"
-                                        onclick="geturl('url_link'+{{$video->id}})" alt="">
+                                    <img src="{{asset('img/1x/plahhov.png')}}" height="100%" width="100%"
+                                        class="forHover" onclick="geturl('url_link'+{{$video->id}})" alt="">
 
                                 </div>
 
@@ -327,8 +328,7 @@
                 <i class="fa fa-circle float-end"></i>
                 {{-- <h1>{{$displayUser['id']}}</h1> --}}
                 <a href="{{route('user-profile',$displayUser['id'])}}">
-                    <img src="{{asset('user_image/noimg.jpg')}}"
-                    alt="">
+                    <img src="{{asset('user_image/noimg.jpg')}}" alt="">
                 </a>
                 <span class="tooltiptext1">{{$displayUser['first_name']}}</span>
             </div>
@@ -354,33 +354,32 @@
                         <div class="dGItem">
                             @if ($video->hudl_thumbnail)
                             <img class="pl-img" src="{{asset('img/videos/'.$video->hudl_thumbnail)}}" height="100%"
-                                width="100%" alt="">
-                            @else
-                            <img class="pl-img" src="{{asset('img/noimg.jpg')}}" height="100%" width="100%" alt="">
-                            @endif
+width="100%" alt="">
+@else
+<img class="pl-img" src="{{asset('img/noimg.jpg')}}" height="100%" width="100%" alt="">
+@endif
 
-                            <div class="img-txt">
+<div class="img-txt">
 
-                                NAME {{$video->user->name}} - HIGH SCHOOL
-                                {{$video->user->basicInfo->high_school ?? " "}} <br /> CLASS
-                                OF{{$video->user->basicInfo->class_off ?? ""}} -
-                                POSITION{{$video->user->basicInfo->special_team_position?? ""}}
-                            </div>
-                            <input type="hidden" value="{{$video->hudl_link}}" name="video_url"
-                                id="url_link{{$video->id}}">
-                            <img src="{{asset('img/1x/plahhov.png')}}" height="100%" width="100%" class="forHover"
-                                onclick="geturl('url_link'+{{$video->id}})" alt="">
+    NAME {{$video->user->name}} - HIGH SCHOOL
+    {{$video->user->basicInfo->high_school ?? " "}} <br /> CLASS
+    OF{{$video->user->basicInfo->class_off ?? ""}} -
+    POSITION{{$video->user->basicInfo->special_team_position?? ""}}
+</div>
+<input type="hidden" value="{{$video->hudl_link}}" name="video_url" id="url_link{{$video->id}}">
+<img src="{{asset('img/1x/plahhov.png')}}" height="100%" width="100%" class="forHover"
+    onclick="geturl('url_link'+{{$video->id}})" alt="">
 
-                        </div>
+</div>
 
-                        @endforeach
-                    </div>
-                </div>
-                @endforeach
+@endforeach
+</div>
+</div>
+@endforeach
 
-            </div>
-        </div>
-    </div>
+</div>
+</div>
+</div>
 </div> --}}
 <div class="offers mt2">
     <div class="col-lg-12 text-center">
@@ -414,11 +413,11 @@
                     <div class="dataG1"><a href="{{route('user-profile',$item->id)}}">{{$item->name}}</a></div>
                     <div class="dataG1">{{$item->basicInfo->height ?? " "}}</div>
                     <div class="dataG1">{{$item->basicInfo->weight ?? " "}}
-                    @if (empty($item->basicInfo->weight))
+                        @if (empty($item->basicInfo->weight))
                         --
-                    @else
+                        @else
                         LBS
-                    @endif
+                        @endif
                     </div>
                     <div class="dataG1">{{$item->basicInfo->high_school ?? ""}}</div>
                     <div class="dataG1">{{$item->personalInfo->player_state ?? ""}}</div>
@@ -434,24 +433,103 @@
         </div>
     </div>
 </div>
+<div class="feeds-section  mt4" style="padding:0 2rem;">
+    <h1 class=" text-center" style="font-family: bebuseRegular; color: black;">PLAYER FEEDS</h1>
+    <div class="feeds">
+        @foreach ( $playerFeeds as $key => $playerFeed)
+
+
+        <div class="forEachData">
+            <div class="feed mt4 d-flex" styl="width:100%;     align-items: flex-start;">
+                <div class="img-section" style="width: 7%; margin-right: 30px;">
+                    <img src="{{asset('user_image').'/'.$playerFeed->user->user_profile}}"
+                        style="width: 100%; object-fit:cover; border-radius:100px;" alt="">
+                </div>
+                <div class="feed-details d-flex flex-column">
+                    <a href="">{{$playerFeed->user->name}} {{@$playerFeed->user->basicInfo->high_school}} Class of {{@$playerFeed->user->basicInfo->class_off}} {{@$playerFeed->user->basicInfo->special_team_position}}</a>
+                    <label for="" style="color: #878787;">{{$playerFeed->created_at->diffForHumans()}}</label>
+                    <div class="playerFeeds-{{$key}}">
+                        {{-- <span>${conversion(value.change_value)}</span> --}}
+                    </div>
+                </div>
+                </div>
+        </div>
+        <hr>
+        @endforeach
+
+    </div>
+    <div class="show-more d-flex justify-content-center">
+        <button class="allBtn mt2 show-more-btn">Show More</button>
+    </div>
+</div>
 </div>
 </div>
 <script>
+    var sites = {!!json_encode($playerFeeds)!!}
+    // arr;
+    console.log('data',sites);
+    sites.forEach((value, key) => {
+        console.log("value",value);
+        if (value != null) {
+            $(`.playerFeeds-${key}`).append(`
+                <div class="playerFeeds">
+                    <span>${conversion(value.change_value)}</span>
+                </div>
+            `)
+        }
+        function conversion(data) {
+        var arr = [];
+        var date;
+        var mainData = JSON.parse(data)
+        console.log(typeof(mainData))
+        for (const property in mainData) {
+            console.log(`data here ${property}: ${data[property]}`);
+            if (property == 'updated_at') {
+                // arr.push(`${data[property]}`)
+                date = data[property]
+            } else {
+                if(property.includes('_')){
+                    var ty = property.replace(/_/g,' ');
+                    arr.push(ty)
+                }
+                else{
+                    arr.push(`${ property }    `)
+                }
+            }
+
+        }
+        var cnvrt = arr.toString().replace(/,/g, ', ')
+        console.log(cnvrt)
+        return `<span>PLAYER UPDATED : ${cnvrt}</span>`
+    }
+    });
+
     // var link = $('#txt_name').val();
     // console.log(video_url)
     var mBtnn = document.getElementById('vidModal')
     async function geturl(id) {
-        console.log(id);
+        // console.log(id);
         var idr = document.getElementById(id);
-        console.log(idr.value)
+        // console.log(idr.value)
         $('#exampleModalVideo .modal-body iframe').attr("src", idr.value);
         setTimeout(() => {
             mBtnn.click()
         }, 500)
     }
-
+    $('.show-more-btn').on('click', ()=> {
+        $(".feeds").css("overflow-y", "scroll")
+    })
 </script>
 <style>
+    .feeds{
+        height: 700px;
+        overflow-y: hidden;
+    }
+    .feeds-section hr {
+        background-color: #a4a5a5c2;
+        height: 2px;
+    }
+
     .twitter-body {
         background-color: #fff;
         padding: 1rem;
@@ -598,24 +676,28 @@
     .pl-img {
         position: relative;
     }
-    .tooltip1{
+
+    .tooltip1 {
         position: relative;
     }
-    .tooltip1 i{
+
+    .tooltip1 i {
         color: #55d729
     }
-    @media only screen and (max-width:1960px){
-        .online-frnds-head{
-            margin-top:2rem;
+
+    @media only screen and (max-width:1960px) {
+        .online-frnds-head {
+            margin-top: 2rem;
 
         }
     }
+
 </style>
 
 <script>
-    var tweety = {!!json_encode($tweets)!!},
+    var tweety = {!!json_encode($tweets) !!},
         arr = [];
-    console.log(tweety)
+    // console.log(tweety)
     setTimeout(() => {
         for (var i = 0; i < 100000; i++) {
             if (tweety[i] === undefined) {
@@ -629,7 +711,7 @@
 
     // var tweetyi = document.getElementsByClassName('twitter-page')[0]
     function tweetAppend(d) {
-        console.log(moment("12-25-1995", "MM-DD-YYYY"))
+        // console.log(moment("12-25-1995", "MM-DD-YYYY"))
         $('.twitter-page').append(`
         <div class="twitter-body">
     <div class="row mb-2">
@@ -690,7 +772,7 @@
     var text = 'Find me at http://www.example.com and also at http://stackoverflow.com';
     var html = urlify(text);
 
-    console.log(html)
+    // console.log(html)
 
 </script>
 

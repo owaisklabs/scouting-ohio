@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SubsriptionMail;
 use App\Models\AcademicInfo;
 use App\Models\AddtionalCoach;
 use App\Models\ChangeField;
 use App\Models\CoachPlayer;
 use App\Models\HonorAward;
 use App\Models\MyLinks;
+use App\Models\PaypalPayment;
 use App\Models\PlayerArticle;
 use App\Models\PlayerBasicInfo;
 use App\Models\PlayerCombineResult;
@@ -17,12 +19,14 @@ use App\Models\PlayerPersonalInfo;
 use App\Models\PlayerVideo;
 use App\Models\ScholarshipOffer;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
@@ -36,7 +40,7 @@ class PlayerController extends Controller
             // return $request->all();
             $basicInfo->fullname = $request->full_name;
             $basicInfo->best_college_poition = $request->best_college_poition;
-            $basicInfo->high_school = $request->high_school;
+            $basicInfo->high_school_id = $request->high_school;
             $basicInfo->offensive = $request->offensive;
             $basicInfo->class_off = $request->class_off;
             $basicInfo->secondry_offensive = $request->secondry_offensive;
@@ -54,29 +58,31 @@ class PlayerController extends Controller
             $user->save();
             $items = $basicInfo->getChanges();
             $jsonData = json_encode($items);
+            if ($jsonData) {
             $changes = new ChangeField();
             $changes->user_id = Auth::id();
             $changes->change_value = $jsonData;
             $changes->save();
+            }
             $request->session()->put('basic_info_updating', $items);
             Session::flash('message', 'This is a message!');
             return redirect()->back();
         } else {
+            dd($request->all());
             $basicInfo = new PlayerBasicInfo();
             $basicInfo->fullname = $request->full_name;
             $basicInfo->best_college_poition = $request->best_college_poition;
-            $basicInfo->high_school = $request->high_school;
-            $basicInfo->high_school_defensive = $request->high_school_defensive;
+            $basicInfo->high_school_id = $request->high_school;
+            $basicInfo->high_school_defensive = $request->offensive;
             $basicInfo->class_off = $request->class_off;
             $basicInfo->secondry_offensive = $request->secondry_offensive;
             $basicInfo->jersey_number = $request->jersey_number;
-            $basicInfo->jersey_defensive = $request->jersey_defensive;
+            $basicInfo->jersey_defensive = $request->defensive;
             $basicInfo->height = $request->height;
             $basicInfo->secondry_defensive = $request->secondry_defensive;
             $basicInfo->weight = $request->weight;
             $basicInfo->special_team_position = $request->special_team_position;
             $basicInfo->user_id = Auth::id();
-            $basicInfo->offer = $request->offer;
             $basicInfo->save();
             Session::flash('message', 'This is a message!');
             return redirect()->back();
@@ -356,15 +362,15 @@ class PlayerController extends Controller
     {
         // Update Player Article
         if (Session::get('type') === "update") {
+            // dd($request->all());
             $playerArticle = PlayerArticle::find($request->hidden_id);
             //  dd($playerArticle);
             $playerArticle->title = $request->title;
             $playerArticle->article_link = $request->aticle_link;
-            if ($request->file('article_img')) {
+            if ($request->file('hudl_thumbnail')) {
                 Storage::disk('public_academic_info')->delete($playerArticle->upload_image);
-                $article_img = $request->article_img;
+                $article_img = $request->hudl_thumbnail;
                 $articleImageName = Str::random(15) . '.' . $article_img->getClientOriginalExtension();
-                // dd($articleImageName);
                 Storage::disk('public_academic_info')->put($articleImageName, \File::get($article_img));
                 $playerArticle->upload_image = $articleImageName;
                 $playerArticle->save();
@@ -384,8 +390,8 @@ class PlayerController extends Controller
             $playerArticle->title = $request->title;
             $playerArticle->article_link = $request->aticle_link;
             $playerArticle->User_id = Auth::id();
-            if ($request->file('article_img')) {
-                $article_img = $request->article_img;
+            if ($request->file('hudl_thumbnail')) {
+                $article_img = $request->hudl_thumbnail;
                 $articleImageName = Str::random(10) . '.' . $article_img->getClientOriginalExtension();
                 Storage::disk('public_academic_info')->put($articleImageName, \File::get($article_img));
                 $playerArticle->upload_image = $articleImageName;
@@ -461,70 +467,37 @@ class PlayerController extends Controller
     }
     public function scholarShipOffer(Request $request)
     {
-        // dd($request->all());
         $fbs_collection = collect($request->fbs);
         $fcs_collection = collect($request->fcs);
         $walkin_collection = collect($request->walkOnOffers);
         $fbsJson = $fbs_collection->implode(',');
         $fcsJson=$fcs_collection->implode(',');
         $walkinJson=$walkin_collection->implode(',');
-        $scholarshipOffer = ScholarshipOffer::where('user_id', Auth::id())->get();
+        // dd($fbsJson,$fcsJson,$walkinJson);
+        $scholarshipOffer = ScholarshipOffer::where('user_id', Auth::id())->first();
         if ($scholarshipOffer) {
-            foreach ($scholarshipOffer as $item) {
-                # code...
-                $item = ScholarshipOffer::where('user_id', Auth::id())->delete();
-            }
+            $scholarshipOffer->user_id =Auth::id();
+            $scholarshipOffer->fbs_offers_json =$fbsJson;
+            $scholarshipOffer->fcs_offer_json =$fcsJson;
+            $scholarshipOffer->walkin_offer_json =$walkinJson;
+            $scholarshipOffer->FBS_division_1_college =$request->fbs__division;
+            $scholarshipOffer->division_FCS_division_1aa_2_and_3_college =$request->fcs_division;
+            $scholarshipOffer->walk_on_committment =$request->walk_on_committment;
+            $scholarshipOffer->save();
+        }
+        else{
+            $scholarshipOffer = new ScholarshipOffer();
+            $scholarshipOffer->user_id =Auth::id();
+            $scholarshipOffer->fbs_offers_json =$fbsJson;
+            $scholarshipOffer->fcs_offer_json =$fcsJson;
+            $scholarshipOffer->walkin_offer_json =$walkinJson;
+            $scholarshipOffer->FBS_division_1_college =$request->fbs__division;
+            $scholarshipOffer->division_FCS_division_1aa_2_and_3_college =$request->fcs_division;
+            $scholarshipOffer->walk_on_committment =$request->walk_on_committment;
+            $scholarshipOffer->save();
+
         }
         // dd($request->all());
-        if ($request->fbs) {
-            foreach ($request->fbs as $item) {
-                $scholarshipOffer = new ScholarshipOffer();
-                $scholarshipOffer->user_id = Auth::id();
-                $scholarshipOffer->FBS_division_1_colleges = $item;
-                $scholarshipOffer->FCS_division_1aa_2_and_3_colleges = null;
-                $scholarshipOffer->FBS_division_1_college = $request->fbs__division;
-                $scholarshipOffer->division_FCS_division_1aa_2_and_3_college = $request->fcs_division;
-                $scholarshipOffer->list_walk_wn_offers = null;
-                $scholarshipOffer->walk_on_committment = $request->walk_on_committment;
-                $scholarshipOffer->fcs_offer_json = $fcsJson;
-                $scholarshipOffer->fbs_offers_json = $fbsJson;
-                $scholarshipOffer->walkin_offer_json = $walkinJson;
-                $scholarshipOffer->save();
-            }
-        }
-        if ($request->fcs) {
-            foreach ($request->fcs as $item) {
-                $scholarshipOffer = new ScholarshipOffer();
-                $scholarshipOffer->user_id = Auth::id();
-                $scholarshipOffer->FBS_division_1_colleges = null;
-                $scholarshipOffer->FCS_division_1aa_2_and_3_colleges = $item;
-                $scholarshipOffer->FBS_division_1_college = $request->fbs__division;
-                $scholarshipOffer->division_FCS_division_1aa_2_and_3_college = $request->fcs_division;
-                $scholarshipOffer->list_walk_wn_offers = null;
-                $scholarshipOffer->walk_on_committment = $request->walk_on_committment;
-                $scholarshipOffer->fcs_offer_json = $fcsJson;
-                $scholarshipOffer->fbs_offers_json = $fbsJson;
-                $scholarshipOffer->walkin_offer_json = $walkinJson;
-                $scholarshipOffer->save();
-            }
-        }
-        if ($request->walkOnOffers) {
-            // dd($request->walkOnOffers);
-            foreach ($request->walkOnOffers as $item) {
-                $scholarshipOffer = new ScholarshipOffer();
-                $scholarshipOffer->user_id = Auth::id();
-                $scholarshipOffer->FBS_division_1_colleges = null;
-                $scholarshipOffer->FCS_division_1aa_2_and_3_colleges = null;
-                $scholarshipOffer->FBS_division_1_college = $request->fbs__division;
-                $scholarshipOffer->division_FCS_division_1aa_2_and_3_college = $request->fcs_division;
-                $scholarshipOffer->list_walk_wn_offers = $item;
-                $scholarshipOffer->walk_on_committment = $request->walk_on_committment;
-                $scholarshipOffer->fcs_offer_json = $fcsJson;
-                $scholarshipOffer->fbs_offers_json = $fbsJson;
-                $scholarshipOffer->walkin_offer_json = $walkinJson;
-                $scholarshipOffer->save();
-            }
-        }
         return redirect()->back();
 
     }
@@ -717,5 +690,45 @@ class PlayerController extends Controller
         $price = $request->packageVaue;
         // dd($price);
         return view('payment.index',compact('price'));
+    }
+    public function paypalPayment(Request $request)
+    {
+        $data = new PaypalPayment();
+        $data->user_id = Auth::id();
+        $data->paypal_id = $request->paymaentInfo[0]['id'];
+        $data->payer_id = $request->paymaentInfo[0]['payer']['payer_id'];
+        $data->amount = $request->paymaentInfo[0]['purchase_units'][0]['amount']['value'];
+        $data->status = $request->paymaentInfo[0]['intent'];
+        if($request->paymaentInfo[0]['purchase_units'][0]['amount']['value'] == 9){
+            $data->package_type = 'monthly';
+            $user = User::find(Auth::id());
+            $user->package_end_date =Carbon::now()->addMonths(1);
+            $user->save();
+        }
+        if($request->paymaentInfo[0]['purchase_units'][0]['amount']['value'] == 20){
+            $data->package_type = '3-monthly';
+            $user = User::find(Auth::id());
+            $user->package_end_date =Carbon::now()->addMonths(3);
+            $user->save();
+        }
+        if($request->paymaentInfo[0]['purchase_units'][0]['amount']['value'] == 65){
+            $data->package_type = 'annual';
+            $user = User::find(Auth::id());
+            $user->package_end_date =Carbon::now()->addYear();
+            $user->save();
+        }
+        $data->save();
+        $user = User::find(Auth::id());
+        Mail::to($user->email)->send(new SubsriptionMail($user));
+        // dd($user);
+        $user->is_premium = 1;
+        $user->save();
+        if($data){
+            return response()->json(['payment'=>'success']);
+        }
+        else{
+            return response()->json(['payment'=>'failed']);
+        }
+
     }
 }

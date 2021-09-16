@@ -567,6 +567,7 @@ right: 6px;
 .userTableCustom .col-lg-6 input,
 .userTableCustom .col-lg-12 input,
 .userTableCustom .col-lg-12 textarea,
+.userTableCustom .col-lg-6 select,
 .select2-container--default .select2-selection--multiple{
     font-family: poppinregular !important;
     background-color: transparent !important;
@@ -904,6 +905,9 @@ margin-left:15px}
     height: 52px;
     width: 33%;
     text-align: center;
+}
+.PprofileMain.customheadingClass007 h1{
+  width: 100% !important;
 }
 .PprofileMain .deta .imgs.d-flex{
     height: 30px;
@@ -2813,4 +2817,8 @@ scrollbar-width: none;  /* Firefox */
 
 #paypal-button-container{
   width:400px
+}
+
+.customheadingClass007{
+  width: 100% !important;
 }

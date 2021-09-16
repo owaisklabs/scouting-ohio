@@ -14,11 +14,14 @@ use App\Models\Feature;
 use App\Models\Package;
 use App\Models\User;
 use App\Models\Contact;
+use App\Models\Like;
+use App\Models\PaypalPayment;
 use App\Models\PlayerLink;
 use App\Models\PlayerVideo;
 use App\Models\Region;
 use App\Models\ScholarshipOffer;
 use App\Models\SeeProfile;
+use App\Models\TermsAndCondition;
 use App\Models\Video;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -33,6 +36,8 @@ class HomeController extends Controller
 {
     public function index()
     {
+        $playerFeeds = ChangeField::latest()->get();
+        // dd($playerFeeds);
         $articles = Article::all();
         $videos = PlayerVideo::latest()->get();
         $Players = User::where('type', 'Player')
@@ -125,7 +130,7 @@ class HomeController extends Controller
         //     $result = curl($user->twitter_username);
         //     array_push($results, $result);
         // }
-        return view('web.home.index', compact('articles', 'videos', 'Players', 'tweets','displayUsers'));
+        return view('web.home.index', compact('articles', 'videos', 'Players', 'tweets','displayUsers','playerFeeds'));
     }
 
     public function players(Request $request)
@@ -202,8 +207,30 @@ class HomeController extends Controller
     }
     public function articlesDetail($id)
     {
+        $comment_id= Session::get('comment-id');
+        $likesCollection=[];
+         $comment123  = Article::where('id',$id)->with(['comments.likes'=>function($q){
+             $q->where('user_id',Auth::id());
+         }])->first();
+        //  return ( $comment123);
+        //  return $comment;
+        // return $comment->comments->with('likes')->get(0);
+    //     foreach($comment->comments as $comments){
+    //         foreach($comments->likes as $likes){
+    //            array_push($likesCollection,$likes);
+    //         }
+    //     }
+    // //    return $likesCollection;
+    //     $collection = collect($likesCollection);
+    //     $filtered = $collection->filter(function ($value, $key) {
+    //         return $value['user_id'] == Auth::id();
+    //     });
+    //     return $filterData=$filtered->all();
+
         $article = Article::where('id', $id)->first();
-        return view('web.article.article-view', compact('article'));
+        $article->comments;
+        // dd($article->comments);
+        return view('web.article.article-view', compact('article','comment123'));
     }
 
     public function kickers()
@@ -353,7 +380,7 @@ class HomeController extends Controller
         }
         if ($request->FSB_Division_1_Offers) {
             $result = $users->whereHas('scholarshipOffer', function ($q) use ($request) {
-                $q->whereNotNull('FBS_division_1_colleges');
+                $q->whereNotNull('fbs_offers_json');
             })->get();
         }
         if ($request->FSB_Division_1_Verbals) {
@@ -363,7 +390,7 @@ class HomeController extends Controller
         }
         if ($request->FCS_Division_aa_2_3_Offers) {
             $result = $users->whereHas('scholarshipOffer', function ($q) use ($request) {
-                $q->whereNotNull('FCS_division_1aa_2_and_3_colleges');
+                $q->whereNotNull('fcs_offer_json');
             })->get();
         }
         if ($request->FCS_Division_1aa_2_3_Verbals) {
@@ -518,6 +545,14 @@ class HomeController extends Controller
                 }
             }
             if (Auth::attempt($credentials) && $user->type !== 'college coach') {
+                $userPaid= User::where('id',Auth::id())->whereNotNull('package_end_date')->first();
+                // dd($user);
+                if ($userPaid->package_end_date < Carbon::now()) {
+                    $userPaid->is_premium = 0;
+                    $userPaid->save();
+                    $request->session()->regenerate();
+                    return redirect('/');
+                }
                 $request->session()->regenerate();
                 return redirect('/');
             } else {
@@ -562,8 +597,33 @@ class HomeController extends Controller
     }
     public function test(Request $request)
     {
-        return $request->paymaentInfo[0];
-        return Excel::download(new UsersExport,'ScountingOHIO_'.now().'_by_'.Auth::user()->name.'.xlsx');
+        // return $request->paymaentInfo[0];
+        // return $request->paymaentInfo[0]['purchase_units'][0]['payments']['captures'][0]['amount']['value'];
+        // $paypalPayment = new PaypalPayment();
+        // $paypalPayment->user_id = Auth::id();
+        // $paypalPayment->paypal_id = $request->paymaentInfo[0]['id'];
+        // $paypalPayment->payer_id = $request->paymaentInfo[0]['payer']['payer_id'];
+        // $paypalPayment->status = $request->paymaentInfo[0]['intent'];
+        // $paypalPayment->amount = $request->paymaentInfo[0]['purchase_units'][0]['payments']['captures'][0]['amount']['value'];
+        // if ($request->paymaentInfo[0]['purchase_units'][0]['payments']['captures'][0]['amount']['value'] ==="9.00") {
+        //     $paypalPayment->package_type = "Monthly";
+        // }
+        // if ($request->paymaentInfo[0]['purchase_units'][0]['payments']['captures'][0]['amount']['value'] ==="20.00") {
+        //     $paypalPayment->package_type = "Three month";
+        // }
+        // if ($request->paymaentInfo[0]['purchase_units'][0]['payments']['captures'][0]['amount']['value'] ==="65.00") {
+        //     $paypalPayment->package_type = "Annual";
+        // }
+        // $paypalPayment->save();
+        // if ($paypalPayment) {
+        //     Session::flash('payment-success', 'This is a message!');
+        //     return [
+        //         'status'=>'success'
+        //     ];
+        // }
+        // return $request->paymaentInfo[0];
+
+        // return Excel::download(new UsersExport,'ScountingOHIO_'.now().'_by_'.Auth::user()->name.'.xlsx');
 
         $seenNotification = SeeProfile::where('player_id', $request->id)
             ->where('status', 'unseen')
@@ -588,5 +648,10 @@ class HomeController extends Controller
     {
         return Excel::download(new SearchPlayerExport,'ScountingOHIO_'.now().'_by_'.Auth::user()->name.'.xlsx');
     //    dd($players);
+    }
+    public function termsCondtions()
+    {
+        $termsConditions = TermsAndCondition::first();
+        return view('web.terms-conditions.termsandconditions',compact('termsConditions'));
     }
 }

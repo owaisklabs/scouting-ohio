@@ -87,10 +87,11 @@
                     @if (Auth::user()->is_premium=== 1 )
                     <div class="players-and-fans-noti">
                         @foreach ($collegeCoach as $item )
+                        {{-- <p>{{$item}}</p> --}}
                         <div class="fans-noti">
                             <span class="tooltiptext">
-                                Ethan siders: Last visit: Thursday, 27 May 2021 16:08 Total visits: 1:Online Status
-                                53:Offline friends
+                                {{\App\Models\User::where('id',$item->visiter_id)->pluck('name')->first();}}: Last
+                                visit: {{$item->updated_at}} Total visits: {{$item->count}}:Online Status 53:Offline friends
                             </span>
                             <img src="https://cdn.dribbble.com/users/458522/screenshots/4697060/ironman.jpg?compress=1&resize=400x300"
                                 alt="" style="width:100%; height:100%;" data-bs-toggle="tooltip" data-bs-placement="top"

@@ -202,9 +202,10 @@
             <div class="modal-body">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="row mt1">
-                    <form action="{{route('premium-payment')}}" method="POST">
-                        @csrf
+
                     <div class="col-lg-4 mb1">
+                        <form action="{{route('premium-payment')}}" method="POST">
+                            @csrf
                         <div class="premium-card">
                             <div class="premium-pckg">
                                 <div class="buy-pckg text-center">

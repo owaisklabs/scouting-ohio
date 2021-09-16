@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AcademicInfo;
 use App\Models\AddtionalCoach;
 use App\Models\CoachPlayer;
+use App\Models\HighSchoolList;
 use App\Models\HonorAward;
 use App\Models\PlayerArticle;
 use App\Models\PlayerBasicInfo;
@@ -67,7 +68,8 @@ class DashboardController extends Controller
         // return User::with('friends')->get();
         // return($user->friends);
         // dd($basicInfo);
-        $Scholarship = ScholarshipOffer::where('user_id', Auth::id())->get();
+        $Scholarship = ScholarshipOffer::where('user_id', Auth::id())->first();
+        $highSchhol= HighSchoolList::all();
         return view('web.dashboard.player.index', compact(
             'basicInfo',
             'user',
@@ -83,6 +85,7 @@ class DashboardController extends Controller
             'friends',
             'Scholarship',
             'viewer',
+            'highSchhol',
             'collegeCoach'
         ));
     }

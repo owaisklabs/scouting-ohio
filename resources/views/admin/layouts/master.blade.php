@@ -11,6 +11,7 @@
 
 
   <!-- jquery ui css-->
+  <script src="//cdn.ckeditor.com/4.16.2/full/ckeditor.js"></script>
   <link rel="stylesheet" type="text/css" href="{{asset('plugins/jquery-ui/jquery-ui.css')}}">
   {{-- <link rel="icon" href="{{asset('img/SVG/fab.svg')}}"> --}}
   <!-- jquery js -->
@@ -162,6 +163,14 @@
                       <i class="nav-icon fa fa-question-circle"></i>
                       <p>
                         Subscription
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('terms-conditions.index')}}" class="nav-link">
+                      <i class="nav-icon fa fa-question-circle"></i>
+                      <p>
+                        Terms and Conditions
                       </p>
                     </a>
                   </li>

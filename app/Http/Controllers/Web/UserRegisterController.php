@@ -59,7 +59,8 @@ class UserRegisterController extends Controller
         }
 
         $data = $request->all();
-
+        dd($data);
+        
         $check = $this->create($data);
         if ($check->type === "college coach") {
             // dd("College coach");
