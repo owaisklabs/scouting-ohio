@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminUpdateController;
 use App\Http\Controllers\Admin\ChatController;
 use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Auth;
@@ -109,6 +110,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
 
     // coach Dashboard Funcationalty
 
+
 });
 Route::group(['middleware' => 'auth', 'prefix' => 'user'], function () {
     Route::get('/player-dashboard', 'Admin\DashboardController@playerDashboard')->name('player-dashboard');
@@ -146,3 +148,23 @@ Route::get('cancel', 'PayPalController@cancel')->name('payment.cancel');
 // Route::get('/coach-dashboard', 'Admin\DashboardController@coachDashboard')->name('coach-dashboard');
 
 Route::post('user-regiser', 'Web\UserRegisterController@resgister')->name('user-register');
+
+// adminupdates.routes
+Route::get('editingplayer/{id}', [AdminUpdateController::class, 'view_dashboard'])->name('viewdashboard');
+Route::post('editingcoachbasicinfo/{id}', [AdminUpdateController::class, 'adminupdates_coach_basicinfo'])->name('adminupdatescoach_basicinfo');
+Route::post('editingcoachadditoionalcoaches', [AdminUpdateController::class, 'adminupdates_addition_coaches'])->name('adminupdatescoach_additionalcoaches');
+Route::post('editingcoachadditoionalcoaches_update', [AdminUpdateController::class, 'adminupdates_update_addition_coaches'])->name('adminupdatescoach_edit_additionalcoaches');
+Route::get('deletingcoach', [AdminUpdateController::class, 'delete_aditional_coach'])->name('adminupdatescoach_delete_additionalcoaches');
+Route::post('editingcoachpassword/{id}', [AdminUpdateController::class, 'adminupdates_change_coach_password'])->name('adminupdatescoach_change_coachespassword');
+Route::post('editingplayerbasic_info/{id}', [AdminUpdateController::class, 'adminupdates_player_basic_info'])->name('adminupdatesplayer_basic_info');
+Route::post('editingplayercombine_result/{id}', [AdminUpdateController::class, 'adminupdates_player_combine_result'])->name('adminupdatesplayer_combine_result');
+Route::post('editingplayerhonor_awards/{id}', [AdminUpdateController::class, 'adminupdates_player_honor_awards'])->name('adminupdatesplayer_honor_awards');
+Route::post('editingplayeracademic_info/{id}', [AdminUpdateController::class, 'adminupdates_player_academic_info'])->name('adminupdatesplayer_academic_info');
+Route::post('editingplayerpersonal_info/{id}', [AdminUpdateController::class, 'adminupdates_player_personal_info'])->name('adminupdatesplayer_personal_info');
+Route::post('editingplayerscholarship_offers/{id}', [AdminUpdateController::class, 'adminupdates_player_scholarship_offer'])->name('adminupdatesplayer_scholarship_offer');
+Route::post('editingplayersplayer_evaluation/{id}', [AdminUpdateController::class, 'adminupdates_player_evaluation'])->name('adminupdatesplayer_player_evaluation');
+Route::post('editingplayersmy_links/{id}', [AdminUpdateController::class, 'adminupdates_player_mylinks'])->name('adminupdatesplayer_my_links');
+Route::post('editingplayers_changepassword/{id}', [AdminUpdateController::class, 'adminupdates_player_password'])->name('adminupdatesplayer_password');
+
+
+
